@@ -1,0 +1,27 @@
+------------------------------------------------------------------------
+r50 | zeksie | 2009-12-09 11:18:52 +0000 (Wed, 09 Dec 2009) | 1 line
+Changed paths:
+   A /tags/3.3 Release 1 (from /trunk:49)
+
+Tagging as 3.3 Release 1
+------------------------------------------------------------------------
+r49 | Zeksie | 2009-12-09 11:10:16 +0000 (Wed, 09 Dec 2009) | 2 lines
+Changed paths:
+   M /trunk/LibGroupTalents-1.0.lua
+   M /trunk/LibGroupTalents-1.0.toc
+
+TOC 30300
+Also changed the way comms receipts are handled for players who we do not yet have a talent tree scan for. Their info is stored until any player of that class is scanned, when all the stored members of that class are processed together.
+------------------------------------------------------------------------
+r48 | Zeksie | 2009-11-15 16:00:57 +0000 (Sun, 15 Nov 2009) | 1 line
+Changed paths:
+   M /trunk/LibGroupTalents-1.0.lua
+
+Added Protector of the Pack as a requirement for a druid tank in role detection.
+------------------------------------------------------------------------
+r47 | Zeksie | 2009-10-25 20:33:34 +0000 (Sun, 25 Oct 2009) | 1 line
+Changed paths:
+   M /trunk/LibGroupTalents-1.0.lua
+
+Fix rare-ish error in OnReceiveTalents.
+------------------------------------------------------------------------

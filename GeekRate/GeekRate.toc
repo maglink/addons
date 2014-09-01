@@ -1,0 +1,10 @@
+﻿## Interface: 30300
+## Title: GeekRate |cFF0099FF[Link]|r
+## Version: 1.0
+## Notes: Позволяет оценить уровень игрока по различным критериям. Аддон создает базу игроков сервера. Имеется возможность выбирать тип данных для записи. 
+## Author: Maglink
+## DefaultState: enabled
+## SavedVariables: GeekRateDB
+
+GeekRate.xml
+GeekRate.lua

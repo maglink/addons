@@ -1,0 +1,8 @@
+﻿## Interface: 30300
+## Title: PreviousNickname |cFF0099FF[Link]|r
+## Version: 1.0
+## Notes: Отслеживает игроков сменивших ник или рассу
+## Author: Maglink
+## DefaultState: enabled
+## SavedVariables: PreviousNicknameDB
+PreviousNickname.lua

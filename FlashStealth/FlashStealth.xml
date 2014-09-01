@@ -1,0 +1,11 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Script file="CombatFeedback.lua"/>
+    <Frame name="FlashStealthFrame" frameStrata="BACKGROUND" toplevel="true" setAllPoints="true" hidden="true">
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture file="Interface\Addons\FlashStealth\INVISIBLA.png" parentKey="texture"/>
+            </Layer>
+        </Layers>
+    </Frame>
+</Ui>

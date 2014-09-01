@@ -1,0 +1,9 @@
+﻿## Interface: 30300
+## Title: MoreButtons |cFF0099FF[Link]|r
+## Version: 1.0
+## Notes: Дополнительная раширяемая панель с кнопками
+## Author: Mio, Maglink
+## DefaultState: enabled
+## SavedVariablesPerCharacter: MoreButtonsDB
+
+MoreButtons.xml

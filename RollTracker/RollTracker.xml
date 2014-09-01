@@ -1,0 +1,372 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/"> 
+
+
+	<Script file="locale\index.lua"></Script>
+	<Script file="locale\ru-RU.lua"></Script>
+	
+	<Include file="embeds.xml"></Include>
+	<Script file="RollTracker.lua"></Script>
+	
+	<Frame name="RollTrackerTooltip" inherits="GameTooltipTemplate" hidden="true" enableMouse="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentText" inherits="ChatFontNormal" text="" justifyH="LEFT" justifyV="TOP">
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset><AbsDimension x="46" y="-7"/></Offset></Anchor></Anchors>
+				</FontString>
+				<FontString name="$parentInfo" inherits="ChatFontNormal" text="" justifyH="LEFT" justifyV="TOP">
+				<Anchors><Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent"><Offset><AbsDimension x="46" y="11"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	<Frames>
+			<Button name="$parentTexture">
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset><AbsDimension x="9" y="-9"/></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="32" y="32"/></Size>
+			</Button>
+	</Frames>
+				<Scripts>
+					<OnMouseUp>
+						RollTracker_Tooltip_Click()
+					</OnMouseUp>
+				</Scripts>
+	</Frame>
+	
+	<Frame name="RollTrackerFrame" parent="UIParent" hidden="true" movable="true" ClampedToScreen="true" enableMouse="true" frameStrata="HIGH" resizable="true">
+		<Size><AbsDimension x="170" y="150"/></Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+			<Offset><AbsDimension x="300" y="0"/></Offset>
+		</Anchors>
+		<Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+		edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>	
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="Roll Tracker: Link" justifyH="LEFT" justifyV="TOP">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="-10"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-10" y="-30"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+
+				<FontString name="$parentStatusText" inherits="GameFontNormalSmall" text="0 Rolls" justifyH="LEFT" justifyV="TOP">
+					<Color r="0.5" g="0.5" b="1.0"/>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="10" y="10"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="0" y="20"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>		
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<Button name="$parentReportButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="RollTrackerFrame"><Offset><AbsDimension x="-36" y="-2"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\AddOns\Rolltracker\textures\UI-Panel-List-Up.tga" />
+        <PushedTexture file="Interface\AddOns\Rolltracker\textures\UI-Panel-List-Down.tga" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts><OnClick>RollTracker_ReportButton(this)</OnClick></Scripts>
+			</Button>
+			<Button name="$parentPinButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="RollTrackerFrame"><Offset><AbsDimension x="-18" y="-2"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\AddOns\FindGroup\textures\LockButton-Locked-Up.tga" />
+        <PushedTexture file="Interface\AddOns\FindGroup\textures\LockButton-Locked-Down.tga" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts><OnClick>RollTracker_PinButton()</OnClick></Scripts>
+			</Button>
+			<Button name="$parentCloseButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="RollTrackerFrame"><Offset><AbsDimension x="0" y="-2"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+        <PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>
+					<OnClick>
+						RollTracker_HideWindow()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentClearButton" inherits="UIPanelButtonTemplate" text="Clear">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parentStatusText">
+						<Offset>
+							<AbsDimension x="-4" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="75" y="16"/></Size>
+				<Scripts>
+					<OnClick>
+						RollTracker_ClearRolls()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentRollButton" inherits="UIPanelButtonTemplate" text="Roll">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentStatusText">
+						<Offset>
+							<AbsDimension x="-6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="75" y="16"/></Size>
+				<Scripts>
+					<OnClick>
+						RandomRoll(1, 100)
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="$parentResizeGrip" inherits="UIPanelButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="RollTrackerFrame">
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<NormalTexture file="Interface\AddOns\RollTracker\textures\ResizeGrip.tga"/>
+				<PushedTexture file="Interface\AddOns\RollTracker\textures\ResizeGrip.tga"/>
+				<Scripts>
+					<OnMouseDown>
+						RollTrackerFrame:StartSizing()
+					</OnMouseDown>
+					<OnMouseUp>
+						RollTrackerFrame:StopMovingOrSizing();
+						RollTracker_SaveAnchors()
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+
+
+
+
+
+<Button name="$parentComboBox3">
+        <Size>
+          <AbsDimension x="135" y="32" />
+        </Size>
+<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="-7" y="-25"/></Offset></Anchor></Anchors>
+        <Layers>
+          <Layer>
+            <Texture name="$parentLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+              <Size>
+                <AbsDimension x="25" y="64" />
+              </Size>
+              <Anchors>
+                <Anchor point="TOPLEFT">
+                  <Offset>
+                    <AbsDimension x="0" y="17" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <TexCoords left="0" right="0.1953125" top="0" bottom="1" />
+            </Texture>
+            <Texture name="$parentMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+              <Size>
+                <AbsDimension x="135" y="64" />
+              </Size>
+              <Anchors>
+                <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+              </Anchors>
+              <TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" />
+            </Texture>
+            <Texture name="$parentRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+              <Size>
+                <AbsDimension x="25" y="64" />
+              </Size>
+              <Anchors>
+                <Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" />
+              </Anchors>
+              <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
+            </Texture>
+            <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text=" " justifyH="RIGHT">
+              <Size>
+                <AbsDimension x="118" y="10" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" relativeTo="$parentRight">
+                  <Offset>
+                    <AbsDimension x="-43" y="2" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="1" b="1" />
+              <Shadow>
+                <Color r="0" g="0" b="0" />
+                <Offset>
+                  <AbsDimension x="1" y="-1" />
+                </Offset>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Button name="$parentButton">
+            <Size>
+              <AbsDimension x="24" y="24" />
+            </Size>
+            <Anchors>
+              <Anchor point="TOPRIGHT" relativeTo="$parentRight">
+                <Offset>
+                  <AbsDimension x="-16" y="-18" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Scripts>
+              <OnClick>
+						ToggleDropDownMenu(nil, nil, self:GetParent());
+						PlaySound("igMainMenuOptionCheckBoxOn");
+					</OnClick>
+            </Scripts>
+            <NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up">
+              <Size><AbsDimension x="24" y="24" /></Size>
+              <Anchors><Anchor point="RIGHT" /></Anchors></NormalTexture>
+            <PushedTexture name="$parentPushedTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down">
+              <Size><AbsDimension x="24" y="24" /></Size>
+              <Anchors><Anchor point="RIGHT" /></Anchors></PushedTexture>
+            <DisabledTexture name="$parentDisabledTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled">
+              <Size><AbsDimension x="24" y="24" /></Size>
+              <Anchors><Anchor point="RIGHT" /></Anchors></DisabledTexture>
+            <HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
+              <Size><AbsDimension x="24" y="24" /></Size>
+              <Anchors><Anchor point="RIGHT" /></Anchors></HighlightTexture>
+          </Button>
+        </Frames>
+        <Scripts>
+          <OnLoad>
+local cb_init_fn = function()
+  local info
+
+for i=1, RollTracker_GetItemMax() do
+  info = {}
+	 info.checked = false
+  info.func = function() RollTracker_ClicktoCBItem(i); UIDropDownMenu_SetSelectedID(RollTrackerFrameComboBox3, this:GetID(), 0) end
+  info.text = RollTracker_GetItemText(i)
+info.tooltipText = RollTracker_CBgettttext(i)
+info.tooltipTitle = RollTracker_CBgettttitle(i)
+info.tooltipOnButton = 1
+if i == RollTracker_GetCBItemI() then info.checked = true end
+  UIDropDownMenu_AddButton(info);
+end
+  end
+UIDropDownMenu_Initialize(this, cb_init_fn)
+</OnLoad>
+<OnClick>
+RollTracker_OnHyperlinkShow(self,button)
+</OnClick>
+<OnEnter>
+RollTracker_Tooltip_Show()
+</OnEnter>
+<OnLeave>
+RollTracker_Tooltip_Hide()
+</OnLeave>
+          <OnHide>CloseDropDownMenus();</OnHide>
+        </Scripts>
+      </Button>
+
+			<ScrollFrame name="$parentRollScrollFrame" inherits="UIPanelScrollFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="6" y="-55"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentRollButton">
+						<Offset>
+							<AbsDimension x="-24" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ScrollChild>
+					<Frame name="$parentScrollChild">
+						<Size>
+							<AbsDimension x="30" y="30"/>
+						</Size>
+						<Frames>
+							<SimpleHTML name="RollTrackerRollText">
+
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="RollTrackerFrameRollScrollFrameScrollChild">
+										<Offset>
+											<AbsDimension x="0" y="-2"/>
+										</Offset>
+									</Anchor>
+									<Anchor point="BOTTOMRIGHT" relativeTo="RollTrackerFrameRollScrollFrame">
+										<Offset>
+											<AbsDimension x="0" y="2"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<FontString name="RollTrackerFontString" inherits="ChatFontNormal" justifyH="LEFT" justifyV="TOP">
+									<Size>
+										<AbsDimension x="270" y="0"/>
+									</Size>
+									<Color r="1" g="1" b="1" a="1.0" />
+								</FontString>
+							</SimpleHTML>
+						</Frames>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+		</Frames>
+		
+		<Scripts>
+			<OnLoad>
+				this:SetMinResize(170,150)
+				this:SetMaxResize(170,667)
+				this:RegisterForDrag("LeftButton")
+				this:RegisterEvent("ADDON_LOADED")
+				this:RegisterEvent("CHAT_MSG_SYSTEM")
+				this:RegisterEvent("CHAT_MSG_LOOT")
+			</OnLoad>
+			<OnEvent>
+				if  (event == "ADDON_LOADED" and arg1 == "RollTracker") then
+					this:UnregisterEvent("ADDON_LOADED")
+					RollTracker_OnLoad()
+				elseif (event == "CHAT_MSG_SYSTEM") then
+					RollTracker_CHAT_MSG_SYSTEM(self, event, ...);
+				elseif (event == "CHAT_MSG_LOOT") then			
+					RollTracker_CHAT_MSG_LOOT(self, event, ...);
+				end
+			</OnEvent>
+			<OnDragStart>if this:IsMovable() then this:StartMoving() end
+			</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+				RollTracker_SaveAnchors()
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+</Ui>

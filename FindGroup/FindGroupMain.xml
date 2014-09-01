@@ -1,0 +1,4177 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/"> 
+
+<Frame name="FindGroupPanelTemplate" virtual="true">
+	<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+		<BackgroundInsets>
+			<AbsInset left="4" right="4" top="4" bottom="4" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="20" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="15" />
+		</EdgeSize>
+	</Backdrop>
+			<Scripts>
+				<OnLoad>
+					self:SetBackdropBorderColor(0.4,0.4,0.4,1.0);
+					self:SetBackdropColor(0,0,0,1.0)
+				</OnLoad>
+			
+			</Scripts>
+
+</Frame>
+			
+			<Button name="FindGroupRoleIconTemplate" inherits="UIPanelButtonTemplate" hidden="true" virtual="true">
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<Scripts>	<OnEnter>
+						FindGroup_Tooltip_All(this)
+				</OnEnter><OnLeave>GameTooltip:Hide()</OnLeave></Scripts>
+			</Button>
+			
+			<Button name="FindGroupHealTemplate" inherits="FindGroupRoleIconTemplate" hidden="true" virtual="true">
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-HEALICON"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-HEALICON"/>
+       				 <HighlightTexture file="Interface\Buttons\UI-AttributeButton-Encourage-Hilight" alphaMode="ADD" />
+			</Button>
+			<Button name="FindGroupDDTemplate" inherits="FindGroupRoleIconTemplate" hidden="true" virtual="true">
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-DDICON"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-DDICON"/>
+       				 <HighlightTexture file="Interface\Buttons\UI-AttributeButton-Encourage-Hilight" alphaMode="ADD" />
+			</Button>
+			<Button name="FindGroupTankTemplate" inherits="FindGroupRoleIconTemplate" hidden="true" virtual="true">
+				<NormalTexture file="Interface\GROUPFRAME\UI-GROUP-MAINTANKICON"/>
+				<PushedTexture file="Interface\GROUPFRAME\UI-GROUP-MAINTANKICON"/>
+       				 <HighlightTexture file="Interface\Buttons\UI-AttributeButton-Encourage-Hilight" alphaMode="ADD" />
+			</Button>
+			
+			<Button name="FindGroupSkullTemplate" inherits="UIPanelButtonTemplate" hidden="true" virtual="true">
+				<Size><AbsDimension x="11" y="11"/></Size>
+				<NormalTexture file="Interface\TargetingFrame\UI-RaidTargetingIcon_8"/>
+				<PushedTexture file="Interface\TargetingFrame\UI-RaidTargetingIcon_8"/>
+				<Scripts>
+				<OnLoad>this:SetScale(1)</OnLoad>
+				<OnEnter>FindGroup_PartyBatton_Enter(this:GetParent().numline);
+				FindGroup_Tooltip_All(this)</OnEnter><OnLeave>GameTooltip:Hide();FindGroup_PartyBatton_Leave()</OnLeave></Scripts>
+			</Button>
+
+			<Button name="FindGroupAchieveTemplate" inherits="UIPanelButtonTemplate" hidden="true" virtual="true">
+				<Size><AbsDimension x="12" y="12"/></Size>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-ACHIEV0"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-ACHIEV0"/>
+				<Scripts>
+				<OnLoad>this:SetScale(1)</OnLoad>
+				<OnClick>FindGroup_AchieveIcon_Click(this)</OnClick>
+				<OnEnter>FindGroup_AchieveIcon_Enter(this);FindGroup_PartyBatton_Enter(this:GetParent().numline)</OnEnter>
+				<OnLeave>GameTooltip:Hide();FindGroup_PartyBatton_Leave();FindGroup_AchieveIcon_Leave(this);</OnLeave></Scripts>
+			</Button>
+			
+			<Button name="FindGroupQuestTemplate" inherits="UIPanelButtonTemplate" hidden="false" virtual="true">
+				<Size><AbsDimension x="12" y="12"/></Size>
+				<NormalTexture file="Interface\GossipFrame\AvailableQuestIcon.tga"/>
+				<PushedTexture file="Interface\GossipFrame\AvailableQuestIcon.tga"/>
+				<Scripts>
+				<OnLoad>this:SetScale(1)</OnLoad>
+				<OnClick>FindGroup_QuestIcon_Click(this)</OnClick>
+				<OnEnter>FindGroup_QuestIcon_Enter(this);FindGroup_PartyBatton_Enter(this:GetParent().numline)</OnEnter>
+				<OnLeave>GameTooltip:Hide();FindGroup_PartyBatton_Leave();FindGroup_QuestIcon_Leave(this);</OnLeave></Scripts>
+			</Button>	
+			
+			<Button name="FindGroupRepTemplate" inherits="UIPanelButtonTemplate" hidden="true" virtual="true">
+				<Size><AbsDimension x="13" y="13"/></Size>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-Reputarion"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-Reputarion"/>
+				<Scripts>
+				<OnLoad>this:SetScale(1)</OnLoad>
+				<OnClick>FindGroup_RepIcon_Click(this)</OnClick>
+				<OnEnter>FindGroup_RepIcon_Enter(this);FindGroup_PartyBatton_Enter(this:GetParent().numline)</OnEnter>
+				<OnLeave>GameTooltip:Hide();FindGroup_PartyBatton_Leave();FindGroup_RepIcon_Leave(this);</OnLeave></Scripts>
+			</Button>
+			
+			<Button name="FindGroupArenaRegTemplate" inherits="UIPanelButtonTemplate" hidden="true" virtual="true">
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-REG"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-REG"/>
+				<Scripts>
+				<OnEnter>FindGroup_ArenaRegIcon_Enter(this);FindGroup_PartyBatton_Enter(this:GetParent().numline)</OnEnter>
+				<OnLeave>GameTooltip:Hide();FindGroup_PartyBatton_Leave();</OnLeave></Scripts>
+			</Button>
+			<Button name="FindGroupArenaFindTemplate" inherits="UIPanelButtonTemplate" hidden="true" virtual="true">
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-TEAMMATE"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-TEAMMATE"/>
+				<Scripts>
+				<OnEnter>FindGroup_ArenaFindIcon_Enter(this);FindGroup_PartyBatton_Enter(this:GetParent().numline)</OnEnter>
+				<OnLeave>GameTooltip:Hide();FindGroup_PartyBatton_Leave();</OnLeave></Scripts>
+			</Button>			
+			<Button name="FindGroupTextToolTipTemplate" inherits="UIPanelButtonTemplate" hidden="true" virtual="true">
+				<Size><AbsDimension x="15" y="15"/></Size>
+				<NormalTexture file="Interface\GossipFrame\GossipGossipIcon"/>
+			   	<PushedTexture file="Interface\GossipFrame\PetitionGossipIcon"/>
+        				<HighlightTexture file="Interface\GossipFrame\PetitionGossipIcon"/>
+				<Scripts>	<OnClick>FindGroup_PartyButton(this:GetParent().numline)</OnClick>
+					<OnEnter>
+						FindGroup_PartyBatton_Enter(this:GetParent().numline)
+						FindGroup_Tooltip_All(this)
+					</OnEnter>
+					<OnLeave>GameTooltip:Hide();FindGroup_PartyBatton_Leave()</OnLeave>
+				</Scripts>			
+			</Button>
+			
+			<FontString name="FindGroupfTextTemplate" inherits="GameFontNormal" text=" " justifyH="LEFT" justifyV="TOP" virtual="true">
+					<Color r="1.0" g="1.0" b="1.0"/>
+					<Shadow><Offset><AbsDimension x="0" y="0" /></Offset></Shadow>
+					<Scripts><OnLoad>this:SetShadowColor(1, 1, 1, 0);</OnLoad></Scripts>
+			</FontString>	
+			
+			<Frame name="FindGroupClassesTemplate" movable="true" enableMouse="true" frameStrata="MEDIUM" hidden="true" virtual="true">
+				<Backdrop name="$parentBackdrop" bgFile="Interface\Tooltips\UI-Tooltip-Background"
+				edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="8"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="64"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="0" right="0" top="0" bottom="0"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForDrag("LeftButton");
+						this:SetBackdropColor(0, 0, 0, 1);
+						this:SetFrameLevel(27)
+					</OnLoad>
+					<OnEnter>
+						this:Show()
+					</OnEnter>
+					<OnLeave>
+						this:Hide()
+					</OnLeave>						
+					<OnDragStart>
+						 FindGroupFrame_StartMove()
+					</OnDragStart>
+					<OnDragStop>
+						FindGroupFrame_StopMove()
+					</OnDragStop>
+					<OnShow>
+						this:SetFrameLevel(27)
+					</OnShow>
+					<OnHide>
+						FGC_SetAllClasses()
+					</OnHide>
+				</Scripts>	
+			</Frame>
+			
+			
+			<Button name="FindGroupFindLineTemplate" hidden="true" virtual="true">
+				<Size><AbsDimension x="15" y="15"/></Size>
+				<!--<HighlightTexture file="Interface\Buttons\UI-Listbox-Highlight" alphaMode="ADD" />-->
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="$parentfText" inherits="FindGroupfTextTemplate" >
+							<Anchors><Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="14" y="2"/></Offset></Anchor></Anchors>
+						</FontString>
+						<FontString name="$parentText" inherits="GameFontNormal" text=" " justifyH="LEFT" justifyV="TOP">
+								<Color r="1.0" g="1.0" b="1.0"/>
+								<Anchors><Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="$parentfText">
+								<Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+								<Shadow><Offset><AbsDimension x="0" y="0" /></Offset></Shadow>
+								<Scripts><OnLoad>this:SetShadowColor(1, 1, 1, 0);</OnLoad></Scripts>			
+						</FontString>
+						<FontString name="$parentSText" inherits="GameFontNormal" text=" " justifyH="RIGHT" justifyV="TOP">
+								<Color r="1.0" g="1.0" b="1.0"/>
+								<Anchors><Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="$parentText">
+								<Offset><AbsDimension x="2" y="0"/></Offset></Anchor></Anchors>
+								<Shadow><Offset><AbsDimension x="0" y="0" /></Offset></Shadow>
+								<Scripts><OnLoad>this:SetShadowColor(1, 1, 1, 0);</OnLoad></Scripts>			
+						</FontString>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button name="$parentTextToolTip" inherits="FindGroupTextToolTipTemplate">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+						</Anchors>
+					</Button>
+					<Button name="$parentfPartyButton" inherits="UIPanelButtonTemplate" text=" " alpha="0.0">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentfText">
+							<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentfText">
+							<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>							
+						</Anchors>
+						<Scripts>
+							<OnEnter>FindGroup_PartyBatton_Enter(this:GetParent().numline)</OnEnter>
+							<OnLeave>FindGroup_PartyBatton_Leave()</OnLeave>
+							<OnMouseUp>FindGroup_fPartyButton(self,button,this:GetParent().numline)</OnMouseUp>
+						</Scripts>
+					</Button>
+					<Button name="$parentPartyButton" inherits="UIPanelButtonTemplate" text=" " alpha="0.0">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentText">
+							<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentText">
+							<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>							
+						</Anchors>
+						<Scripts>
+							<OnClick>FindGroup_Tooltip_msgonclick(this:GetParent().numline)</OnClick>
+							<OnEnter>
+								FindGroup_Tooltip_msg(this);
+								getglobal(this:GetParent():GetName().."Text"):SetShadowColor(1, 1, 1, 0.7);
+								getglobal(this:GetParent():GetName().."SText"):SetShadowColor(1, 1, 1, 0.7);
+							</OnEnter>
+							<OnLeave>
+								getglobal(this:GetParent():GetName().."Text"):SetShadowColor(1, 1, 1, 0);
+								getglobal(this:GetParent():GetName().."SText"):SetShadowColor(1, 1, 1, 0);
+								GameTooltip:Hide();
+								FindGroup_PartyBatton_Leave();
+							</OnLeave>
+						</Scripts>
+					</Button>
+					<Button name="$parentGup" inherits="UIPanelButtonTemplate" text=" " alpha="0.0">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="$parentPartyButton">
+							<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentPartyButton">
+							<Offset><AbsDimension x="2" y="0"/></Offset></Anchor>							
+						</Anchors>
+						<Scripts>
+							<OnClick>FindGroup_Tooltip_msgonclick(this:GetParent().numline)</OnClick>
+							<OnEnter>
+								FindGroup_Tooltip_msg(getglobal(this:GetParent():GetName().."PartyButton"));
+								getglobal(this:GetParent():GetName().."Text"):SetShadowColor(1, 1, 1, 0.7);
+								getglobal(this:GetParent():GetName().."SText"):SetShadowColor(1, 1, 1, 0.7);
+							</OnEnter>
+							<OnLeave>
+								getglobal(this:GetParent():GetName().."Text"):SetShadowColor(1, 1, 1, 0);
+								getglobal(this:GetParent():GetName().."SText"):SetShadowColor(1, 1, 1, 0);
+								GameTooltip:Hide();
+								FindGroup_PartyBatton_Leave();
+							</OnLeave>
+						</Scripts>
+					</Button>
+					<Button name="$parentHeal" inherits="FindGroupHealTemplate"/>
+					<Button name="$parentDD" inherits="FindGroupDDTemplate"/>			
+					<Button name="$parentTank" inherits="FindGroupTankTemplate"/>
+					<Button name="$parentHead" inherits="FindGroupSkullTemplate"/>
+					<Button name="$parentAchieve" inherits="FindGroupAchieveTemplate"/>
+					<Button name="$parentQuest" inherits="FindGroupQuestTemplate"/>
+					<Button name="$parentRep" inherits="FindGroupRepTemplate"/>
+					<Button name="$parentArenaReg" inherits="FindGroupArenaRegTemplate"/>
+					<Button name="$parentArenaFind" inherits="FindGroupArenaFindTemplate"/>
+				</Frames>
+			</Button>
+			
+	<Frame name="FindGroupFrame" parent="UIParent" hidden="true" movable="true" enableMouse="true" ClampedToScreen="true" frameStrata="MEDIUM" resizable="true">
+		<Size><AbsDimension x="280" y="126"/></Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Backdrop name="$parentBackdrop" bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>	
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="FindGroup: Link" justifyH="LEFT" justifyV="TOP">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="-10"/>
+							</Offset>
+						</Anchor>
+						<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-10" y="-30"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+
+				<FontString name="$parentTitleInst" text="Инст:" font="Fonts\FRIZQT__.TTF" justifyH="LEFT"  hidden="true">
+						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="10" y="-25"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="10" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+					<FontString name="$parentTitleIR" text="Режим:" font="Fonts\FRIZQT__.TTF" justifyH="LEFT"  hidden="true">
+						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentTitleInst">
+							<Offset><AbsDimension x="138" y="0"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="10" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+					<FontString name="$parentTime" inherits="GameFontNormal"  hidden="true" font="Fonts\FRIZQT__.TTF" text="Секунды" justifyH="LEFT" justifyV="TOP">
+						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="220" y="-25"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="10" /></FontHeight>
+					</FontString>
+
+			<FontString name="$parentTank" inherits="GameFontNormal" text="Защита" justifyH="CENTER" justifyV="TOP" hidden="true">
+			<Anchors>
+				<Anchor point="CENTER" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset>
+						<AbsDimension x="33" y="-73" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			</FontString>
+			<FontString name="$parentHeal" inherits="GameFontNormal" text="Лечение" justifyH="CENTER" justifyV="TOP" hidden="true">
+			<Anchors>
+				<Anchor point="CENTER" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset>
+						<AbsDimension x="100" y="-73" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			</FontString>
+			<FontString name="$parentDD" inherits="GameFontNormal" text="Атака" justifyH="CENTER" justifyV="TOP" hidden="true">
+			<Anchors>
+				<Anchor point="CENTER" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset>
+						<AbsDimension x="165" y="-73" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+			</FontString>
+
+			</Layer>
+		</Layers>
+
+		<Frames>
+	
+
+	<Button name="FindGroupTooltip" parent="FindGroupFrame" hidden="true" enableMouse="true" movable="true" ClampedToScreen="true">
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="12"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="12"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="3" right="3" top="3" bottom="3"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentText" inherits="ChatFontNormal" text="" justifyH="LEFT" justifyV="TOP" hidden="true" multiline="true"> 
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset><AbsDimension x="14" y="-9"/></Offset></Anchor></Anchors>
+				</FontString>
+
+				<FontString name="$parentInfo" inherits="ChatFontNormal" text="" justifyH="LEFT" justifyV="TOP"> 
+				<Anchors><Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent"><Offset><AbsDimension x="14" y="9"/></Offset></Anchor></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<ScrollingMessageFrame name="$parentSMF" toplevel="true" displayDuration="99999" maxLines="1">
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset><AbsDimension x="14" y="-9"/></Offset></Anchor></Anchors>
+				<Scripts>
+				<OnHyperlinkClick>
+				ChatFrame_OnHyperlinkShow(self, link, text, button);
+				UIDROPDOWNMENU_INIT_MENU.lineID = 1;
+				</OnHyperlinkClick>
+<OnShow>
+this:SetFrameLevel(21)
+--ChatFrameTemplate
+</OnShow>
+				</Scripts>
+				<FontString inherits="ChatFontNormal" justifyH="LEFT" indented="true" nonspacewrap="true"/>
+			</ScrollingMessageFrame>
+			<Button name="$parentCloseButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-4" y="-4"/></Offset></Anchor></Anchors>		
+       					    <NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+        				<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+       					 <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        					<DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="20" y="20"/></Size>
+				<Scripts><OnClick>FindGroup_Tooltip_msgonhide(this:GetParent())</OnClick></Scripts>
+			</Button>
+		</Frames>
+			<Scripts>
+				<OnLoad>
+					this:RegisterForDrag("LeftButton");
+				self:SetBackdropBorderColor(TOOLTIP_DEFAULT_COLOR.r, TOOLTIP_DEFAULT_COLOR.g, TOOLTIP_DEFAULT_COLOR.b);
+				self:SetBackdropColor(TOOLTIP_DEFAULT_BACKGROUND_COLOR.r, TOOLTIP_DEFAULT_BACKGROUND_COLOR.g, TOOLTIP_DEFAULT_BACKGROUND_COLOR.b);
+				</OnLoad>
+					<OnDoubleClick>
+						FindGroup_Tooltip_msgonhide(this)
+					</OnDoubleClick>
+<OnShow>
+this:SetFrameLevel(20)
+</OnShow>
+			<OnDragStart>if this:IsMovable() then this:StartMoving() end</OnDragStart>
+			<OnDragStop>this:StopMovingOrSizing();chan_check_points(this)</OnDragStop>
+			</Scripts>
+
+	</Button>
+
+
+<Button name="FindGroupShowText" parent="FindGroupFrame" hidden="true" enableMouse="true" movable="true" ClampedToScreen="true">
+		<Size><AbsDimension x="300" y="34"/></Size>
+		<Anchors>
+			<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="FindGroupFrame">
+			<Offset><AbsDimension x="0" y="2"/></Offset></Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="12"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="12"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="3" right="3" top="3" bottom="3"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentText" inherits="ChatFontNormal" text="" justifyH="LEFT" justifyV="TOP" hidden="true"> 
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset><AbsDimension x="14" y="-9"/></Offset></Anchor></Anchors>
+				</FontString>
+
+				<FontString name="$parentInfo" inherits="ChatFontNormal" text="" justifyH="LEFT" justifyV="TOP" hidden="true">
+
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentClearButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-1" y="-1"/></Offset></Anchor></Anchors>		
+						 <NormalTexture file="Interface\Buttons\CancelButton-Up" />
+        					<PushedTexture file="Interface\Buttons\CancelButton-Down" />
+       					 <HighlightTexture file="Interface\Buttons\CancelButton-Highlight" alphaMode="ADD" />
+        					<DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="33" y="33"/></Size>
+				<Scripts>
+					<OnEnter>FindGroup_Tooltip_All(this)</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave>
+					<OnClick>FindGroupShowTextEditText:SetText("")</OnClick>
+				</Scripts>
+			</Button>
+			
+			<ScrollingMessageFrame name="$parentSMF" toplevel="true" displayDuration="99999" maxLines="1" >
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset><AbsDimension x="14" y="-2"/></Offset></Anchor>
+				<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentText">
+						<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+				</Anchors>
+				<Scripts>
+<OnShow>
+this:SetFrameLevel(21)
+</OnShow>
+				<OnHyperlinkClick>ChatFrame_OnHyperlinkShow(ChatFrameTemplate, link, text, button);</OnHyperlinkClick>
+				</Scripts>
+				<FontString inherits="ChatFontNormal" justifyH="LEFT" indented="true" nonspacewrap="true"/>
+</ScrollingMessageFrame>
+			<EditBox name="$parentEditText" MaxBytes="256" justifyH="LEFT">
+				<Size><AbsDimension x="40" y="20"></AbsDimension></Size>
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentSMF">
+						<Offset><AbsDimension x="4" y="-5"/></Offset></Anchor>
+				<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentInfo">
+						<Offset><AbsDimension x="-60" y="0"/></Offset>
+				</Anchor></Anchors>
+					<FontString inherits="ChatFontNormal"></FontString>
+					<Scripts>
+						<OnLoad>
+							this:ClearFocus();
+							this:SetAutoFocus("false")
+						</OnLoad>
+						<OnTextChanged>
+							FindGroupShowTextInfo:SetText(this:GetText());
+							FindGroupShowText:SetWidth(FindGroupShowTextText:GetWidth()+FindGroupShowTextInfo:GetWidth()+40+31);
+							FindGroup_LenghtCheck(self)
+						</OnTextChanged>
+						<OnEnter>
+							if not(this:HasFocus()) then FindGroup_EditText2() end
+						</OnEnter>
+						<OnLeave>
+							if not(this:HasFocus()) then FindGroup_EditText1() end
+						</OnLeave>
+						<OnEnterPressed>
+							this:ClearFocus()
+						</OnEnterPressed>
+						<OnEscapePressed>
+							this:ClearFocus()
+						</OnEscapePressed>
+						<OnEditFocusGained>
+							FindGroup_EditText3();
+							FGC_TriggerButtonOn()
+						</OnEditFocusGained>
+						<OnEditFocusLost>
+						if FGL.db.includeaddon then
+							FGC_EditLostFocus();
+							if this:IsMouseOver() then
+								FindGroup_EditText2()
+							else 
+								FindGroup_EditText1()  
+							end;
+							FindGroupCharVars.FGC.createtext=this:GetText()
+						end
+						</OnEditFocusLost>
+						<OnTextSet>
+							FindGroup_RefreshCursor()
+						</OnTextSet>
+					</Scripts>
+			</EditBox>
+			<Frame name="$parentPanelEditText" inherits="FindGroupPanelTemplate">
+				<Anchors>
+				<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentEditText"><Offset><AbsDimension x="-5" y="2" /></Offset></Anchor>
+				<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentEditText"><Offset><AbsDimension x="5" y="-2" /></Offset></Anchor>
+				</Anchors>
+			<Scripts>
+					<OnLoad>
+					
+					</OnLoad>
+			</Scripts>
+			</Frame>
+		</Frames>
+			<Scripts>
+				<OnLoad>
+					this:RegisterForDrag("LeftButton");
+				self:SetBackdropBorderColor(TOOLTIP_DEFAULT_COLOR.r, TOOLTIP_DEFAULT_COLOR.g, TOOLTIP_DEFAULT_COLOR.b);
+				self:SetBackdropColor(TOOLTIP_DEFAULT_BACKGROUND_COLOR.r, TOOLTIP_DEFAULT_BACKGROUND_COLOR.g, TOOLTIP_DEFAULT_BACKGROUND_COLOR.b);
+				</OnLoad>
+					<OnDoubleClick>
+						
+					</OnDoubleClick>
+<OnShow>
+this:SetFrameLevel(20)
+</OnShow>
+			<OnDragStart>if this:IsMovable() then this:StartMoving() end;FGL.db.FGC.tolltipmove = 1</OnDragStart>
+			<OnDragStop>this:StopMovingOrSizing();chan_check_points(this); FGL.db.FGC.tolltipmove = nil</OnDragStop>
+			</Scripts>
+
+</Button>
+
+<Frame name="FindGroupChannel" parent="FindGroupFrame" movable="true" enableMouse="true" ClampedToScreen="true" resizable="false" hidden="true" frameStrata="MEDIUM">
+		<Size><AbsDimension x="100" y="300"/></Size>
+		<Anchors>
+			<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="FindGroupFrame">
+			<Offset><AbsDimension x="0" y="2"/></Offset></Anchor>
+		</Anchors>
+		<Backdrop name="$parentBackdrop" bgFile="Interface/Tooltips/UI-Tooltip-Background"
+		edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="BACKGROUND">
+			<FontString name="$parentChannels" inherits="GameFontNormal" text="Каналы:" justifyH="LEFT" justifyV="TOP">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset>
+						<AbsDimension x="40" y="-15" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentCloseButton" inherits="UIPanelButtonTemplate" >
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-5" y="-5"/></Offset></Anchor></Anchors>		
+       					 <NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+        					<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+       					 <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        					<DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="26" y="26"/></Size>
+				<Scripts><OnClick>this:GetParent():Hide()</OnClick></Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForDrag("LeftButton");
+				this:SetBackdropColor(0.0, 0.0, 0.0, 0.8);
+				this:SetFrameLevel(40);
+			</OnLoad>
+
+			<OnDragStart>
+				this:StartMoving();
+			</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+				chan_check_points(this);
+			</OnDragStop>
+			<OnMouseDown>
+				FindGroupFrameSec:ClearFocus();
+			</OnMouseDown>
+			<OnShow>
+			this:SetFrameLevel(40);
+			</OnShow>
+		</Scripts>	
+</Frame>
+
+			<Button name="$parentMiniSaveButton" inherits="UIPanelButtonTemplate" hidden="true" motionScriptsWhileDisabled="true">
+				
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent"><Offset>
+							<AbsDimension x="-62" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+        <NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Save-Up.tga" />
+        <PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Save-Down.tga" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Save-Disabled.tga" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>
+				<OnClick>	
+				FindGroupShowTextEditText:ClearFocus()
+					FGC_SaveInstDiff(button);
+						FindGroup_Tooltip_All(this);
+						
+				</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parentMiniInsButton" inherits="UIPanelButtonTemplate" hidden="true" motionScriptsWhileDisabled="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent"><Offset>
+							<AbsDimension x="-42" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+        <NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Accept-Up.tga" />
+        <PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Accept-Down.tga" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Accept-Disabled.tga" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>
+				<OnClick>	
+				FindGroupShowTextEditText:ClearFocus()
+					FGC_SaveIns(button);
+						FindGroup_Tooltip_All(this);
+				</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parentMiniClearButton" inherits="UIPanelButtonTemplate" hidden="true" motionScriptsWhileDisabled="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent"><Offset>
+							<AbsDimension x="-22" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+        <NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Clear-Up.tga" />
+        <PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Clear-Down.tga" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Clear-Disabled.tga" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>
+				<OnClick>	
+				FindGroupShowTextEditText:ClearFocus()
+					FGC_SaveClear(self);
+						FindGroup_Tooltip_All(this);
+				</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parentMiniCancelButton" inherits="UIPanelButtonTemplate" hidden="true" motionScriptsWhileDisabled="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent"><Offset>
+							<AbsDimension x="-2" y="2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+        <NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+        <PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>
+				<OnClick>	
+				FindGroupShowTextEditText:ClearFocus()
+					FGC_SaveCancel(button);
+						FindGroup_Tooltip_All(this);
+				</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+			
+
+			<Button name="$parentCreateButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="FindGroupFrame"><Offset><AbsDimension x="-108" y="-2"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Create-Up.tga" />
+        <PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Create-Down.tga" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\Buttons\UI-Panel-HideButton-Disabled" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>
+					<OnEnter>FindGroup_Tooltip_All(this)</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave>
+					<OnLoad>
+						this:RegisterForClicks("AnyUp")
+					</OnLoad>
+<OnClick>FindGroup_CreateButton(self, button);FindGroup_Tooltip_All(this)</OnClick></Scripts>
+			</Button>
+
+			<Button name="$parentCCDButton" inherits="UIPanelButtonTemplate" hidden="true" motionScriptsWhileDisabled="true">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="FindGroupFrame"><Offset><AbsDimension x="-90" y="-2"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-CD-Up.tga" />
+        <PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-CD-Down.tga" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-CD-Up-Gray.tga" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>					<OnEnter>FindGroup_Tooltip_All(this)</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave><OnClick>FindGroupSaves_Toggle()</OnClick>
+				</Scripts>
+			</Button>
+
+
+			<Button name="$parentAlarmButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="FindGroupFrame"><Offset><AbsDimension x="-90" y="-2"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\Buttons\UI-Panel-HideButton-Up" />
+        <PushedTexture file="Interface\Buttons\UI-Panel-HideButton-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\Buttons\UI-Panel-HideButton-Disabled" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>
+					<OnEnter>FindGroup_Tooltip_All(this)</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave>
+					<OnClick>FindGroup_AlarmButton()</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="$parentConfigButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="FindGroupFrame"><Offset><AbsDimension x="-72" y="-2"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\Buttons\UI-Panel-ExpandButton-Up" />
+        <PushedTexture file="Interface\Buttons\UI-Panel-ExpandButton-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" parentKey="highlight"/>
+        <DisabledTexture file="Interface\Buttons\UI-Panel-ExpandButton-Disabled" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>					<OnEnter>FindGroup_Tooltip_All(this)</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave><OnClick>FindGroup_ConfigButton()</OnClick></Scripts>
+			</Button>
+			<Button name="$parentConfigFrameButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="FindGroupFrame"><Offset><AbsDimension x="-54" y="-2"/></Offset></Anchor></Anchors>		
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Options-Up.tga"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Options-Down.tga"/>
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>					<OnEnter>FindGroup_Tooltip_All(this)</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave><OnClick>FindGroup_ShowOptions()</OnClick></Scripts>
+			</Button>
+			<Button name="$parentPinButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="FindGroupFrame"><Offset><AbsDimension x="-36" y="-2"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\AddOns\FindGroup\textures\LockButton-Locked-Up.tga" />
+        <PushedTexture file="Interface\AddOns\FindGroup\textures\LockButton-Locked-Down.tga" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>					<OnEnter>FindGroup_Tooltip_All(this)</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave><OnClick>PlaySound("igMainMenuOptionCheckBoxOn");FindGroup_PinButton()</OnClick></Scripts>
+			</Button>
+			<Button name="$parentInfoButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="FindGroupFrame"><Offset><AbsDimension x="-18" y="-2"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Inf-Up.tga" />
+        <PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Inf-Down.tga" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\Buttons\UI-Panel-HideButton-Disabled" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>					<OnEnter>FindGroup_Tooltip_All(this)</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave><OnClick>this:UnlockHighlight();PlaySound("igMainMenuOptionCheckBoxOn");FindGroup_ShowInfo()</OnClick></Scripts>
+			</Button>
+			<Button name="$parentCloseButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="FindGroupFrame"><Offset><AbsDimension x="0" y="-2"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+        <PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>					<OnEnter>FindGroup_Tooltip_All(this)</OnEnter>
+					<OnLeave>GameTooltip:Hide()</OnLeave><OnClick>PlaySound("igMainMenuOptionCheckBoxOn");FindGroup_HideWindow()</OnClick></Scripts>
+			</Button>
+
+
+			<Button name="$parentFindLine1" inherits="FindGroupFindLineTemplate"/>
+			<Button name="$parentFindLine2" inherits="FindGroupFindLineTemplate"/>
+			<Button name="$parentFindLine3" inherits="FindGroupFindLineTemplate"/>
+			<Button name="$parentFindLine4" inherits="FindGroupFindLineTemplate"/>
+			<Button name="$parentFindLine5" inherits="FindGroupFindLineTemplate"/>
+			<Button name="$parentFindLine6" inherits="FindGroupFindLineTemplate"/>
+			
+			
+			
+      <Slider name="$parentSlider" minValue="0" maxValue="1" defaultValue="0" valueStep="1">
+        <Size><AbsDimension x="10" y="74" /></Size>
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+				<Offset><AbsDimension x="-10" y="-36"/></Offset></Anchor></Anchors>
+
+        <HitRectInsets>
+          <AbsInset left="0" right="0" top="0" bottom="0" />
+        </HitRectInsets>
+        <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-ScrollBar-Knob">
+          <Size>
+            <AbsDimension x="26" y="26" />
+          </Size>
+        </ThumbTexture>
+		<Scripts>
+			<OnValueChanged>
+			if FGL.db.includeaddon then
+				FindGroup_ScrollChanged(FindGroupFrameSlider:GetValue())
+			end
+			</OnValueChanged>
+		</Scripts>
+      </Slider>
+
+			<Button name="$parentSliderButtonUp" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="FindGroupFrame"><Offset><AbsDimension x="-2" y="-20"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\Buttons\UI-ScrollBar-ScrollUpButton-Up" />
+        <PushedTexture file="Interface\Buttons\UI-ScrollBar-ScrollUpButton-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-ScrollBar-ScrollUpButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\Buttons\UI-ScrollBar-ScrollUpButton-Disabled" />
+				<Size><AbsDimension x="26" y="26"/></Size>
+				<Scripts><OnClick>FindGroup_SliderButton(1)</OnClick></Scripts>
+			</Button>
+			<Button name="$parentSliderButtonDown" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="FindGroupFrame"><Offset><AbsDimension x="-2" y="0"/></Offset></Anchor></Anchors>		
+        <NormalTexture file="Interface\Buttons\UI-ScrollBar-ScrollDownButton-Up" />
+        <PushedTexture file="Interface\Buttons\UI-ScrollBar-ScrollDownButton-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-ScrollBar-ScrollDownButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\Buttons\UI-ScrollBar-ScrollDownButton-Disabled" />
+				<Size><AbsDimension x="26" y="26"/></Size>
+				<Scripts><OnClick>FindGroup_SliderButton(2)</OnClick></Scripts>
+			</Button>
+
+			<Button name="$parentReadyInput" inherits="UIPanelButtonTemplate" text="ок"  hidden="true">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parentTitle">
+						<Offset>
+							<AbsDimension x="175" y="16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="30" y="20"/></Size>
+				<Scripts>
+					<OnClick>
+						FindGroup_ReadyInput()
+					</OnClick>
+				</Scripts>
+			</Button>
+		
+			
+<Button name="$parentComboBox1"  hidden="true">
+        <Size>
+          <AbsDimension x="100" y="32" />
+        </Size>
+<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentTitleInst">
+							<Offset><AbsDimension x="-20" y="-13"/></Offset></Anchor></Anchors>
+							
+
+							
+        <Layers>
+          <Layer>
+            <Texture name="$parentLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+              <Size>
+                <AbsDimension x="25" y="64" />
+              </Size>
+              <Anchors>
+                <Anchor point="TOPLEFT">
+                  <Offset>
+                    <AbsDimension x="0" y="17" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <TexCoords left="0" right="0.1953125" top="0" bottom="1" />
+            </Texture>
+            <Texture name="$parentMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+              <Size>
+                <AbsDimension x="131" y="64" />
+              </Size>
+              <Anchors>
+                <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+              </Anchors>
+              <TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" />
+            </Texture>
+            <Texture name="$parentRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+              <Size>
+                <AbsDimension x="25" y="64" />
+              </Size>
+              <Anchors>
+                <Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" />
+              </Anchors>
+              <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
+            </Texture>
+            <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text=" " justifyH="RIGHT" parentKey="text">
+              <Size>
+                <AbsDimension x="116" y="10" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" relativeTo="$parentRight">
+                  <Offset>
+                    <AbsDimension x="-43" y="2" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="1" b="1" />
+              <Shadow>
+                <Color r="0" g="0" b="0" />
+                <Offset>
+                  <AbsDimension x="1" y="-1" />
+                </Offset>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+       
+		<Frames>
+		
+				
+		
+				<Frame name="$parentPanelFind" inherits="FindGroupPanelTemplate" hidden="true" parentKey="panel" alpha="0">
+ <Size>
+                <AbsDimension x="116" y="5" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" relativeTo="$parentRight">
+                  <Offset>
+                    <AbsDimension x="-43" y="2" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+						<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+							<BackgroundInsets>
+								<AbsInset left="3" right="3" top="3" bottom="3" />
+							</BackgroundInsets>
+							<TileSize>
+								<AbsValue val="20" />
+							</TileSize>
+							<EdgeSize>
+								<AbsValue val="12" />
+							</EdgeSize>
+						</Backdrop>
+									<Layers>
+								  <Layer>
+									<Texture name="$parentLeft">
+									  <Size>
+										<AbsDimension x="1" y="50" />
+									  </Size>
+									 <Anchors>
+										<Anchor point="TOPLEFT">
+										  <Offset>
+											<AbsDimension x="-23" y="0" />
+										  </Offset>
+										</Anchor>
+									  </Anchors>
+									</Texture>
+									 </Layer>
+									</Layers>
+					</Frame>	
+					
+					<EditBox name="$parentFindEdit" letters="25"  justifyH="RIGHT" hidden="true" parentKey="edit">
+						 <Size>
+                <AbsDimension x="116" y="10" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" relativeTo="$parentRight">
+                  <Offset>
+                    <AbsDimension x="-43" y="1" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+						<FontString inherits="ChatFontNormal"></FontString>
+
+						<Scripts>
+								<OnLoad>
+								local g = this:GetParent().panel;
+								local cb_init_fn = function(g, level)
+									if FGL.db.includeaddon then
+										if #FGL.db.FGC.findlist>0 then
+											for i=1, #FGL.db.FGC.findlist do
+												local info = UIDropDownMenu_CreateInfo();
+												info.checked = FGL.db.FGC.findlist[i].checked;
+												info.colorCode = FGL.db.FGC.findlist[i].colorCode;
+												info.text = FGL.db.FGC.findlist[i].text;
+												info.func = FGL.db.FGC.findlist[i].func;
+												UIDropDownMenu_AddButton(info, level);
+											end
+										end
+									end
+								end;
+								UIDropDownMenu_Initialize(this:GetParent().panel, cb_init_fn)
+								</OnLoad>
+									<OnHide>
+									this:GetParent().panel:Hide();
+									CloseDropDownMenus();
+									this:GetParent().text:Show();
+									</OnHide>
+									<OnShow>
+									this:SetFrameLevel(40);
+									this:GetParent().text:Hide();
+									this:SetText(this:GetParent().text:GetText());
+									this:HighlightText(0,100);
+									ToggleDropDownMenu(nil, nil, this:GetParent().panel);
+									</OnShow>
+						<OnEditFocusLost>
+							this:Hide()
+						</OnEditFocusLost>
+						
+						
+							<OnEnterPressed>this:Hide()</OnEnterPressed>
+							<OnEscapePressed>this:Hide()</OnEscapePressed>
+							<OnTextChanged>
+								CloseDropDownMenus();
+								FGL.db.FGC.dropdownframe = this;
+								FGL.db.FGC.findlist = FGC_CreateFindTable(self:GetText());
+								ToggleDropDownMenu(nil, nil, this:GetParent().panel);
+							</OnTextChanged>
+						</Scripts>
+					</EditBox>
+		
+		
+		
+		<Button name="$parentButton1" alpha="1">
+		<HighlightTexture file="Interface\GLUES\COMMON\Glue-Panel-Button-Highlight-Blue" alphaMode="ADD" parentkey="highlight"/>
+		<Size><AbsDimension x="116" y="14" /></Size>
+				          <Anchors>
+                <Anchor point="RIGHT" relativeTo="$parentRight">
+                  <Offset>
+                    <AbsDimension x="-43" y="2" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+		<Frames>
+		</Frames>
+		 <Scripts>
+				<OnLoad>
+				this.highlight:SetPoint("TOPLEFT",this:GetParent().text,"TOPLEFT",0,0);
+				this.highlight:SetPoint("BOTTOMRIGHT",this:GetParent().text,"BOTTOMRIGHT",80,-10);
+				</OnLoad>
+					<OnClick>
+					  this:GetParent().panel:Show();
+						this:GetParent().edit:Show();
+						this:GetParent().edit:SetFocus();
+					 </OnClick>
+		</Scripts>
+		</Button>
+		
+          <Button name="$parentButton">
+            <Size>
+              <AbsDimension x="24" y="24" />
+            </Size>
+            <Anchors>
+              <Anchor point="TOPRIGHT" relativeTo="$parentRight">
+                <Offset>
+                  <AbsDimension x="-16" y="-18" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Scripts>
+              <OnClick>
+			  this:GetParent().edit:Hide();
+						ToggleDropDownMenu(nil, nil, self:GetParent());
+						PlaySound("igMainMenuOptionCheckBoxOn");
+	</OnClick>
+            </Scripts>
+            <NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up">
+              <Size>
+                <AbsDimension x="24" y="24" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" />
+              </Anchors>
+            </NormalTexture>
+            <PushedTexture name="$parentPushedTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down">
+              <Size>
+                <AbsDimension x="24" y="24" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" />
+              </Anchors>
+            </PushedTexture>
+            <DisabledTexture name="$parentDisabledTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled">
+              <Size>
+                <AbsDimension x="24" y="24" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" />
+              </Anchors>
+            </DisabledTexture>
+            <HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
+              <Size>
+                <AbsDimension x="24" y="24" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" />
+              </Anchors>
+            </HighlightTexture>
+          </Button>
+					
+        </Frames>
+        <Scripts>
+          <OnLoad>
+	this:SetScale(0.9);
+local cb_init_fn = function(self, level)
+    if level == 1 then
+	if FGC_Patch_GetMax() > 1 then
+		for i=1, FGC_Patch_GetMax() do
+		        local info = UIDropDownMenu_CreateInfo();
+		        info.text = FGC_Patch_GetText(i);
+		        info.hasArrow = true;
+		        info.value = FGC_Patch_GetValue(i);
+		        UIDropDownMenu_AddButton(info, level);
+		end
+	else
+		 for i=1, FGC_Inst_GetMax(FGC_Patch_GetValue(1)) do
+		        	local info = UIDropDownMenu_CreateInfo();
+			info.checked = false;
+		  	info.text = FGC_Inst_Text(i, FGC_Patch_GetValue(1));
+			info.func = function() FGC_Inst_Click(i, FGC_Patch_GetValue(1)); CloseDropDownMenus(); end;
+			if i == FGC_Inst_Geti2(FGC_Patch_GetValue(1)) then info.checked = true end;
+		        	UIDropDownMenu_AddButton(info, level);
+		end
+	end
+	
+		        local info = UIDropDownMenu_CreateInfo();
+				info.checked = false;
+		        info.text = FGC_Rand_GetText();
+		        info.func = function() FGC_Rand_Click(); CloseDropDownMenus(); end;
+		        if FGC_Rand_GetStat() then info.checked = true end;
+		        UIDropDownMenu_AddButton(info, level);
+			if FGL.db.includeaddon then
+				if FindGroupCharVars.othermode=="\121\101\115" then
+					local info = UIDropDownMenu_CreateInfo();
+					info.checked = false;
+					info.text = FGC_Other_GetText();
+					info.func = function() FGC_Other_Click(); CloseDropDownMenus(); end;
+					if FGC_Other_GetStat() then info.checked = true end;
+					UIDropDownMenu_AddButton(info, level);
+				end
+				end
+    elseif (level == 2) then
+	for i=1, FGC_Inst_GetMax(UIDROPDOWNMENU_MENU_VALUE) do
+	        	local info = UIDropDownMenu_CreateInfo();
+		info.checked = false;
+		info.colorCode = FGC_Inst_Color(i, UIDROPDOWNMENU_MENU_VALUE, level);
+	  	info.text = FGC_Inst_Text(i, UIDROPDOWNMENU_MENU_VALUE);
+		info.func = function() FGC_Inst_Click(i, UIDROPDOWNMENU_MENU_VALUE); CloseDropDownMenus(); end;
+		if i == FGC_Inst_Geti2(UIDROPDOWNMENU_MENU_VALUE) then info.checked = true end;
+	        	UIDropDownMenu_AddButton(info, level);
+	end
+    end
+
+end
+UIDropDownMenu_Initialize(this, cb_init_fn);
+	</OnLoad>
+          <OnHide>CloseDropDownMenus();</OnHide>
+
+        </Scripts>
+	
+      </Button>
+
+
+		
+
+ <Button name="$parentComboBox3"  hidden="true">
+        <Size>
+          <AbsDimension x="60" y="32" />
+        </Size>
+<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentTitleIR">
+							<Offset><AbsDimension x="-20" y="-13"/></Offset></Anchor></Anchors>
+        <Layers>
+          <Layer>
+            <Texture name="$parentLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+              <Size>
+                <AbsDimension x="25" y="64" />
+              </Size>
+              <Anchors>
+                <Anchor point="TOPLEFT">
+                  <Offset>
+                    <AbsDimension x="0" y="17" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <TexCoords left="0" right="0.1953125" top="0" bottom="1" />
+            </Texture>
+            <Texture name="$parentMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+              <Size>
+                <AbsDimension x="60" y="64" />
+              </Size>
+              <Anchors>
+                <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+              </Anchors>
+              <TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" />
+            </Texture>
+            <Texture name="$parentRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+              <Size>
+                <AbsDimension x="25" y="64" />
+              </Size>
+              <Anchors>
+                <Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" />
+              </Anchors>
+              <TexCoords left="0.8046875" right="1" top="0" bottom="1" />
+            </Texture>
+            <FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text=" " justifyH="RIGHT">
+              <Size>
+                <AbsDimension x="60" y="10" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" relativeTo="$parentRight">
+                  <Offset>
+                    <AbsDimension x="-43" y="2" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="1" b="1" />
+              <Shadow>
+                <Color r="0" g="0" b="0" />
+                <Offset>
+                  <AbsDimension x="1" y="-1" />
+                </Offset>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Button name="$parentButton">
+            <Size>
+              <AbsDimension x="24" y="24" />
+            </Size>
+            <Anchors>
+              <Anchor point="TOPRIGHT" relativeTo="$parentRight">
+                <Offset>
+                  <AbsDimension x="-16" y="-18" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Scripts>
+              <OnClick>
+						ToggleDropDownMenu(nil, nil, self:GetParent());
+						PlaySound("igMainMenuOptionCheckBoxOn");
+					</OnClick>
+            </Scripts>
+            <NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up">
+              <Size>
+                <AbsDimension x="24" y="24" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" />
+              </Anchors>
+            </NormalTexture>
+            <PushedTexture name="$parentPushedTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down">
+              <Size>
+                <AbsDimension x="24" y="24" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" />
+              </Anchors>
+            </PushedTexture>
+            <DisabledTexture name="$parentDisabledTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled">
+              <Size>
+                <AbsDimension x="24" y="24" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" />
+              </Anchors>
+            </DisabledTexture>
+            <HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
+              <Size>
+                <AbsDimension x="24" y="24" />
+              </Size>
+              <Anchors>
+                <Anchor point="RIGHT" />
+              </Anchors>
+            </HighlightTexture>
+          </Button>
+        </Frames>
+        <Scripts>
+          <OnLoad>
+this:SetScale(0.9);
+	local cb_init_fn = function()
+	if FGL.db.includeaddon then
+		local info;
+		for i=1,FGC_IR_GetMax() do
+			  info = {};
+			  info.func = function() FGC_IR_Click(i); UIDropDownMenu_SetSelectedID(FindGroupFrameComboBox3, this:GetID(), 0) end;
+			  info.text = FGC_IR_Text(i);
+			  info.colorCode = FGC_IR_Color(i, nil, level);
+			  if i == FGC_IR_Geti() then info.checked = true end;
+			  UIDropDownMenu_AddButton(info);
+		end
+	end
+	  end;
+UIDropDownMenu_Initialize(this, cb_init_fn);
+</OnLoad>
+          <OnHide>CloseDropDownMenus();</OnHide>
+        </Scripts>
+      </Button>
+
+			<Button name="$parentHealh" inherits="UIPanelButtonTemplate" hidden="true">
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentHeal">
+				<Offset><AbsDimension x="-2" y="2"/></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-HEALICON"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-HEALICON"/>
+       				 <HighlightTexture file="Interface\Buttons\UI-AttributeButton-Encourage-Hilight" alphaMode="ADD" />
+			</Button>
+			<Button name="$parentDDh" inherits="UIPanelButtonTemplate" hidden="true">
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentDD">
+				<Offset><AbsDimension x="-2" y="2"/></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-DDICON"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-GROUP-DDICON"/>
+       				 <HighlightTexture file="Interface\Buttons\UI-AttributeButton-Encourage-Hilight" alphaMode="ADD" />
+			</Button>
+			<Button name="$parentTankh" inherits="UIPanelButtonTemplate" hidden="true">
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentTank">
+				<Offset><AbsDimension x="-2" y="2"/></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<NormalTexture file="Interface\GROUPFRAME\UI-GROUP-MAINTANKICON"/>
+				<PushedTexture file="Interface\GROUPFRAME\UI-GROUP-MAINTANKICON"/>
+       				 <HighlightTexture file="Interface\Buttons\UI-AttributeButton-Encourage-Hilight" alphaMode="ADD" />
+			</Button>
+
+
+
+
+			<Button name="$parentTriggerButton" inherits="UIPanelButtonTemplate" text="Запустить"  hidden="true"  motionScriptsWhileDisabled="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="-10" y="35"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="80" y="20"/></Size>
+				<Scripts>
+          					<OnLoad>
+						this:SetScale(0.9)
+					</OnLoad>
+
+					<OnClick>
+						if FindGroupShowTextEditText:HasFocus() or FindGroupFrameSec:HasFocus() or FindGroupFrameEditTank:HasFocus() or FindGroupFrameEditHeal:HasFocus() or FindGroupFrameEditDD:HasFocus() then
+						FGC_TriggerButtonOff()
+						else
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						FindGroup_CreateTrigger()
+						end
+						FindGroupShowTextEditText:ClearFocus();
+						FindGroupFrameSec:ClearFocus();
+						FindGroupFrameEditTank:ClearFocus();
+						FindGroupFrameEditHeal:ClearFocus();
+						FindGroupFrameEditDD:ClearFocus();
+					</OnClick>
+			
+				</Scripts>
+			</Button>
+
+		<EditBox name="$parentSec" letters="3" justifyH="CENTER" hidden="true">
+			<Size>
+				<AbsDimension x="35" y="32"></AbsDimension>
+			</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentTime">
+								<Offset>
+									<AbsDimension x="14" y="-8"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+			<FontString inherits="ChatFontNormal"></FontString>
+						<Scripts>
+
+						</Scripts>
+		<Scripts>
+
+
+							<OnEditFocusGained>
+								FGC_TriggerButtonOn();
+							</OnEditFocusGained>
+							<OnEditFocusLost>
+								FindGroup_CreateLostSec();
+								FGC_EditLostFocus();
+							</OnEditFocusLost>
+
+							<OnLoad>
+								this:ClearFocus();
+								this:SetAutoFocus("false");
+								this:SetNumeric(true);
+							</OnLoad>
+						<OnEnterPressed>this:ClearFocus()</OnEnterPressed>
+						<OnEscapePressed>this:ClearFocus()</OnEscapePressed>
+		</Scripts>
+		</EditBox>
+
+		<Frame name="$parentPanel3" inherits="FindGroupPanelTemplate" hidden="true">
+			<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentSec">
+			<Offset><AbsDimension x="-5" y="-4" /></Offset>	</Anchor></Anchors>
+			<Size><AbsDimension x="33" y="25" /></Size>
+		</Frame>
+
+<EditBox name="$parentEditTank" letters="2" justifyH="CENTER" hidden="true">
+	<Size><AbsDimension x="20" y="32"></AbsDimension></Size>
+				<Anchors><Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parentTank">
+						<Offset><AbsDimension x="3" y="-20"/></Offset></Anchor></Anchors>
+	<FontString inherits="ChatFontNormal"></FontString>
+	<Scripts>
+		<OnLoad>
+			this:ClearFocus();
+			this:SetAutoFocus("false");
+			this:SetNumeric(true);
+		</OnLoad>
+		<OnTextChanged>
+if userInput then
+FindGroupFrameSliderTankHeal:SetMinMaxValues(0, FindGroupFrameEditHeal:GetNumber()+FindGroupFrameEditTank:GetNumber())
+FindGroupFrameSliderTankHeal:SetValue(FindGroupFrameEditHeal:GetNumber())
+FindGroupFrameSliderHealDD:SetMinMaxValues(0, FindGroupFrameEditDD:GetNumber()+FindGroupFrameEditHeal:GetNumber())
+FindGroupFrameSliderHealDD:SetValue(FindGroupFrameEditDD:GetNumber())
+end
+		</OnTextChanged>
+		<OnMouseWheel>
+		self:SetNumber(self:GetNumber()+delta)
+		FindGroupFrameSliderTankHeal:SetMinMaxValues(0, FindGroupFrameEditHeal:GetNumber()+FindGroupFrameEditTank:GetNumber())
+		FindGroupFrameSliderTankHeal:SetValue(FindGroupFrameEditHeal:GetNumber())
+		FindGroupFrameSliderHealDD:SetMinMaxValues(0, FindGroupFrameEditDD:GetNumber()+FindGroupFrameEditHeal:GetNumber())
+		FindGroupFrameSliderHealDD:SetValue(FindGroupFrameEditDD:GetNumber())
+		</OnMouseWheel>
+				<OnEnter>
+			getglobal(self:GetParent():GetName().."ClassesTank"):Show();
+			getglobal(self:GetParent():GetName().."PanelTank").s_texture:SetPoint("TOPLEFT", 
+			getglobal(self:GetParent():GetName().."PanelTank"), "TOPLEFT", 2,-2)
+			getglobal(self:GetParent():GetName().."PanelTank").s_texture:SetPoint("BOTTOMRIGHT", 
+			getglobal(self:GetParent():GetName().."PanelTank"), "BOTTOMRIGHT", -2,2)			
+			getglobal(self:GetParent():GetName().."PanelTank").s_texture:Show()
+		</OnEnter>
+		<OnLeave>
+			getglobal(self:GetParent():GetName().."PanelTank").s_texture:Hide()
+			getglobal(self:GetParent():GetName().."ClassesTank"):Hide();
+		</OnLeave>
+		<OnEnterPressed>this:ClearFocus()</OnEnterPressed>
+		<OnEscapePressed>this:ClearFocus()</OnEscapePressed>
+	</Scripts>
+</EditBox>
+
+<EditBox name="$parentEditHeal" letters="2" justifyH="CENTER" hidden="true">
+	<Size><AbsDimension x="20" y="32"></AbsDimension></Size>
+				<Anchors><Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parentHeal">
+						<Offset><AbsDimension x="0" y="-20"/></Offset></Anchor></Anchors>
+	<FontString inherits="ChatFontNormal"></FontString>
+	<Scripts>
+		<OnLoad>
+			this:ClearFocus();
+			this:SetAutoFocus("false");
+			this:SetNumeric(true);
+		</OnLoad>
+		<OnTextChanged>
+if userInput then
+FindGroupFrameSliderTankHeal:SetMinMaxValues(0, FindGroupFrameEditHeal:GetNumber()+FindGroupFrameEditTank:GetNumber())
+FindGroupFrameSliderTankHeal:SetValue(FindGroupFrameEditHeal:GetNumber())
+FindGroupFrameSliderHealDD:SetMinMaxValues(0, FindGroupFrameEditDD:GetNumber()+FindGroupFrameEditHeal:GetNumber())
+FindGroupFrameSliderHealDD:SetValue(FindGroupFrameEditDD:GetNumber())
+end
+		</OnTextChanged>
+		<OnMouseWheel>
+		self:SetNumber(self:GetNumber()+delta)
+		FindGroupFrameSliderTankHeal:SetMinMaxValues(0, FindGroupFrameEditHeal:GetNumber()+FindGroupFrameEditTank:GetNumber())
+		FindGroupFrameSliderTankHeal:SetValue(FindGroupFrameEditHeal:GetNumber())
+		FindGroupFrameSliderHealDD:SetMinMaxValues(0, FindGroupFrameEditDD:GetNumber()+FindGroupFrameEditHeal:GetNumber())
+		FindGroupFrameSliderHealDD:SetValue(FindGroupFrameEditDD:GetNumber())
+		</OnMouseWheel>
+		<OnEnter>
+			getglobal(self:GetParent():GetName().."ClassesHeal"):Show();
+			getglobal(self:GetParent():GetName().."PanelHeal").s_texture:SetPoint("TOPLEFT", 
+			getglobal(self:GetParent():GetName().."PanelHeal"), "TOPLEFT", 2,-2)
+			getglobal(self:GetParent():GetName().."PanelHeal").s_texture:SetPoint("BOTTOMRIGHT", 
+			getglobal(self:GetParent():GetName().."PanelHeal"), "BOTTOMRIGHT", -2,2)			
+			getglobal(self:GetParent():GetName().."PanelHeal").s_texture:Show()
+		</OnEnter>
+		<OnLeave>
+			getglobal(self:GetParent():GetName().."PanelHeal").s_texture:Hide()
+			getglobal(self:GetParent():GetName().."ClassesHeal"):Hide();
+		</OnLeave>
+		<OnEnterPressed>this:ClearFocus()</OnEnterPressed>
+		<OnEscapePressed>this:ClearFocus()</OnEscapePressed>
+	</Scripts>
+</EditBox>
+
+<EditBox name="$parentEditDD" letters="2" justifyH="CENTER" hidden="true">
+	<Size><AbsDimension x="20" y="32"></AbsDimension></Size>
+				<Anchors><Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parentDD">
+						<Offset><AbsDimension x="0" y="-20"/></Offset></Anchor></Anchors>
+	<FontString inherits="ChatFontNormal"></FontString>
+	<Scripts>
+		<OnLoad>
+			this:ClearFocus();
+			this:SetAutoFocus("false");
+			this:SetNumeric(true);
+		</OnLoad>
+		<OnTextChanged>
+if userInput then
+FindGroupFrameSliderHealDD:SetMinMaxValues(0, FindGroupFrameEditDD:GetNumber()+FindGroupFrameEditHeal:GetNumber())
+FindGroupFrameSliderHealDD:SetValue(FindGroupFrameEditDD:GetNumber())
+end
+		</OnTextChanged>
+		<OnMouseWheel>
+		self:SetNumber(self:GetNumber()+delta)
+		FindGroupFrameSliderHealDD:SetMinMaxValues(0, FindGroupFrameEditDD:GetNumber()+FindGroupFrameEditHeal:GetNumber())
+		FindGroupFrameSliderHealDD:SetValue(FindGroupFrameEditDD:GetNumber())
+		</OnMouseWheel>
+		<OnEnter>
+			getglobal(self:GetParent():GetName().."ClassesDD"):Show();
+			getglobal(self:GetParent():GetName().."PanelDD").s_texture:SetPoint("TOPLEFT", 
+			getglobal(self:GetParent():GetName().."PanelDD"), "TOPLEFT", 2,-2)
+			getglobal(self:GetParent():GetName().."PanelDD").s_texture:SetPoint("BOTTOMRIGHT", 
+			getglobal(self:GetParent():GetName().."PanelDD"), "BOTTOMRIGHT", -2,2)			
+			getglobal(self:GetParent():GetName().."PanelDD").s_texture:Show()
+		</OnEnter>
+		<OnLeave>
+			getglobal(self:GetParent():GetName().."PanelDD").s_texture:Hide()
+			getglobal(self:GetParent():GetName().."ClassesDD"):Hide();
+		</OnLeave>		
+		<OnEnterPressed>this:ClearFocus()</OnEnterPressed>
+		<OnEscapePressed>this:ClearFocus()</OnEscapePressed>
+	</Scripts>
+</EditBox>
+
+
+		<Frame name="$parentClassesTank" inherits="FindGroupClassesTemplate">
+			<Size><AbsDimension x="60" y="60"/></Size>
+			<Anchors><Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parentEditTank">
+					<Offset><AbsDimension x="-20" y="0"/></Offset>
+			</Anchor></Anchors>
+		</Frame>
+		<Frame name="$parentClassesHeal" inherits="FindGroupClassesTemplate">
+			<Size><AbsDimension x="60" y="60"/></Size>
+			<Anchors><Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parentEditHeal">
+					<Offset><AbsDimension x="-20" y="0"/></Offset>
+			</Anchor></Anchors>
+		</Frame>
+		<Frame name="$parentClassesDD" inherits="FindGroupClassesTemplate">
+			<Size><AbsDimension x="120" y="60"/></Size>
+			<Anchors><Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parentEditDD">
+					<Offset><AbsDimension x="-50" y="0"/></Offset>
+			</Anchor></Anchors>
+		</Frame>
+		
+<Frame name="$parentPanelTank" inherits="FindGroupPanelTemplate" hidden="true">
+	<Anchors>
+	<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentEditTank"><Offset><AbsDimension x="-5" y="-4" /></Offset></Anchor>
+	<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentEditTank"><Offset><AbsDimension x="5" y="4" /></Offset></Anchor>
+	</Anchors>
+	<Layers>
+		<Layer level="ARTWORK">
+			<Texture file="Interface\Buttons\CheckButtonHilight" alphaMode="ADD" parentKey="s_texture" hidden="true"/>
+		</Layer>
+	</Layers>
+</Frame>
+<Frame name="$parentPanelHeal" inherits="FindGroupPanelTemplate" hidden="true">
+	<Anchors>
+	<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentEditHeal"><Offset><AbsDimension x="-5" y="-4" /></Offset></Anchor>
+	<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentEditHeal"><Offset><AbsDimension x="5" y="4" /></Offset></Anchor>
+	</Anchors>
+	<Layers>
+		<Layer level="ARTWORK">
+			<Texture file="Interface\Buttons\CheckButtonHilight" alphaMode="ADD" parentKey="s_texture" hidden="true"/>
+		</Layer>
+	</Layers>
+</Frame>
+<Frame name="$parentPanelDD" inherits="FindGroupPanelTemplate" hidden="true">
+	<Anchors>
+	<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentEditDD"><Offset><AbsDimension x="-5" y="-4" /></Offset></Anchor>
+	<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentEditDD"><Offset><AbsDimension x="5" y="4" /></Offset></Anchor>
+	</Anchors>
+	<Layers>
+		<Layer level="ARTWORK">
+			<Texture file="Interface\Buttons\CheckButtonHilight" alphaMode="ADD" parentKey="s_texture" hidden="true"/>
+		</Layer>
+	</Layers>
+</Frame>
+
+      <Slider name="$parentSliderTankHeal" enableMouse="true" minValue="-5" maxValue="5" defaultValue="0" valueStep="1" orientation="HORIZONTAL" hidden="true">
+        <Size>
+          <AbsDimension x="100" y="8" />
+        </Size>
+						<Anchors>
+<Anchor point="TOPLEFT" relativePoint="CENTER" relativeTo="$parentTank"><Offset><AbsDimension x="-10" y="-35"/></Offset></Anchor>
+<Anchor point="TOPRIGHT" relativePoint="CENTER" relativeTo="$parentHeal"><Offset><AbsDimension x="-10" y="-35"/></Offset></Anchor>
+</Anchors>
+        <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+          <BackgroundInsets>
+            <AbsInset left="0" right="0" top="0" bottom="0" />
+          </BackgroundInsets>
+          <TileSize>
+            <AbsValue val="3" />
+          </TileSize>
+          <EdgeSize>
+            <AbsValue val="4" />
+          </EdgeSize>
+        </Backdrop>
+        <HitRectInsets>
+          <AbsInset left="0" right="0" top="0" bottom="0" />
+        </HitRectInsets>
+        <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+          <Size>
+            <AbsDimension x="28" y="28" />
+          </Size>
+        </ThumbTexture>
+	<Scripts><OnValueChanged>
+local minValue, maxValue = this:GetMinMaxValues();
+FindGroupFrameEditTank:SetNumber(maxValue - this:GetValue());
+FindGroupFrameEditHeal:SetNumber(minValue + this:GetValue());
+if FGL.db.includeaddon then
+FindGroupFrameSliderHealDD:SetMinMaxValues(0, FindGroupFrameEditDD:GetNumber()+FindGroupFrameEditHeal:GetNumber());
+FindGroupFrameSliderHealDD:SetValue(FindGroupFrameEditDD:GetNumber());
+end
+		</OnValueChanged>
+	</Scripts>
+      </Slider>
+
+      <Slider name="$parentSliderHealDD" enableMouse="true" minValue="-5" maxValue="5" defaultValue="0" valueStep="1" orientation="HORIZONTAL" hidden="true">
+        <Size>
+          <AbsDimension x="100" y="8" />
+        </Size>
+						<Anchors>
+<Anchor point="TOPLEFT" relativePoint="CENTER" relativeTo="$parentHeal"><Offset><AbsDimension x="10" y="-35"/></Offset></Anchor>
+<Anchor point="TOPRIGHT" relativePoint="CENTER" relativeTo="$parentDD"><Offset><AbsDimension x="10" y="-35"/></Offset></Anchor>
+</Anchors>
+        <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+          <BackgroundInsets>
+            <AbsInset left="0" right="0" top="0" bottom="0" />
+          </BackgroundInsets>
+          <TileSize>
+            <AbsValue val="3" />
+          </TileSize>
+          <EdgeSize>
+            <AbsValue val="4" />
+          </EdgeSize>
+        </Backdrop>
+        <HitRectInsets>
+          <AbsInset left="0" right="0" top="0" bottom="0" />
+        </HitRectInsets>
+        <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+          <Size>
+            <AbsDimension x="28" y="28" />
+          </Size>
+        </ThumbTexture>
+	<Scripts><OnValueChanged>
+local minValue, maxValue = this:GetMinMaxValues();
+FindGroupFrameEditHeal:SetNumber(maxValue - this:GetValue());
+FindGroupFrameEditDD:SetNumber(minValue + this:GetValue());
+FindGroupFrameSliderTankHeal:SetMinMaxValues(0, FindGroupFrameEditHeal:GetNumber()+FindGroupFrameEditTank:GetNumber());
+FindGroupFrameSliderTankHeal:SetValue(FindGroupFrameEditHeal:GetNumber());
+		</OnValueChanged>
+	</Scripts>
+      </Slider>
+
+			<Button name="$parentCalculate" inherits="UIPanelButtonTemplate" text="" hidden="true">
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parentHeal">
+						<Offset>
+							<AbsDimension x="0" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight"  alphaMode="ADD" />
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Auto-Up"/>
+			   	<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Auto-Down"/>
+				<Size><AbsDimension x="24" y="24"/></Size>
+				<Scripts>	<OnEnter>
+						FindGroup_Tooltip_All(this);
+				</OnEnter><OnLeave>GameTooltip:Hide()</OnLeave></Scripts>
+				<Scripts>
+					<OnClick>
+FindGroupShowTextEditText:ClearFocus();
+FindGroupFrameSec:ClearFocus();
+FindGroupFrameEditTank:ClearFocus();
+FindGroupFrameEditHeal:ClearFocus();
+FindGroupFrameEditDD:ClearFocus();
+PlaySound("igMainMenuOptionCheckBoxOn");
+						FGC_calc();
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="$parentDTank" inherits="UIPanelButtonTemplate" hidden="true">
+			<Anchors><Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parentEditTank"><Offset>
+			<AbsDimension x="-20" y="0" /></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="25" y="25"/></Size>
+				<Scripts><OnClick>FGC_dTank(self);
+FindGroupFrameSliderTankHeal:SetMinMaxValues(0, FindGroupFrameEditHeal:GetNumber()+FindGroupFrameEditTank:GetNumber());
+FindGroupFrameSliderTankHeal:SetValue(FindGroupFrameEditHeal:GetNumber());
+</OnClick></Scripts>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Minus-Up"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Minus-Down"/>
+       								<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight"  alphaMode="ADD" />
+			</Button>
+			<Button name="$parentUTank" inherits="UIPanelButtonTemplate" hidden="true">
+			<Anchors><Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parentEditTank"><Offset>
+			<AbsDimension x="21" y="0" /></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="25" y="25"/></Size>
+				<Scripts><OnClick>FGC_uTank(self);
+FindGroupFrameSliderTankHeal:SetMinMaxValues(0, FindGroupFrameEditHeal:GetNumber()+FindGroupFrameEditTank:GetNumber());
+FindGroupFrameSliderTankHeal:SetValue(FindGroupFrameEditHeal:GetNumber());
+</OnClick></Scripts>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Plus-Up"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Plus-Down"/>
+       								<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight"  alphaMode="ADD" />
+			</Button>
+
+			<Button name="$parentDHeal" inherits="UIPanelButtonTemplate" hidden="true">
+			<Anchors><Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parentEditHeal"><Offset>
+			<AbsDimension x="-20" y="0" /></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="25" y="25"/></Size>
+				<Scripts><OnClick>FGC_dHeal(self);
+FindGroupFrameSliderTankHeal:SetMinMaxValues(0, FindGroupFrameEditHeal:GetNumber()+FindGroupFrameEditTank:GetNumber());
+FindGroupFrameSliderTankHeal:SetValue(FindGroupFrameEditHeal:GetNumber());
+FindGroupFrameSliderHealDD:SetMinMaxValues(0, FindGroupFrameEditDD:GetNumber()+FindGroupFrameEditHeal:GetNumber());
+FindGroupFrameSliderHealDD:SetValue(FindGroupFrameEditDD:GetNumber());
+</OnClick></Scripts>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Minus-Up"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Minus-Down"/>
+       								<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight"  alphaMode="ADD" />
+			</Button>
+			<Button name="$parentUHeal" inherits="UIPanelButtonTemplate" hidden="true">
+			<Anchors><Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parentEditHeal"><Offset>
+			<AbsDimension x="21" y="0" /></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="25" y="25"/></Size>
+				<Scripts><OnClick>FGC_uHeal(self);
+FindGroupFrameSliderTankHeal:SetMinMaxValues(0, FindGroupFrameEditHeal:GetNumber()+FindGroupFrameEditTank:GetNumber());
+FindGroupFrameSliderTankHeal:SetValue(FindGroupFrameEditHeal:GetNumber());
+FindGroupFrameSliderHealDD:SetMinMaxValues(0, FindGroupFrameEditDD:GetNumber()+FindGroupFrameEditHeal:GetNumber());
+FindGroupFrameSliderHealDD:SetValue(FindGroupFrameEditDD:GetNumber());
+</OnClick></Scripts>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Plus-Up"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Plus-Down"/>
+       								<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight"  alphaMode="ADD" />
+			</Button>
+
+			<Button name="$parentDDD" inherits="UIPanelButtonTemplate" hidden="true">
+			<Anchors><Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parentEditDD"><Offset>
+			<AbsDimension x="-20" y="0" /></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="25" y="25"/></Size>
+				<Scripts><OnClick>FGC_dDD(self);
+FindGroupFrameSliderHealDD:SetMinMaxValues(0, FindGroupFrameEditDD:GetNumber()+FindGroupFrameEditHeal:GetNumber());
+FindGroupFrameSliderHealDD:SetValue(FindGroupFrameEditDD:GetNumber());
+</OnClick></Scripts>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Minus-Up"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Minus-Down"/>
+       								<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight"  alphaMode="ADD" />
+			</Button>
+			<Button name="$parentUDD" inherits="UIPanelButtonTemplate" hidden="true">
+			<Anchors><Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parentEditDD"><Offset>
+			<AbsDimension x="21" y="0" /></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="25" y="25"/></Size>
+				<Scripts><OnClick>FGC_uDD(self);
+FindGroupFrameSliderHealDD:SetMinMaxValues(0, FindGroupFrameEditDD:GetNumber()+FindGroupFrameEditHeal:GetNumber());
+FindGroupFrameSliderHealDD:SetValue(FindGroupFrameEditDD:GetNumber());
+</OnClick></Scripts>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Plus-Up"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Plus-Down"/>
+       								<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight"  alphaMode="ADD" />
+			</Button>
+
+		</Frames>
+		
+		<Scripts>
+			<OnLoad>
+				this:SetMinResize(280,70);
+				this:SetMaxResize(280,126);
+				this:RegisterForDrag("LeftButton");
+				this:RegisterEvent("ADDON_LOADED");
+				this:SetBackdropColor(0.0, 0.0, 0.0, 0.6);
+			</OnLoad>
+			<OnEvent>
+				if  (event == "ADDON_LOADED" and arg1 == "FindGroup") then
+					this:UnregisterEvent("ADDON_LOADED");
+					FGL.db.chsum = getglobal(FGL.SPACE_NAME).GetCS(FGL.db);
+					if FindGroupDB then if FindGroupDB.getback then DisableAddOn(arg1) end end
+					FindGroup_OnLoad();
+					FGC_OnLoad();
+				end
+			</OnEvent>
+			<OnDragStart>FindGroupFrame_StartMove()
+			</OnDragStart>
+			<OnDragStop>
+				FindGroupFrame_StopMove();
+			</OnDragStop>
+<OnShow>
+this:SetFrameLevel(2);
+</OnShow>
+			<OnHide>FindGroupOptionsFrame:Hide()</OnHide>
+			<OnMouseDown>
+FindGroupShowTextEditText:ClearFocus();
+FindGroupFrameSec:ClearFocus();
+FindGroupFrameEditTank:ClearFocus();
+FindGroupFrameEditHeal:ClearFocus();
+FindGroupFrameEditDD:ClearFocus();
+			</OnMouseDown>
+		</Scripts>
+	</Frame>
+	
+<Frame name="FindGroupBackFrame" parent="FindGroupFrame" movable="true" alpha="0.3"  frameStrata="MEDIUM">
+<Size><AbsDimension x="280" y="126"/></Size>
+
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset><AbsDimension x="0" y="0"/></Offset>
+				</Anchor></Anchors>
+			<Backdrop name="$parentBackdrop" bgFile="Interface\LFGFrame\UI-LFG-BACKGROUND-RANDOMDUNGEON"
+		tile="false">
+			<EdgeSize>
+				<AbsValue val="2"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="0" right="0" top="0" bottom="0"/>
+			</BackgroundInsets>
+		</Backdrop>
+<Scripts>
+<OnShow>
+this:SetFrameLevel(0)
+</OnShow>
+</Scripts>
+</Frame>
+
+
+
+	<Frame name="FindGroupConfigFrameH" parent="FindGroupFrame" enableMouse="true" frameStrata="MEDIUM" movable="true" hidden="true">
+		<Size><AbsDimension x="70" y="100"/></Size>
+				<Anchors><Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+						<Offset><AbsDimension x="63" y="-113"/></Offset>
+				</Anchor></Anchors>
+		<Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+		edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Frames>
+
+<Frame name="$parentSecFrame" hidden="true">
+
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parent">	<Offset>
+							<AbsDimension x="12" y="-60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+			<FontString name="$parentElapsedTime" inherits="GameFontNormal" text="" justifyH="CENTER" justifyV="CENTER" parentKey="text">
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors> 
+			<Color r="1.0" g="1.0" b="1.0"/>
+			<Shadow><Offset><AbsDimension x="-1" y="-1" /></Offset></Shadow>
+			<Size><AbsDimension x="30" y="10"/></Size>
+			</FontString>
+			</Layer>
+		</Layers>
+                <Size><AbsDimension x="46" y="16"/></Size> 
+		<Frames>
+			<Frame name="$parentPanel1" parentKey="panel">
+				<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="4" right="4" top="4" bottom="4" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="20" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="15" />
+					</EdgeSize>
+				</Backdrop>
+				<Anchors>
+				<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="-3" y="3" /></Offset>	</Anchor>
+				<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="3" y="-3" /></Offset>	</Anchor>
+				</Anchors>
+						<Scripts>
+							<OnLoad>
+								self:SetFrameLevel(self:GetFrameLevel()-1);
+								self:SetBackdropBorderColor(0.4,0.4,0.4,1);
+								self:SetBackdropColor(0,0,0,0.4);
+							</OnLoad>
+						
+						</Scripts>
+			</Frame>
+			<Cooldown name="$parentCooldown" inherits="CooldownFrameTemplate" DrawEdge="true">
+				<Size x="36" y="36"/>
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="0" y="-1"/>
+						</Offset>
+					</Anchor>
+				</Anchors> 
+			</Cooldown>
+		</Frames>
+				<Scripts>
+
+				
+				<OnEnter>
+					FindGroup_TriggerTooltipOn(this);
+				</OnEnter>
+				<OnLeave>FindGroup_TriggerTooltipOff();
+				</OnLeave>
+				</Scripts>
+	
+	</Frame>
+
+			<Button name="$parentChannelsButton" inherits="UIPanelButtonTemplate" text="каналы" hidden="true">
+				<Anchors><Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+				<Offset><AbsDimension x="10" y="-23"/></Offset></Anchor></Anchors>
+<ButtonText parentKey="text"/>
+				<Size><AbsDimension x="50" y="16"/></Size> 
+				<Scripts>
+					<OnClick>
+						if FindGroupChannel:IsVisible() then
+						FindGroupChannel:Hide()
+						else
+						FindGroup_CreateChannel();
+						FindGroupChannel:Show()
+						end
+PlaySound("igMainMenuOptionCheckBoxOn");
+					</OnClick>
+				<OnLoad>
+					this.highlight = this:GetHighlightTexture();
+				</OnLoad>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parentSaveButton" inherits="UIPanelButtonTemplate" text="сохран." hidden="true" motionScriptsWhileDisabled="true">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset>
+							<AbsDimension x="10" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="50" y="16"/></Size> 
+				<Scripts>
+				<OnClick>
+					FGC_ShowSaveInst()
+				</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+				
+			
+			<Button name="$parentNeedsButton" inherits="UIPanelButtonTemplate" text="роли">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="10" y="-23"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="50" y="16"/></Size> 
+				<Scripts>
+					<OnClick>
+						FindGroup_ShadowButtons(1)
+					</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parentTextButton" inherits="UIPanelButtonTemplate" text="текст">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset>
+							<AbsDimension x="10" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="50" y="16"/></Size>
+				<Scripts>
+					<OnClick>
+						FindGroup_ShadowButtons(2)
+					</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>	
+			<Button name="$parentOtherButton" inherits="UIPanelButtonTemplate" text="опов..">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parent">	<Offset>
+							<AbsDimension x="10" y="-57"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="50" y="16"/></Size>
+       				
+				<Scripts>
+					<OnClick>
+						FindGroup_ShadowButtons(3)
+					</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parentActButton" inherits="UIPanelButtonTemplate" text="60">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset>
+							<AbsDimension x="10" y="-74"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="50" y="16"/></Size>
+				<Scripts>
+					<OnMouseUp>FindGroup_ActButton(self,button)</OnMouseUp>
+
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForDrag("LeftButton")
+			</OnLoad>
+			<OnDragStart>
+				FindGroupFrame_StartMove()
+			</OnDragStart>
+			<OnDragStop>
+				FindGroupFrame_StopMove()
+			</OnDragStop>
+<OnShow>
+this:SetFrameLevel(1)
+</OnShow>
+		</Scripts>
+	</Frame>
+
+
+
+		
+
+<Frame name="FindGroupShadow" parent="FindGroupFrame" movable="true" enableMouse="true" hidden="true"  frameStrata="MEDIUM">
+
+			
+		<Backdrop name="$parentBackdrop" bgFile="Interface\Tooltips\UI-Tooltip-Background"
+		edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="BACKGROUND">
+			<FontString name="$parentTextT" inherits="GameFontNormal" nonspacewrap="true" maxLines="5" text=" " justifyH="CENTER" justifyV="TOP">
+					<Color r="1.0" g="1.0" b="1.0"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="20" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+	<Size>
+		<AbsDimension x="240" y="100"></AbsDimension>
+	</Size>
+			</FontString>
+					<FontString name="$parentCheckText1" text="Лечить союзников" font="Fonts\FRIZQT__.TTF" justifyH="LEFT">
+						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="50" y="-30"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="12" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+					<FontString name="$parentCheckText2" text="Наносить урон врагам" font="Fonts\FRIZQT__.TTF" justifyH="LEFT">
+						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentCheckText1">
+							<Offset><AbsDimension x="0" y="-12"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="12" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+					<FontString name="$parentCheckText3" text="Отводить все удары врагов на себя" font="Fonts\FRIZQT__.TTF" justifyH="LEFT">
+						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentCheckText2">
+							<Offset><AbsDimension x="0" y="-12"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="12" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+					<FontString name="$parentCheckText4" text="Найти напарника для арены" font="Fonts\FRIZQT__.TTF" justifyH="LEFT">
+						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentCheckText3">
+							<Offset><AbsDimension x="0" y="-12"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="12" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+					<FontString name="$parentCheckText5" text="Отслеживать вызов на арену" font="Fonts\FRIZQT__.TTF" justifyH="LEFT">
+						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentCheckText4">
+							<Offset><AbsDimension x="0" y="-12"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="12" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+					<FontString name="$parentTitleInst" text="Инст:" font="Fonts\FRIZQT__.TTF" justifyH="LEFT"  hidden="true">
+						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="12" y="-25"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="8" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+					<FontString name="$parentTitleIR" text="Режим:" font="Fonts\FRIZQT__.TTF" justifyH="LEFT"  hidden="true">
+						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentTitleInst">
+							<Offset><AbsDimension x="0" y="-30"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="8" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+
+			</Layer>
+		</Layers>
+		<Frames>
+		
+			<Button name="$parentFastButton" inherits="UIPanelButtonTemplate" text="Вкл/откл">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent"><Offset>
+							<AbsDimension x="115" y="10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="50" y="20"/></Size>
+				<Scripts>
+					<OnClick>
+						FindGroup_FastButton()
+					</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_Fast()
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+
+				<Button name="$parentClearButton" inherits="UIPanelButtonTemplate" text="Очистить">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent"><Offset>
+							<AbsDimension x="107" y="11"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="70" y="20"/></Size>
+				<Scripts>
+					<OnClick>
+						FindGroup_ClearAlarmList()
+					</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+			
+			<Button name="$parentAddButton" inherits="UIPanelButtonTemplate" text="Добавить">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent"><Offset>
+							<AbsDimension x="82" y="48"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="68" y="20"/></Size>
+				<Scripts>
+				          <OnLoad>
+this:SetScale(0.9) </OnLoad>
+					<OnClick>
+						FindGroup_AddAlarm()
+					</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+
+ <Button name="$parentComboBox1">
+	<Size><AbsDimension x="100" y="32" /></Size>
+	<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentTitleInst">
+	<Offset><AbsDimension x="-20" y="-9"/></Offset></Anchor></Anchors>
+	<Layers><Layer><Texture name="$parentLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+	<Size><AbsDimension x="25" y="64" /></Size>
+	<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="17" />
+	</Offset></Anchor></Anchors>
+	<TexCoords left="0" right="0.1953125" top="0" bottom="1" />
+	</Texture><Texture name="$parentMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+	<Size><AbsDimension x="131" y="64" /></Size>
+	<Anchors><Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" /></Anchors>
+	<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" /></Texture>
+	<Texture name="$parentRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+	<Size><AbsDimension x="25" y="64" /></Size>
+	<Anchors><Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" /></Anchors>
+	<TexCoords left="0.8046875" right="1" top="0" bottom="1" /></Texture>
+	<FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text=" " justifyH="RIGHT">
+	<Size><AbsDimension x="116" y="10" /></Size>
+	<Anchors><Anchor point="RIGHT" relativeTo="$parentRight">
+	<Offset><AbsDimension x="-43" y="2" /></Offset>
+	</Anchor></Anchors><FontHeight><AbsValue val="10" />
+	</FontHeight><Color r="1" g="1" b="1" />
+	<Shadow><Color r="0" g="0" b="0" />
+                <Offset><AbsDimension x="1" y="-1" /></Offset>
+	</Shadow></FontString></Layer></Layers>
+      	<Frames>
+          	<Button name="$parentButton"><Size><AbsDimension x="24" y="24" /></Size>
+	<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentRight"><Offset>
+	<AbsDimension x="-16" y="-18" /></Offset></Anchor></Anchors>
+	<Scripts><OnClick>
+						ToggleDropDownMenu(nil, nil, self:GetParent());
+						PlaySound("igMainMenuOptionCheckBoxOn");
+	</OnClick></Scripts>
+	<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up">
+		<Size><AbsDimension x="24" y="24" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></NormalTexture>
+	<PushedTexture name="$parentPushedTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down">
+		<Size><AbsDimension x="24" y="24" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></PushedTexture>
+	<DisabledTexture name="$parentDisabledTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled">
+		<Size><AbsDimension x="24" y="24" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></DisabledTexture>
+	<HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
+		<Size><AbsDimension x="24" y="24" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></HighlightTexture>
+          	</Button>
+	</Frames>
+        <Scripts>
+          <OnLoad>
+this:SetScale(0.82);
+local cb_init_fn = function(self, level)
+if level == 1 then
+	if FG_APatch_GetPatchMax() > 0 then
+		local info = UIDropDownMenu_CreateInfo();
+		info.text = FG_APatch_GetTargetText();
+		info.hasArrow = true;
+		UIDropDownMenu_AddButton(info, level);
+	end
+		local info = UIDropDownMenu_CreateInfo();
+		info.text = FG_APatch_Rand_GetText();
+		info.checked = false;
+		info.func = function() FG_APatch_Rand_Click(); CloseDropDownMenus(); end;
+		if FG_APatch_Rand_GetStat() then info.checked = true end;
+		UIDropDownMenu_AddButton(info, level);
+		
+	for i=1, FG_APatch_GetAddMax() do
+		if "Все анонсы" ~= FG_APatch_GetAddText(i) then
+		local info = UIDropDownMenu_CreateInfo();
+		info.checked = false;
+		info.text = FG_APatch_GetAddText(i);
+		info.func = function() FG_APatch_ClickAdd(i); CloseDropDownMenus(); end;
+		if i == FG_APatch_GetAddi() then info.checked = true end;
+		UIDropDownMenu_AddButton(info, level);
+		end
+	end
+elseif level == 2 then
+	if FG_APatch_GetPatchMax() > 1 then
+		for i=1, FG_APatch_GetPatchMax() do
+		        local info = UIDropDownMenu_CreateInfo();
+		        info.text = FG_APatch_GetPatchText(i);
+		        info.hasArrow = true;
+		        info.value = FG_APatch_GetPatchValue(i);
+		        UIDropDownMenu_AddButton(info, level);
+		end
+	elseif FG_APatch_GetPatchMax() == 1 then
+		for i=1, FG_APatch_GetInstMax(FG_APatch_GetPatchValue(1)) do
+		        	local info = UIDropDownMenu_CreateInfo();
+			info.checked = false;
+		  	info.text = FG_APatch_GetInstText(i, FG_APatch_GetPatchValue(1));
+			info.func = function() FG_APatch_ClickInst(i, FG_APatch_GetPatchValue(1)); CloseDropDownMenus(); end;
+			if i == FG_APatch_GetInsti(FG_APatch_GetPatchValue(1)) then info.checked = true end;
+		        	UIDropDownMenu_AddButton(info, level);
+		end
+	end
+	if FGL.db.includeaddon then
+		if FindGroupCharVars.battlemode then
+			local info = UIDropDownMenu_CreateInfo();
+			info.checked = false;
+			info.text = "Анонс БГ";
+			info.hasArrow = true;
+			info.value = "notice";
+			UIDropDownMenu_AddButton(info, level);
+		end
+	end
+elseif (level == 3) then
+	
+	if UIDROPDOWNMENU_MENU_VALUE == "notice" then
+		local my_table = {}
+		for i=1, #FGL.db.instances do
+			if FGL.db.instances[i].patch == UIDROPDOWNMENU_MENU_VALUE then
+				tinsert(my_table, i)
+			end
+		end
+		for i=1, #my_table do
+			local info = UIDropDownMenu_CreateInfo();
+			info.checked = false;
+			info.text = FGL.db.instances[my_table[i]].name
+			info.func = function() 
+				FindGroupShadowComboBox1Text:SetText(FGL.db.instances[my_table[i]].name)
+				FGL.db.alarminst = my_table[i]
+				FGL.db.alarmir = FGL.db.defparam["alarmir"]
+				FindGroupShadowComboBox1Text:SetText(FGL.db.instances[FGL.db.alarminst].name)
+				FindGroupShadowComboBox3Text:SetText(FindGroup_Difficulty_Name(FindGroup_GetCBInstRI()))
+				UIDropDownMenu_SetSelectedValue(FindGroupShadowComboBox3, FGL.db.alarmir, 0)
+				FG_AInst_Check()
+				CloseDropDownMenus(); 
+			end;
+			if my_table[i] == FGL.db.alarminst then info.checked = true end;
+			UIDropDownMenu_AddButton(info, level);
+		end
+		for i=1, FG_APatch_GetAddMax() do
+			if "Все анонсы" == FG_APatch_GetAddText(i) then
+				local info = UIDropDownMenu_CreateInfo();
+				info.checked = false;
+				info.text = FG_APatch_GetAddText(i);
+				info.func = function() FG_APatch_ClickAdd(i); CloseDropDownMenus(); end;
+				if i == FG_APatch_GetAddi() then info.checked = true end;
+				UIDropDownMenu_AddButton(info, level);
+			end
+		end
+	else
+		for i=1, FG_APatch_GetInstMax(UIDROPDOWNMENU_MENU_VALUE) do
+					local info = UIDropDownMenu_CreateInfo();
+			info.checked = false;
+			info.text = FG_APatch_GetInstText(i, UIDROPDOWNMENU_MENU_VALUE);
+			info.func = function() FG_APatch_ClickInst(i, UIDROPDOWNMENU_MENU_VALUE); CloseDropDownMenus(); end;
+			if i == FG_APatch_GetInsti(UIDROPDOWNMENU_MENU_VALUE) then info.checked = true end;
+					UIDropDownMenu_AddButton(info, level);
+		end
+	end
+end
+end;
+UIDropDownMenu_Initialize(this, cb_init_fn);
+
+	</OnLoad>
+          <OnHide>CloseDropDownMenus();</OnHide>
+        </Scripts>
+      </Button>
+
+
+
+ <Button name="$parentComboBox3">
+	<Size><AbsDimension x="60" y="32" /></Size>
+	<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentTitleIR">
+	<Offset><AbsDimension x="-20" y="-9"/></Offset></Anchor></Anchors>
+	<Layers><Layer><Texture name="$parentLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+	<Size><AbsDimension x="25" y="64" /></Size>
+	<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="17" />
+	</Offset></Anchor></Anchors>
+	<TexCoords left="0" right="0.1953125" top="0" bottom="1" />
+	</Texture><Texture name="$parentMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+	<Size><AbsDimension x="60" y="64" /></Size>
+	<Anchors><Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" /></Anchors>
+	<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" /></Texture>
+	<Texture name="$parentRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+	<Size><AbsDimension x="25" y="64" /></Size>
+	<Anchors><Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" /></Anchors>
+	<TexCoords left="0.8046875" right="1" top="0" bottom="1" /></Texture>
+	<FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text=" " justifyH="RIGHT">
+	<Size><AbsDimension x="116" y="10" /></Size>
+	<Anchors><Anchor point="RIGHT" relativeTo="$parentRight">
+	<Offset><AbsDimension x="-43" y="2" /></Offset>
+	</Anchor></Anchors><FontHeight><AbsValue val="10" />
+	</FontHeight><Color r="1" g="1" b="1" />
+	<Shadow><Color r="0" g="0" b="0" />
+                <Offset><AbsDimension x="1" y="-1" /></Offset>
+	</Shadow></FontString></Layer></Layers>
+      	<Frames>
+          	<Button name="$parentButton"><Size><AbsDimension x="24" y="24" /></Size>
+	<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentRight"><Offset>
+	<AbsDimension x="-16" y="-18" /></Offset></Anchor></Anchors>
+	<Scripts><OnClick>
+						ToggleDropDownMenu(nil, nil, self:GetParent());
+						PlaySound("igMainMenuOptionCheckBoxOn");
+	</OnClick></Scripts>
+	<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up">
+		<Size><AbsDimension x="24" y="24" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></NormalTexture>
+	<PushedTexture name="$parentPushedTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down">
+		<Size><AbsDimension x="24" y="24" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></PushedTexture>
+	<DisabledTexture name="$parentDisabledTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled">
+		<Size><AbsDimension x="24" y="24" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></DisabledTexture>
+	<HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
+		<Size><AbsDimension x="24" y="24" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></HighlightTexture>
+          	</Button>
+	</Frames>
+        <Scripts>
+          <OnLoad>
+this:SetScale(0.82);
+		local cb_init_fn = function()
+		if FGL.db.includeaddon then
+			local info;
+			for i=1, FindGroup_GetInstRMax() do
+			  info = {};
+			  info.func = function() FindGroup_ClicktoCBInstR(i); UIDropDownMenu_SetSelectedID(FindGroupShadowComboBox3, this:GetID(), 0) end;
+			  info.text = FindGroup_Difficulty_Name(i);
+			if i == FindGroup_GetCBInstRI() then info.checked = true end;
+			  UIDropDownMenu_AddButton(info);
+			end
+			end
+		  end;
+		UIDropDownMenu_Initialize(this, cb_init_fn)
+	</OnLoad>
+          <OnHide>CloseDropDownMenus();</OnHide>
+        </Scripts>
+      </Button>
+
+<Frame name="$parentPanelFrame" >
+	<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+		<BackgroundInsets>
+			<AbsInset left="2" right="2" top="2" bottom="2" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="12" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="12" />
+		</EdgeSize>
+	</Backdrop>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-10" y="-25"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="135" y="30"/></Offset></Anchor>
+				</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1);
+				this:SetBackdropColor(0.2, 0.2, 0.2, 1);
+			</OnLoad>
+		</Scripts>
+</Frame>
+
+	<ScrollFrame name="$parentScrollFrame" inherits="UIPanelScrollFrameTemplate" hidden="false">
+
+				<Size><AbsDimension x="12" y="50"/></Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-37" y="-33"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="153" y="37"/></Offset></Anchor>
+				</Anchors>
+				<ScrollChild>
+					<Frame name="$parentScrollChild">
+						<Size><AbsDimension x="30" y="60"/></Size>				
+						<Frames>
+
+						</Frames>
+					</Frame>
+				</ScrollChild>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForDrag("LeftButton");
+this:SetScale(0.9);
+					</OnLoad>
+			<OnDragStart>
+				FindGroupFrame_StartMove()
+			</OnDragStart>
+			<OnDragStop>
+				FindGroupFrame_StopMove()
+			</OnDragStop>
+					<OnShow>
+						local scrollbar = _G[self:GetName().."ScrollBar"];
+						scrollbar:SetValue(0);
+						local min;
+						local max;
+						min, max = scrollbar:GetMinMaxValues();
+						_G[scrollbar:GetName().."ScrollUpButton"]:Disable();
+						if ((scrollbar:GetValue() - max) == 0) then
+							_G[scrollbar:GetName().."ScrollDownButton"]:Disable();
+						else
+							_G[scrollbar:GetName().."ScrollDownButton"]:Enable();
+						end
+					</OnShow>
+
+				</Scripts>
+			</ScrollFrame>
+			
+
+
+
+      <CheckButton name="$parentCheckButton1">
+        <Size>
+          <AbsDimension x="16" y="16" />
+        </Size>
+		<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentCheckText1">
+		<Offset><AbsDimension x="-20" y="-0" /></Offset></Anchor></Anchors>
+        <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
+        <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
+        <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
+        <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
+<Scripts><OnClick>PlaySound("igMainMenuOptionCheckBoxOn");</OnClick></Scripts>
+      </CheckButton>
+
+      
+      
+      
+      <CheckButton name="$parentCheckButton2">
+        <Size>
+          <AbsDimension x="16" y="16" />
+        </Size>
+		<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentCheckText2">
+		<Offset><AbsDimension x="-20" y="-0" /></Offset></Anchor></Anchors>
+        <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
+        <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
+        <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
+        <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
+<Scripts><OnClick>PlaySound("igMainMenuOptionCheckBoxOn");</OnClick></Scripts>
+      </CheckButton>
+
+      <CheckButton name="$parentCheckButton3">
+        <Size><AbsDimension x="16" y="16" /></Size>
+		<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentCheckText3">
+		<Offset><AbsDimension x="-20" y="-0" /></Offset></Anchor></Anchors>
+        <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
+        <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
+        <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
+        <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
+	<Scripts><OnClick>PlaySound("igMainMenuOptionCheckBoxOn");</OnClick></Scripts>
+      </CheckButton>
+
+      <CheckButton name="$parentCheckButton4">
+        <Size><AbsDimension x="16" y="16" /></Size>
+		<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentCheckText4">
+		<Offset><AbsDimension x="-20" y="-0" /></Offset></Anchor></Anchors>
+        <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
+        <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
+        <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
+        <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
+	<Scripts><OnClick>PlaySound("igMainMenuOptionCheckBoxOn");</OnClick></Scripts>
+      </CheckButton>
+
+      <CheckButton name="$parentCheckButton5">
+        <Size><AbsDimension x="16" y="16" /></Size>
+		<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentCheckText5">
+		<Offset><AbsDimension x="-20" y="-0" /></Offset></Anchor></Anchors>
+        <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
+        <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
+        <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
+        <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
+        <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
+	<Scripts><OnClick>PlaySound("igMainMenuOptionCheckBoxOn");</OnClick></Scripts>
+      </CheckButton>
+      
+	<Button name="$parentHeal" inherits="FindGroupHealTemplate">
+		<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentCheckText1">
+		<Offset><AbsDimension x="-3" y="-0" /></Offset></Anchor></Anchors>
+		<Scripts><OnClick></OnClick><OnEnter></OnEnter></Scripts>
+	</Button>
+	<Button name="$parentDD" inherits="FindGroupDDTemplate">
+		<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentCheckText2">
+		<Offset><AbsDimension x="-3" y="-0" /></Offset></Anchor></Anchors>
+		<Scripts><OnClick></OnClick><OnEnter></OnEnter></Scripts>
+	</Button>
+	<Button name="$parentTank" inherits="FindGroupTankTemplate">
+		<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentCheckText3">
+		<Offset><AbsDimension x="-3" y="-0" /></Offset></Anchor></Anchors>
+		<Scripts><OnClick></OnClick><OnEnter></OnEnter></Scripts>
+	</Button>
+	<Button name="$parentArenaFind" inherits="FindGroupArenaFindTemplate">
+	<Size><AbsDimension x="16" y="16" /></Size>
+		<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentCheckText4">
+		<Offset><AbsDimension x="-3" y="-0" /></Offset></Anchor></Anchors>
+		<Scripts><OnClick></OnClick><OnEnter></OnEnter></Scripts>
+	</Button>
+	<Button name="$parentArenaReg" inherits="FindGroupArenaRegTemplate">
+	<Size><AbsDimension x="16" y="16" /></Size>
+		<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentCheckText5">
+		<Offset><AbsDimension x="-3" y="-0" /></Offset></Anchor></Anchors>
+		<Scripts><OnClick></OnClick><OnEnter></OnEnter></Scripts>
+	</Button>
+		
+
+			
+			<Button name="$parentYesButton" inherits="UIPanelButtonTemplate" text="Принять">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="32" y="-95"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="70" y="20"/></Size>
+				<Scripts>
+					<OnClick>
+						FindGroup_YesButton() 
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentNoButton" inherits="UIPanelButtonTemplate" text="Отменить">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="180" y="-95"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="70" y="20"/></Size>
+				<Scripts>
+					<OnClick>
+						FindGroup_NoButton() 
+					</OnClick>
+				</Scripts>
+			</Button>
+		<Frame name="$parentPanel1" inherits="FindGroupPanelTemplate">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset>
+						<AbsDimension x="20" y="-26" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+	<Size>
+		<AbsDimension x="240" y="66" />
+	</Size>
+		</Frame>
+
+<ScrollFrame name="$parentEdit" inherits="UIPanelScrollFrameTemplate" >
+		<Size>
+				<AbsDimension x="202" y="54" />
+			</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+								<Offset>
+									<AbsDimension x="30" y="-32"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+	<ScrollChild>
+		<EditBox name="$parentBox" letters="128" multiLine="true" enableMouse="true" autoFocus="false">
+			<Size>
+				<AbsDimension x="202" y="80"></AbsDimension>
+			</Size>
+						<Anchors>
+				<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="NotepadEntryScrollFrame">
+					<Offset>
+						<AbsDimension x="0" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+
+			<FontString inherits="ChatFontNormal"></FontString>
+			<Scripts><OnEnterPressed>FindGroupShadowYesButton:Click()</OnEnterPressed>
+			</Scripts>
+		</EditBox>
+	</ScrollChild>
+</ScrollFrame>
+
+
+<Frame name="$parentPanel2" inherits="FindGroupPanelTemplate">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset>
+						<AbsDimension x="20" y="-64" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+	<Size>
+		<AbsDimension x="240" y="26" />
+	</Size>
+		</Frame>
+
+<EditBox name="$parentEditBox2" letters="128">
+	<Size>
+		<AbsDimension x="220" y="32"></AbsDimension>
+	</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="30" y="-60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+	<FontString inherits="ChatFontNormal"></FontString>
+	<Scripts><OnEnterPressed>FindGroupShadowYesButton:Click()</OnEnterPressed></Scripts>
+</EditBox>
+
+
+
+
+
+
+
+
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForDrag("LeftButton");
+				this:SetBackdropColor(0, 0, 0, 1);
+				this:SetBackdropBorderColor(0.4,0.4,0.4,0);
+			
+			</OnLoad>
+<OnShow>
+this:SetFrameLevel(26)
+</OnShow>
+			<OnDragStart>
+				 FindGroupFrame_StartMove()
+			</OnDragStart>
+			<OnDragStop>
+				FindGroupFrame_StopMove()
+			</OnDragStop>
+		</Scripts>	
+	</Frame>
+
+
+							<Button name="FindGroupShadowAlarmButtonTemplate" virtual="true">
+								<Layers>
+									<Layer level="BACKGROUND">
+										<FontString name="$parentR" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="RIGHT" justifyV="TOP">
+											<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+											<Offset><AbsDimension x="-2" y="0"/></Offset></Anchor></Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+										</FontString>
+										<FontString name="$parentL" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+											<Anchors>
+												<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+												<Offset><AbsDimension x="2" y="0"/></Offset></Anchor>
+												<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentR">
+												<Offset><AbsDimension x="-2" y="0"/></Offset></Anchor>
+											</Anchors>
+											<FontHeight><AbsValue val="11" /></FontHeight>
+										</FontString>
+									</Layer>
+								</Layers>
+								<NormalTexture file="" alphaMode="ADD" />
+								<PushedTexture file="" alphaMode="ADD"/>
+				        				<HighlightTexture file="Interface\Buttons\UI-Listbox-Highlight" alphaMode="ADD" />
+								<Scripts><OnClick></OnClick></Scripts>
+							</Button>
+
+<Frame name="FindGroupInfo" parent="FindGroupFrame" movable="true" enableMouse="true" hidden="true" ClampedToScreen="true">
+				<Anchors>
+				<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset><AbsDimension x="0" y="0"/></Offset>
+				</Anchor>
+				<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="0" y="0"/></Offset>
+				</Anchor>
+				</Anchors>
+		<Backdrop name="$parentBackdrop" bgFile="Interface\Tooltips\UI-Tooltip-Background"
+		edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+
+<Layers>
+<Layer>
+
+					<FontString name="$parentfText1" text="Версия" font="Fonts\FRIZQT__.TTF" justifyH="LEFT">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="110" y="-28"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="12" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+				
+								<FontString name="$parentText1" text="2.0" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" parentKey="text">
+								<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentfText1">
+								<Offset><AbsDimension x="5" y="0"/></Offset></Anchor></Anchors><FontHeight><AbsValue val="12" /></FontHeight>
+								</FontString>
+								
+								<FontString name="$parentVesr" text="(Устарело)" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" hidden="true">
+								<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentfText1">
+								<Offset><AbsDimension x="90" y="0"/></Offset></Anchor></Anchors><FontHeight><AbsValue val="12" /></FontHeight>
+								<Color r="1" g="0.2" b="0.2" />
+								</FontString>
+
+					<FontString name="$parentfText2" text="Язык" font="Fonts\FRIZQT__.TTF" justifyH="LEFT">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentfText1">
+							<Offset><AbsDimension x="0" y="-15"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="12" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+								<FontString name="$parentText2" text="Русский" font="Fonts\FRIZQT__.TTF" justifyH="LEFT">
+								<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentfText2">
+								<Offset><AbsDimension x="5" y="0"/></Offset></Anchor></Anchors><FontHeight><AbsValue val="12" /></FontHeight>
+								</FontString>
+					<FontString name="$parentfText3" text="Авторы" font="Fonts\FRIZQT__.TTF" justifyH="LEFT">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentfText2">
+							<Offset><AbsDimension x="0" y="-15"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="12" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+					<FontString name="$parentfText4" text="Пожертвование" font="Fonts\FRIZQT__.TTF" justifyH="LEFT">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentfText3">
+							<Offset><AbsDimension x="0" y="-15"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="12" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+					<FontString name="$parentfText5" text="Пользователей" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" hidden="true">
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentfText4">
+							<Offset><AbsDimension x="0" y="-15"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="12" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+
+								<FontString name="$parentText3" text="0" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" hidden="true">
+								<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentfText5">
+								<Offset><AbsDimension x="5" y="0"/></Offset></Anchor></Anchors><FontHeight><AbsValue val="12" /></FontHeight>
+								</FontString>
+</Layer>
+</Layers>
+<Frames>
+					<Button name="$parentButton5" hidden="true" alpha="0">
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentfText5">
+							<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentfText5">
+							<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+					<OnClick>
+					FindGroupWhisper_Click();
+					</OnClick></Scripts>
+					</Button>
+					<Button name="$parentButton6" hidden="true" alpha="0">
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentText3">
+							<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentText3">
+							<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+						</Anchors>
+						<Scripts>
+						<OnClick>
+					FindGroupWhisper_Click();
+					</OnClick>
+					<OnEnter>FindGroupInfo_PlayersTooltip();</OnEnter><OnLeave>GameTooltip:Hide()</OnLeave></Scripts>
+					</Button>
+		<Frame name="$parentPanel1" inherits="FindGroupPanelTemplate" hidden="true">
+								<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentfText4">
+								<Offset><AbsDimension x="0" y="6"/></Offset></Anchor></Anchors>
+	<Size>
+		<AbsDimension x="150" y="23" />
+	</Size>
+		</Frame>
+		
+	<EditBox name="$parentfEditBox" hidden="true">
+		<Scripts>
+			<OnTextSet>
+				if this:GetText() == "1" then
+					print("Кого вы там видите?")
+				elseif this:GetText() == "2" then
+					print("Барыжишь? Ммммм круто!")
+				elseif this:GetText() == "3" then
+					print("Вот бг дофармлю и пойду спать")
+				end
+			</OnTextSet>
+			</Scripts>
+		</EditBox>
+		
+<EditBox name="$parentEditBox" letters="80">
+								<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentfText4">
+								<Offset><AbsDimension x="5" y="2"/></Offset></Anchor></Anchors>
+	<Size>
+		<AbsDimension x="140" y="15"></AbsDimension>
+	</Size>
+	<FontString font="Fonts\FRIZQT__.TTF"><FontHeight><AbsValue val="12" /></FontHeight></FontString>
+				<Scripts>
+					<OnLoad>
+						local text = string.upper("z");
+						local num=tonumber("3".."1".."7".."8".."1".."0".."3");
+						num = num * tonumber("2".."9".."7".."0");
+						text=text..((num+1)*14);
+						this:SetText(text);
+						this:EnableKeyboard("false");
+						this:ClearFocus();
+						this:SetBlinkSpeed(0);
+						this:SetAutoFocus("false");
+
+this:SetTextColor(0.3,0.5,1.0,1);
+					</OnLoad>
+<onupdate>
+local text = string.upper("z");
+local num=tonumber("3".."1".."7".."8".."1".."0".."3");
+num = num * tonumber("2".."9".."7".."0");
+text=text..((num+1)*14);
+if not(this:GetText() == text) then this:SetText(text) end;
+</onupdate>
+
+<OnEnterPressed>
+this:ClearFocus();
+this:EnableKeyboard("false");
+FindGroupInfoPanel1:Hide();
+this:SetTextColor(0.3,0.5,1.0,1);
+this:HighlightText(0,0);
+</OnEnterPressed>
+
+<OnHide>
+this:ClearFocus();
+this:EnableKeyboard("false");
+FindGroupInfoPanel1:Hide();
+this:SetTextColor(0.3,0.5,1.0,1);
+this:HighlightText(0,0);
+</OnHide>
+
+<OnEscapePressed>
+this:ClearFocus();
+this:EnableKeyboard("false");
+FindGroupInfoPanel1:Hide();
+this:SetTextColor(0.3,0.5,1.0,1);
+this:HighlightText(0,0);
+</OnEscapePressed>
+
+<OnEnter>
+if not this:IsKeyboardEnabled() then
+GameTooltip:SetOwner(this, "ANCHOR_TOPLEFT");
+GameTooltip:SetText("Кликните чтобы выделить, нажмите Ctrl+C для копирования.", nil, nil, nil, nil, true);
+end
+</OnEnter>
+
+<OnLeave>GameTooltip:Hide()</OnLeave>
+<OnMouseUp>
+GameTooltip:Hide();
+this:SetTextColor(1,1,1,1);
+this:EnableKeyboard("true");
+FindGroupInfoPanel1:Show();
+this:HighlightText(0,13);
+
+FindGroupInfoEditBoxLink:ClearFocus();
+FindGroupInfoEditBoxLink:EnableKeyboard("false");
+FindGroupInfoPanel2:Hide();
+FindGroupInfoEditBoxLink:SetTextColor(0.3,0.5,1.0,1);
+FindGroupInfoEditBoxLink:HighlightText(0,0);
+
+</OnMouseUp>
+
+</Scripts>
+</EditBox>
+<EditBox name="$parentEditBox2" letters="80">
+								<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentfText3">
+								<Offset><AbsDimension x="40" y="1"/></Offset></Anchor></Anchors>
+	<Size>
+		<AbsDimension x="55" y="15"></AbsDimension>
+	</Size>
+	<FontString font="Fonts\FRIZQT__.TTF"><FontHeight><AbsValue val="12" /></FontHeight></FontString>
+				<Scripts>
+					<OnLoad>
+						this:SetText("Maglink");
+						this:EnableKeyboard("false");
+						this:ClearFocus();
+						this:SetBlinkSpeed(0);
+						this:SetAutoFocus("false");
+					</OnLoad>
+				<OnEnter>
+GameTooltip:SetOwner(this, "ANCHOR_TOPLEFT");
+GameTooltip:SetText("mail|cffffffff amglink@mail.ru\n|rskype|cffffffff maglink05", nil, nil, nil, nil, true);
+</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				<OnMouseDown>this:ClearFocus()</OnMouseDown>
+				<OnMouseUp>this:ClearFocus();this:HighlightText(0,0)</OnMouseUp>
+				<OnKeyUp>this:ClearFocus()</OnKeyUp>
+				<OnEnterPressed>this:ClearFocus()</OnEnterPressed>
+				<OnEscapePressed>this:ClearFocus()</OnEscapePressed>
+				</Scripts>
+</EditBox>
+<EditBox name="$parentEditBox1" letters="80">
+								<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentfText3">
+								<Offset><AbsDimension x="5" y="1"/></Offset></Anchor></Anchors>
+	<Size>
+		<AbsDimension x="50" y="15"></AbsDimension>
+	</Size>
+	<FontString font="Fonts\FRIZQT__.TTF"><FontHeight><AbsValue val="12" /></FontHeight></FontString>
+				<Scripts>
+					<OnLoad>
+						this:SetText("Mio,");
+						this:EnableKeyboard("false");
+						this:ClearFocus();
+						this:SetBlinkSpeed(0);
+						this:SetAutoFocus("false");
+					</OnLoad>
+				<OnEnter>
+GameTooltip:SetOwner(this, "ANCHOR_TOPLEFT");
+GameTooltip:SetText("mail|cffffffff lmiol@mail.ru\n|rskype|cffffffff miodarkproject", nil, nil, nil, nil, true);
+</OnEnter>			
+				<OnMouseDown>this:ClearFocus()</OnMouseDown>
+				<OnMouseUp>this:ClearFocus();this:HighlightText(0,0)</OnMouseUp>
+				<OnKeyUp>this:ClearFocus()</OnKeyUp>
+				<OnEnterPressed>this:ClearFocus()</OnEnterPressed>
+				<OnEscapePressed>this:ClearFocus()</OnEscapePressed>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+</EditBox>
+
+
+			<Button name="$parentCloseButton" inherits="UIPanelButtonTemplate" text="Закрыть">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="190" y="-95"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="70" y="20"/></Size>
+				<Scripts>
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						FindGroup_CloseInfo();
+					</OnClick>
+				</Scripts>
+			</Button>
+
+
+
+
+<Frame name="$parentPanel2" inherits="FindGroupPanelTemplate" hidden="true">
+								<Anchors><Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+								<Offset><AbsDimension x="5" y="8"/></Offset></Anchor></Anchors>
+	<Size>
+		<AbsDimension x="170" y="19" />
+	</Size>
+		</Frame>
+<EditBox name="$parentEditBoxLink" letters="80">
+								<Anchors><Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+								<Offset><AbsDimension x="10" y="10"/></Offset></Anchor></Anchors>
+	<Size>
+		<AbsDimension x="300" y="15"></AbsDimension>
+	</Size>
+<FontHeight><AbsValue val="10" /></FontHeight>
+	<FontString font="Fonts\FRIZQT__.TTF"><FontHeight><AbsValue val="10" /></FontHeight></FontString>
+				<Scripts>
+					<OnLoad>
+						local text="linkaddonproject.blogspot.com";
+						this:SetText(text);
+						this:EnableKeyboard("false");
+						this:ClearFocus();
+						this:SetBlinkSpeed(0);
+						this:SetAutoFocus("false");
+						this:SetTextColor(0.3,0.5,1.0,1);
+					</OnLoad>
+<onupdate>
+local text="linkaddonproject.blogspot.com";
+if not(this:GetText() == text) then this:SetText(text) end;
+</onupdate>
+
+<OnEnterPressed>
+this:ClearFocus();
+this:EnableKeyboard("false");
+FindGroupInfoPanel2:Hide();
+this:SetTextColor(0.3,0.5,1.0,1);
+this:HighlightText(0,0);
+</OnEnterPressed>
+
+<OnHide>
+this:ClearFocus();
+this:EnableKeyboard("false");
+FindGroupInfoPanel2:Hide();
+this:SetTextColor(0.3,0.5,1.0,1);
+this:HighlightText(0,0);
+</OnHide>
+
+<OnEscapePressed>
+this:ClearFocus();
+this:EnableKeyboard("false");
+FindGroupInfoPanel2:Hide();
+this:SetTextColor(0.3,0.5,1.0,1);
+this:HighlightText(0,0);
+</OnEscapePressed>
+
+<OnEnter>
+if not this:IsKeyboardEnabled() then
+GameTooltip:SetOwner(this, "ANCHOR_TOPLEFT");
+GameTooltip:SetText("Кликните чтобы выделить, нажмите Ctrl+C для копирования.", nil, nil, nil, nil, true);
+end
+</OnEnter>
+
+<OnLeave>GameTooltip:Hide()</OnLeave>
+<OnMouseUp>
+GameTooltip:Hide();
+this:SetTextColor(1,1,1,1);
+this:EnableKeyboard("true");
+FindGroupInfoPanel2:Show();
+this:HighlightText(0,80);
+
+
+FindGroupInfoEditBox:ClearFocus();
+FindGroupInfoEditBox:EnableKeyboard("false");
+FindGroupInfoPanel1:Hide();
+FindGroupInfoEditBox:SetTextColor(0.3,0.5,1.0,1);
+FindGroupInfoEditBox:HighlightText(0,0);
+
+</OnMouseUp>
+
+</Scripts>
+</EditBox>
+
+
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForDrag("LeftButton");
+				FindGroupInfoText1:SetText(FGL.SPACE_VERSION.." build "..FGL.SPACE_BUILD);
+				self:SetBackdropBorderColor(0.4,0.4,0.4,0);
+				self:SetBackdropColor(0,0,0,1.0);
+			</OnLoad>
+<OnShow>FindGroup_CalcUsers();this:SetFrameLevel(5)</OnShow>
+			<OnDragStart>
+				FindGroupFrame_StartMove()
+			</OnDragStart>
+			<OnDragStop>
+				FindGroupFrame_StopMove()
+			</OnDragStop>
+			<OnMouseUp>
+
+FindGroupInfoEditBoxLink:ClearFocus();
+FindGroupInfoEditBoxLink:EnableKeyboard("false");
+FindGroupInfoPanel2:Hide();
+FindGroupInfoEditBoxLink:SetTextColor(0.3,0.5,1.0,1);
+FindGroupInfoEditBoxLink:HighlightText(0,0);
+
+FindGroupInfoEditBox:ClearFocus();
+FindGroupInfoEditBox:EnableKeyboard("false");
+FindGroupInfoPanel1:Hide();
+FindGroupInfoEditBox:SetTextColor(0.3,0.5,1.0,1);
+FindGroupInfoEditBox:HighlightText(0,0);
+
+</OnMouseUp>
+		</Scripts>	
+	</Frame>
+
+
+	
+
+<Frame name="FindGroupClassesTrees" parent="FindGroupFrame" ClampedToScreen="true" hidden="true">
+	<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+		<BackgroundInsets>
+			<AbsInset left="4" right="4" top="4" bottom="4" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="20" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="15" />
+		</EdgeSize>
+	</Backdrop>
+			<Scripts>
+				<OnLoad>
+					self:SetBackdropBorderColor(0.4,0.4,0.4,1.0);
+					self:SetBackdropColor(0,0,0,1.0);
+				</OnLoad>
+			</Scripts>
+
+</Frame>
+
+
+	<Frame name="FindGroupWhisperFrame" parent="FindGroupFrame" movable="true" hidden="true" enableMouse="true"  ClampedToScreen="true" frameStrata="HIGH" resizable="true">
+		<Size><AbsDimension x="350" y="280"/></Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" relativeTo="UIParent">
+			<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+		</Anchors>
+		<Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+		edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>	
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="Пользователи аддона FindGroup: Link" justifyH="CENTER" justifyV="TOP">
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="180" y="-18"/></Offset></Anchor>
+				</Anchors>
+				<Size><AbsDimension x="300"/></Size>
+				</FontString>
+				<FontString name="$parentTitle2" inherits="GameFontNormal" text="" justifyH="CENTER" justifyV="TOP">
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="180" y="-32"/></Offset></Anchor>
+				</Anchors>
+				<Size><AbsDimension x="320"/></Size>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+		<Button name="$parentScrollText" virtual="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-40" y="-38"/></Offset></Anchor>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="15" y="-28"/></Offset></Anchor>
+				</Anchors>
+
+							<Layers>
+									<Layer level="BACKGROUND">
+										<FontString name="$parentR" inherits="GameFontNormal" text="Билд"  font="Fonts\FRIZQT__.TTF" justifyH="RIGHT" justifyV="TOP">
+											<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+											<Offset><AbsDimension x="-6" y="-2"/></Offset></Anchor></Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+											<Color r="0.6" g="0.6" b="0.6"/>
+										</FontString>
+										<FontString name="$parentC" inherits="GameFontNormal" text="Уровень" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+											<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+											<Offset><AbsDimension x="-230" y="-2"/></Offset></Anchor></Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+											<Color r="0.6" g="0.6" b="0.6"/>
+										</FontString>
+										<FontString name="$parentC2" inherits="GameFontNormal" text="Установка" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+											<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+											<Offset><AbsDimension x="-180" y="-2"/></Offset></Anchor></Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+											<Color r="0.6" g="0.6" b="0.6"/>
+										</FontString>
+										<FontString name="$parentC3" inherits="GameFontNormal" text="Используется" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+											<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+											<Offset><AbsDimension x="-112" y="-2"/></Offset></Anchor></Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+											<Color r="0.6" g="0.6" b="0.6"/>
+										</FontString>
+										<FontString name="$parentL" inherits="GameFontNormal"  text="Имя" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+											<Anchors>
+												<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+												<Offset><AbsDimension x="2" y="-2"/></Offset></Anchor>
+												<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentC">
+												<Offset><AbsDimension x="-2" y="0"/></Offset></Anchor>
+											</Anchors>
+											<FontHeight><AbsValue val="11" /></FontHeight>
+											<Color r="0.6" g="0.6" b="0.6"/>
+										</FontString>
+									</Layer>
+								</Layers>
+			</Button>
+
+			<Button name="$parentCloseButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-5" y="-5"/></Offset></Anchor></Anchors>		
+       					 <NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+        					<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+       					 <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        					<DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="26" y="26"/></Size>
+				<Scripts>
+<OnClick>this:GetParent():Hide()</OnClick></Scripts>
+			</Button>
+
+			<Button name="$parentResizeGrip" inherits="UIPanelButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\ResizeGrip"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\ResizeGrip"/>
+				<Scripts>
+					<OnMouseDown>
+						this:GetParent():StartSizing();
+					</OnMouseDown>
+					<OnMouseUp>
+						this:GetParent():StopMovingOrSizing();
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+
+
+
+<Frame name="$parentPanelFrame" >
+	<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+		<BackgroundInsets>
+			<AbsInset left="2" right="2" top="2" bottom="2" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="12" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="12" />
+		</EdgeSize>
+	</Backdrop>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-37" y="-40"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="10" y="10"/></Offset></Anchor>
+				</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1);
+				this:SetBackdropColor(0.2, 0.2, 0.2, 1);
+			</OnLoad>
+		</Scripts>
+</Frame>
+
+
+
+<Frame name="$parentPanel2Frame" >
+	<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+		<BackgroundInsets>
+			<AbsInset left="2" right="2" top="2" bottom="2" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="12" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="12" />
+		</EdgeSize>
+	</Backdrop>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-10" y="-40"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-37" y="10"/></Offset></Anchor>
+				</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1);
+				this:SetBackdropColor(0.2, 0.2, 0.2, 1);
+			</OnLoad>
+		</Scripts>
+</Frame>
+
+
+			<ScrollFrame name="$parentScrollFrame" inherits="UIPanelScrollFrameTemplate" hidden="false">
+
+				<Size><AbsDimension x="12" y="50"/></Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-38" y="-45"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="15" y="15"/></Offset></Anchor>
+				</Anchors>
+				<ScrollChild>
+					<Frame name="$parentScrollChild">
+						<Size><AbsDimension x="295" y="60"/></Size>				
+						<Frames>
+
+						</Frames>
+
+					</Frame>
+				</ScrollChild>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForDrag("LeftButton");
+					</OnLoad>
+					<OnDragStart>
+						this:GetParent():StartMoving();
+					</OnDragStart>
+					<OnDragStop>
+						this:GetParent():StopMovingOrSizing();
+					</OnDragStop>
+					<OnShow>
+						local scrollbar = _G[self:GetName().."ScrollBar"];
+						scrollbar:SetValue(0);
+						local min;
+						local max;
+						min, max = scrollbar:GetMinMaxValues();
+						_G[scrollbar:GetName().."ScrollUpButton"]:Disable();
+						if ((scrollbar:GetValue() - max) == 0) then
+							_G[scrollbar:GetName().."ScrollDownButton"]:Disable();
+						else
+							_G[scrollbar:GetName().."ScrollDownButton"]:Enable();
+						end
+					</OnShow>
+
+				</Scripts>
+			</ScrollFrame>
+	</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForDrag("LeftButton");
+				this:SetMinResize(350,120);
+				this:SetMaxResize(350,480);
+				this:SetWidth(350);
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving();
+			</OnDragStart>
+				<OnShow>
+				this:SetFrameLevel(30);
+				</OnShow>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+			</OnDragStop>
+		</Scripts>	
+	</Frame>
+
+							<Button name="FindGroupWhisperFrameScrollFrameScrollChildTextButtonTemplate" virtual="true">
+								<Layers>
+									<Layer level="BACKGROUND">
+										<FontString name="$parentR" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="RIGHT" justifyV="TOP">
+											<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+											<Offset><AbsDimension x="-2" y="-3"/></Offset></Anchor></Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+										</FontString>
+										<FontString name="$parentC" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+											<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+											<Offset><AbsDimension x="-210" y="-3"/></Offset></Anchor></Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+										</FontString>
+										<FontString name="$parentC2" inherits="GameFontNormal" text="" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+											<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+											<Offset><AbsDimension x="-180" y="-3"/></Offset></Anchor></Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+										</FontString>
+										<FontString name="$parentC3" inherits="GameFontNormal" text="" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+											<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+											<Offset><AbsDimension x="-105" y="-3"/></Offset></Anchor></Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+										</FontString>
+										<FontString name="$parentL" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+											<Anchors>
+												<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+												<Offset><AbsDimension x="2" y="-3"/></Offset></Anchor>
+											</Anchors>
+											<FontHeight><AbsValue val="11" /></FontHeight>
+										</FontString>
+									</Layer>
+								</Layers>
+									<Frames>
+													<Button name="$parentIcon" inherits="UIPanelButtonTemplate" hidden="true" parentKey="icon">
+														<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentL">
+																<Offset><AbsDimension x="2" y="1"/></Offset>
+														</Anchor></Anchors>
+														<Size><AbsDimension x="14" y="14"/></Size>
+														<NormalTexture file="Interface\GROUPFRAME\UI-Group-LeaderIcon"/>
+														<PushedTexture file="Interface\GROUPFRAME\UI-Group-LeaderIcon"/>
+														<Scripts><OnLeave>GameTooltip:Hide();</OnLeave></Scripts>
+													</Button>
+														</Frames>
+								<NormalTexture file="" alphaMode="ADD" />
+								<PushedTexture file="" alphaMode="ADD"/>
+				        				<HighlightTexture file="Interface\Buttons\UI-Listbox-Highlight" alphaMode="ADD" />
+								<Scripts><OnClick></OnClick></Scripts>
+							</Button>
+
+
+<Frame name="FindGroupInstNameFrame" parent="FindGroupFrame" movable="true" hidden="true" enableMouse="true"  ClampedToScreen="true" frameStrata="HIGH" resizable="true">
+		<Size><AbsDimension x="350" y="350"/></Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" relativeTo="UIParent">
+			<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+		</Anchors>
+		<Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+		edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>	
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="" justifyH="CENTER" justifyV="TOP">
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="160" y="-18"/></Offset></Anchor>
+				</Anchors>
+				<Size><AbsDimension x="300"/></Size>
+				</FontString>
+				<FontString name="$parentTitle2" inherits="GameFontNormal" text="" justifyH="CENTER" justifyV="TOP">
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="180" y="-32"/></Offset></Anchor>
+				</Anchors>
+				<Size><AbsDimension x="320"/></Size>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+		<Button name="$parentScrollText" virtual="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-40" y="-38"/></Offset></Anchor>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="15" y="-28"/></Offset></Anchor>
+				</Anchors>
+
+							<Layers>
+									<Layer level="BACKGROUND">
+										<FontString name="$parentR" inherits="GameFontNormal" text="Измененное название"  font="Fonts\FRIZQT__.TTF" justifyH="RIGHT" justifyV="TOP">
+											<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+											<Offset><AbsDimension x="-6" y="-2"/></Offset></Anchor></Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+											<Color r="0.6" g="0.6" b="0.6"/>
+										</FontString>
+										<FontString name="$parentL" inherits="GameFontNormal"  text="Оригинальное название" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+											<Anchors>
+												<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+												<Offset><AbsDimension x="2" y="-2"/></Offset></Anchor>
+												<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentR">
+												<Offset><AbsDimension x="-2" y="0"/></Offset></Anchor>
+											</Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+											<Color r="0.6" g="0.6" b="0.6"/>
+										</FontString>
+									</Layer>
+								</Layers>
+			</Button>
+
+			<Button name="$parentCloseButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-5" y="-5"/></Offset></Anchor></Anchors>		
+       					 <NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+        					<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+       					 <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        					<DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="26" y="26"/></Size>
+				<Scripts>
+<OnClick>this:GetParent():Hide()</OnClick></Scripts>
+			</Button>
+
+			<Button name="$parentResizeGrip" inherits="UIPanelButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\ResizeGrip"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\ResizeGrip"/>
+				<Scripts>
+					<OnMouseDown>
+						this:GetParent():StartSizing();
+					</OnMouseDown>
+					<OnMouseUp>
+						this:GetParent():StopMovingOrSizing();
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+
+
+
+<Frame name="$parentPanelFrame" >
+	<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+		<BackgroundInsets>
+			<AbsInset left="2" right="2" top="2" bottom="2" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="12" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="12" />
+		</EdgeSize>
+	</Backdrop>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-37" y="-40"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="10" y="10"/></Offset></Anchor>
+				</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1);
+				this:SetBackdropColor(0.2, 0.2, 0.2, 1);
+			</OnLoad>
+		</Scripts>
+</Frame>
+
+
+
+<Frame name="$parentPanel2Frame" >
+	<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+		<BackgroundInsets>
+			<AbsInset left="2" right="2" top="2" bottom="2" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="12" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="12" />
+		</EdgeSize>
+	</Backdrop>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-10" y="-40"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-37" y="10"/></Offset></Anchor>
+				</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1);
+				this:SetBackdropColor(0.2, 0.2, 0.2, 1);
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+
+			<ScrollFrame name="$parentScrollFrame" inherits="UIPanelScrollFrameTemplate" hidden="false">
+
+				<Size><AbsDimension x="12" y="50"/></Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-38" y="-45"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="15" y="15"/></Offset></Anchor>
+				</Anchors>
+				<ScrollChild>
+					<Frame name="$parentScrollChild">
+						<Size><AbsDimension x="295" y="60"/></Size>				
+						<Frames>
+
+						</Frames>
+
+					</Frame>
+				</ScrollChild>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForDrag("LeftButton");
+					</OnLoad>
+					<OnDragStart>
+						this:GetParent():StartMoving();
+					</OnDragStart>
+					<OnDragStop>
+						this:GetParent():StopMovingOrSizing();
+					</OnDragStop>
+					<OnShow>
+						local scrollbar = _G[self:GetName().."ScrollBar"];
+						scrollbar:SetValue(0);
+						local min;
+						local max;
+						min, max = scrollbar:GetMinMaxValues();
+						_G[scrollbar:GetName().."ScrollUpButton"]:Disable();
+						if ((scrollbar:GetValue() - max) == 0) then
+							_G[scrollbar:GetName().."ScrollDownButton"]:Disable();
+						else
+							_G[scrollbar:GetName().."ScrollDownButton"]:Enable();
+						end
+					</OnShow>
+
+				</Scripts>
+			</ScrollFrame>
+	</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForDrag("LeftButton");
+				this:SetMinResize(350,120);
+				this:SetMaxResize(350,800);
+				this:SetWidth(350);
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving();
+			</OnDragStart>
+				<OnShow>
+				this:SetFrameLevel(30);
+				</OnShow>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+			</OnDragStop>
+		</Scripts>	
+	</Frame>
+	
+							<Button name="FindGroupInstNameFrameScrollFrameScrollChildTextButtonTemplate" virtual="true" enableMouse="true">
+								<Layers>
+									<Layer level="BACKGROUND">
+										<FontString name="$parentL" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+											<Anchors>
+												<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+												<Offset><AbsDimension x="2" y="-2"/></Offset></Anchor>
+											</Anchors>
+											<FontHeight><AbsValue val="12" /></FontHeight>
+										</FontString>
+									</Layer>
+								</Layers>
+									<Frames>
+					<Frame name="$parentPanelNormal" inherits="FindGroupPanelTemplate" >
+						<Size><AbsDimension x="101" y="18"></AbsDimension></Size>
+																<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+																<Offset><AbsDimension x="-9" y="1"/></Offset></Anchor></Anchors>
+						<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+							<BackgroundInsets>
+								<AbsInset left="3" right="3" top="3" bottom="3" />
+							</BackgroundInsets>
+							<TileSize>
+								<AbsValue val="20" />
+							</TileSize>
+							<EdgeSize>
+								<AbsValue val="12" />
+							</EdgeSize>
+						</Backdrop>
+					</Frame>				
+					<EditBox name="$parentEditNormal" letters="20" justifyH="RIGHT">
+						<Size><AbsDimension x="100" y="20"></AbsDimension></Size>
+																<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+																<Offset><AbsDimension x="-6" y="1"/></Offset></Anchor></Anchors>
+						<FontString inherits="ChatFontNormal"></FontString>
+						<Scripts>
+							<OnLoad>
+								this:ClearFocus();
+								this:SetAutoFocus("false");
+							</OnLoad>
+									<OnShow>
+									this:SetFrameLevel(40);
+									</OnShow>
+							<OnEnterPressed>this:ClearFocus()</OnEnterPressed>
+							<OnEscapePressed>this:ClearFocus()</OnEscapePressed>
+						</Scripts>
+					</EditBox>
+
+
+	
+														</Frames>
+								<NormalTexture file="" alphaMode="ADD" />
+								<PushedTexture file="" alphaMode="ADD"/>
+				        				<HighlightTexture file="" alphaMode="ADD" />
+								<Scripts>
+													<OnLoad>
+						this:RegisterForDrag("LeftButton");
+					</OnLoad>
+					<OnDragStart>
+						getglobal("FindGroupInstNameFrame"):StartMoving();
+					</OnDragStart>
+					<OnDragStop>
+						getglobal("FindGroupInstNameFrame"):StopMovingOrSizing();
+					</OnDragStop></Scripts>
+							</Button>
+	
+							<Button name="FindGroupDropDownScrollFrameScrollChildTextButtonTemplate" virtual="true" enableMouse="true">
+										
+										<Layers>
+											<Layer level="ARTWORK">
+												<Texture name="$parentCheck" file="Interface\Buttons\UI-CheckBox-Check" hidden="true">
+													<Size x="18" y="18"/>
+													<Anchors>
+														<Anchor point="LEFT">
+															<Offset x="0" y="0"/>
+														</Anchor>
+													</Anchors>
+												</Texture>
+												<Texture name="$parentIcon" hidden="true">
+													<Size>
+														<AbsDimension x="16" y="16"/>
+													</Size>
+													<Anchors>
+														<Anchor point="RIGHT">
+															<Offset x="0" y="0"/>
+														</Anchor>
+													</Anchors>
+												</Texture>
+											</Layer>
+											<Layer level="BACKGROUND">
+												<FontString name="$parentL" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+													<Anchors>
+														<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+														<Offset><AbsDimension x="25" y="-4"/></Offset></Anchor>
+													</Anchors>
+													<FontHeight><AbsValue val="10" /></FontHeight>
+													<Color r="1.0" g="1.0" b="1.0"/>
+												</FontString>
+											</Layer>
+										</Layers>
+								
+							<NormalTexture file="" alphaMode="ADD" />
+							<PushedTexture file="" alphaMode="ADD"/>
+							<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD" />
+										
+							</Button>
+							
+							
+
+<Frame name="FindGroupSaveListFrame" parent="FindGroupFrame" movable="true" hidden="true" enableMouse="true"  ClampedToScreen="true" frameStrata="HIGH" >
+		<Size><AbsDimension x="350" y="155"/></Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" relativeTo="UIParent">
+			<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+		</Anchors>
+		<Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+		edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>	
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="Список сохраненных сообщений" justifyH="CENTER" justifyV="TOP">
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="160" y="-18"/></Offset></Anchor>
+				</Anchors>
+				<Size><AbsDimension x="300"/></Size>
+				</FontString>
+				<FontString name="$parentTitle2" inherits="GameFontNormal" text="" justifyH="CENTER" justifyV="TOP">
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="180" y="-32"/></Offset></Anchor>
+				</Anchors>
+				<Size><AbsDimension x="320"/></Size>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+		
+		
+		
+		<Button name="$parentScrollText" virtual="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-40" y="-38"/></Offset></Anchor>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="15" y="-28"/></Offset></Anchor>
+				</Anchors>
+
+							<Layers>
+									<Layer level="BACKGROUND">
+										<FontString name="$parentR" inherits="GameFontNormal" text="Текст сообщения"  font="Fonts\FRIZQT__.TTF" justifyH="RIGHT" justifyV="TOP">
+											<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+											<Offset><AbsDimension x="-6" y="-2"/></Offset></Anchor></Anchors>
+											<FontHeight><AbsValue val="10" /></FontHeight>
+											<Color r="0.6" g="0.6" b="0.6"/>
+										</FontString>
+									</Layer>
+								</Layers>
+			</Button>
+
+			<Button name="$parentCloseButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-5" y="-5"/></Offset></Anchor></Anchors>		
+       					 <NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+        					<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+       					 <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        					<DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="26" y="26"/></Size>
+				<Scripts>
+<OnClick>this:GetParent():Hide()</OnClick></Scripts>
+			</Button>
+			<Button name="$parentClearButton" inherits="UIPanelButtonTemplate" hidden="false" motionScriptsWhileDisabled="true">
+								<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-22" y="-4"/></Offset></Anchor></Anchors>
+        <NormalTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Clear-Up.tga" />
+        <PushedTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Clear-Down.tga" />
+        <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        <DisabledTexture file="Interface\AddOns\FindGroup\textures\UI-Panel-Clear-Disabled.tga" />
+				<Size><AbsDimension x="28" y="28"/></Size>
+				<Scripts>
+				<OnClick>	
+					FGC_ClearSavelist_Check()
+				</OnClick>
+				<OnEnter>
+					FindGroup_Tooltip_All(this)
+				</OnEnter>
+				<OnLeave>GameTooltip:Hide()</OnLeave>
+				</Scripts>
+			</Button>
+
+<Frame name="$parentPanelFrame" >
+	<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+		<BackgroundInsets>
+			<AbsInset left="2" right="2" top="2" bottom="2" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="12" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="12" />
+		</EdgeSize>
+	</Backdrop>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-37" y="-40"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="120" y="10"/></Offset></Anchor>
+				</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1);
+				this:SetBackdropColor(0.2, 0.2, 0.2, 1);
+			</OnLoad>
+		</Scripts>
+</Frame>
+
+
+
+<Frame name="$parentPanel3Frame" >
+	<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+		<BackgroundInsets>
+			<AbsInset left="2" right="2" top="2" bottom="2" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="12" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="12" />
+		</EdgeSize>
+	</Backdrop>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="120" y="-40"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="10" y="10"/></Offset></Anchor>
+				</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1);
+				this:SetBackdropColor(0.2, 0.2, 0.2, 1);
+			</OnLoad>
+		</Scripts>
+</Frame>
+
+<Button name="$parentPrewiew">
+
+	<Anchors>
+		<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parent">
+		<Offset><AbsDimension x="120" y="-40"/></Offset></Anchor>
+		<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+		<Offset><AbsDimension x="10" y="10"/></Offset></Anchor>
+	</Anchors>
+	
+	<Layers>
+		<Layer level="HIGH">
+			<Texture file="" parentkey="texture">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-2" y="-2"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="2" y="2"/></Offset></Anchor>
+				</Anchors>
+			</Texture>
+		</Layer>
+	</Layers>
+
+	<Frames>
+		<Button name="$parentAddButton" inherits="UIPanelButtonTemplate" text="Вставить" hidden="true">
+			<Anchors>
+				<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent"><Offset>
+						<AbsDimension x="5" y="5"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Size><AbsDimension x="60" y="20"/></Size>
+			<Scripts>
+				<OnLoad>
+				this:SetScale(0.8);
+				</OnLoad>
+				<OnClick>
+					FindGroup_SaveList_Insert();
+				</OnClick>
+			<OnEnter>
+				FindGroup_Tooltip_All(this);
+			</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+			</Scripts>
+		</Button>
+		
+		<Button name="$parentClearButton" inherits="UIPanelButtonTemplate" text="Удалить" hidden="true">
+			<Anchors>
+				<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent"><Offset>
+						<AbsDimension x="70" y="5"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Size><AbsDimension x="60" y="20"/></Size>
+			<Scripts>
+				<OnLoad>
+				this:SetScale(0.8);
+				</OnLoad>
+				<OnClick>
+					FindGroup_SaveList_Delete();
+				</OnClick>
+			<OnEnter>
+				FindGroup_Tooltip_All(this)
+			</OnEnter>
+			<OnLeave>GameTooltip:Hide()</OnLeave>
+			</Scripts>
+		</Button>
+	</Frames>
+			
+</Button>	
+
+<Frame name="$parentPanel2Frame" >
+	<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+		<BackgroundInsets>
+			<AbsInset left="2" right="2" top="2" bottom="2" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="12" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="12" />
+		</EdgeSize>
+	</Backdrop>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-10" y="-40"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-37" y="10"/></Offset></Anchor>
+				</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1);
+				this:SetBackdropColor(0.2, 0.2, 0.2, 1);
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+
+	
+
+		<Button name="$parentTooltip" hidden="true" enableMouse="true" ClampedToScreen="true" frameStrata="TOOLTIP">
+		<Size><AbsDimension x="300" y="48"/></Size>
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="12"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="12"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="3" right="3" top="3" bottom="3"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentText" inherits="ChatFontNormal" text="" justifyH="LEFT" justifyV="TOP" hidden="false" multiline="true"> 
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset><AbsDimension x="14" y="-9"/></Offset></Anchor>
+				<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-14" y="9"/></Offset></Anchor>
+				</Anchors>
+				</FontString>
+				<FontString name="$parentInfo" inherits="ChatFontNormal" text="" justifyH="LEFT" justifyV="TOP" hidden="true" multiline="true"> 
+				<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset><AbsDimension x="14" y="-9"/></Offset></Anchor>
+				</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+			<Scripts>
+				<OnLoad>
+				self:SetBackdropBorderColor(TOOLTIP_DEFAULT_COLOR.r, TOOLTIP_DEFAULT_COLOR.g, TOOLTIP_DEFAULT_COLOR.b);
+				self:SetBackdropColor(TOOLTIP_DEFAULT_BACKGROUND_COLOR.r, TOOLTIP_DEFAULT_BACKGROUND_COLOR.g, TOOLTIP_DEFAULT_BACKGROUND_COLOR.b);
+				</OnLoad>
+			</Scripts>
+
+	</Button>
+			
+			
+			<ScrollFrame name="$parentScrollFrame" inherits="UIPanelScrollFrameTemplate" hidden="false">
+
+				<Size><AbsDimension x="12" y="50"/></Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-37" y="-45"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="125" y="15"/></Offset></Anchor>
+				</Anchors>
+				<ScrollChild>
+					<Frame name="$parentScrollChild">
+						<Size><AbsDimension x="185" y="60"/></Size>			
+						<Frames>
+
+						</Frames>
+
+					</Frame>
+				</ScrollChild>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForDrag("LeftButton");
+					</OnLoad>
+					<OnDragStart>
+						this:GetParent():StartMoving();
+					</OnDragStart>
+					<OnDragStop>
+						this:GetParent():StopMovingOrSizing();
+					</OnDragStop>
+					<OnShow>
+						local scrollbar = _G[self:GetName().."ScrollBar"];
+						scrollbar:SetValue(0);
+						local min;
+						local max;
+						min, max = scrollbar:GetMinMaxValues();
+						_G[scrollbar:GetName().."ScrollUpButton"]:Disable();
+						if ((scrollbar:GetValue() - max) == 0) then
+							_G[scrollbar:GetName().."ScrollDownButton"]:Disable();
+						else
+							_G[scrollbar:GetName().."ScrollDownButton"]:Enable();
+						end
+					</OnShow>
+
+				</Scripts>
+			</ScrollFrame>
+	</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForDrag("LeftButton");
+				this:SetMinResize(350,155);
+				this:SetMaxResize(350,155);
+				this:SetWidth(350);
+				this:SetHeight(155);
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving();
+			</OnDragStart>
+				<OnShow>
+				this:SetFrameLevel(30);
+				</OnShow>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+			</OnDragStop>
+		</Scripts>	
+	</Frame>
+	
+	
+
+	
+							<Button name="FindGroupSaveListFrameScrollFrameScrollChildTextButtonTemplate" virtual="true" enableMouse="true">
+										<Layers>
+											<Layer level="BACKGROUND">
+												<FontString name="$parentL" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+													<Anchors>
+														<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+														<Offset><AbsDimension x="5" y="-4"/></Offset></Anchor>
+														<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+														<Offset><AbsDimension x="-7" y="-4"/></Offset></Anchor>
+													</Anchors>
+													<FontHeight><AbsValue val="10" /></FontHeight>
+													<Color r="1.0" g="1.0" b="1.0"/>
+												</FontString>
+											</Layer>
+											
+										</Layers>
+										<NormalTexture file="" alphaMode="ADD"/>
+										<PushedTexture file="" alphaMode="ADD"/>
+										<HighlightTexture file="Interface\Buttons\UI-Listbox-Highlight" alphaMode="ADD" />
+							</Button>
+</Ui>

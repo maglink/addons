@@ -1,0 +1,9 @@
+﻿## Interface: 30300
+## Title: Elmig |cFF0099FF[Link]|r
+## Version: 1.0
+## Notes: Аддон оповещает друидов о баффе "Быстрота хищника"
+## Author: Maglink
+## DefaultState: enabled
+## SavedVariablesPerCharacter: ElmigDB
+
+Elmig.lua

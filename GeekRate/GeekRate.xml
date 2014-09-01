@@ -1,0 +1,486 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/"> 
+	
+	<Frame name="GeekRatePanelTemplate" virtual="true">
+	<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+		<BackgroundInsets>
+			<AbsInset left="4" right="4" top="4" bottom="4" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="20" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="15" />
+		</EdgeSize>
+	</Backdrop>
+			<Scripts>
+				<OnLoad>
+					self:SetBackdropBorderColor(0.4,0.4,0.4,1.0);
+					self:SetBackdropColor(0,0,0,1.0)
+				</OnLoad>
+			</Scripts>
+	</Frame>
+	
+	<Frame name="GeekRateListFrame" parent="UIParent" movable="true" hidden="true" enableMouse="true"  ClampedToScreen="true" frameStrata="HIGH" resizable="true">
+		<Size><AbsDimension x="400" y="280"/></Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" relativeTo="UIParent">
+			<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+		</Anchors>
+		<Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+		edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>	
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="GeekRate ListFrame" justifyH="LEFT" justifyV="TOP">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="10" y="-10"/></Offset></Anchor>
+				</Anchors>
+				<Size><AbsDimension x="300"/></Size>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+		
+		
+			<Frame name="$parentPanel" inherits="GeekRatePanelTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+				<Offset><AbsDimension x="-126" y="-6"/></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="80" y="20" /></Size>
+			</Frame>
+
+			<EditBox name="$parentEditFilter" letters="20" justifyH="LEFT" justifyV="TOP">
+				<Size><AbsDimension x="70" y="16"></AbsDimension></Size>
+							<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+									<Offset><AbsDimension x="-130" y="-8"/></Offset></Anchor></Anchors>
+				<FontString inherits="ChatFontNormal"></FontString>
+				<Scripts>
+					<OnLoad>
+						this:ClearFocus();
+						this:SetAutoFocus("false");
+					</OnLoad>
+					<OnTextChanged>
+						GeekRate_Filter_Set(string.lower(this:GetText()))
+					</OnTextChanged>
+					<OnEnterPressed>this:ClearFocus()</OnEnterPressed>
+					<OnEscapePressed>this:ClearFocus()</OnEscapePressed>
+				</Scripts>
+			</EditBox>
+		
+					
+		
+			<Button name="$parentComboBoxFaction">
+				<Size><AbsDimension x="50" y="32" /></Size>
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+				<Offset><AbsDimension x="-110" y="-6"/></Offset></Anchor></Anchors>
+					<Layers><Layer>
+					
+					<Texture name="$parentLeft1" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+					<Size><AbsDimension x="25" y="50" /></Size>
+					<Anchors><Anchor point="TOPLEFT">
+					<Offset><AbsDimension x="0" y="10" />
+					</Offset></Anchor></Anchors>
+					<TexCoords left="0" right="0.1953125" top="0" bottom="1" />
+					</Texture>
+					
+					<Texture name="$parentLeft" hidden="true" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+					<Size><AbsDimension x="25" y="64" /></Size>
+					<Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="0" y="17" />
+					</Offset></Anchor></Anchors>
+					<TexCoords left="0" right="0.1953125" top="0" bottom="1" />
+					</Texture>
+					<Texture name="$parentMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+					<Size><AbsDimension x="80" y="50" /></Size>
+					<Anchors><Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" /></Anchors>
+					<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" /></Texture>
+					<Texture name="$parentRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+						
+
+					
+					<Size><AbsDimension x="25" y="50" /></Size>
+					<Anchors><Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" /></Anchors>
+					<TexCoords left="0.8046875" right="1" top="0" bottom="1" /></Texture>
+					<FontString name="$parentText" font="Fonts\FRIZQT__.TTF" text=" " justifyH="RIGHT" justifyV="TOP" parentKey="text">
+					<Size><AbsDimension x="66" y="20" /></Size>
+					<Anchors><Anchor point="RIGHT" relativeTo="$parentRight">
+					<Offset><AbsDimension x="-43" y="-3" /></Offset>
+					</Anchor></Anchors><FontHeight><AbsValue val="10" />
+					</FontHeight><Color r="1" g="1" b="1" />
+					<Shadow><Color r="0" g="0" b="0" />
+								<Offset><AbsDimension x="1" y="-1" /></Offset>
+					</Shadow></FontString></Layer></Layers>
+						<Frames>
+							<Button name="$parentButton"><Size><AbsDimension x="20" y="18" /></Size>
+					<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentRight"><Offset>
+					<AbsDimension x="-16" y="-15" /></Offset></Anchor></Anchors>
+					<Scripts><OnClick>
+										ToggleDropDownMenu(nil, nil, self:GetParent());
+										PlaySound("igMainMenuOptionCheckBoxOn");
+					</OnClick></Scripts>
+					<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up">
+						<Size><AbsDimension x="20" y="18" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></NormalTexture>
+					<PushedTexture name="$parentPushedTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down">
+						<Size><AbsDimension x="20" y="18" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></PushedTexture>
+					<DisabledTexture name="$parentDisabledTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled">
+						<Size><AbsDimension x="20" y="18" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></DisabledTexture>
+					<HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
+						<Size><AbsDimension x="20" y="18" /></Size><Anchors><Anchor point="RIGHT" /></Anchors></HighlightTexture>
+							</Button>
+					</Frames>
+						<Scripts>
+						  <OnLoad>
+							this:SetScale(0.85);
+							local my_frame = this
+							my_frame.text:SetText(UnitFactionGroup("player"))
+							local cb_init_fn = function(self, level)
+								if GeekRate_Faction_Get then
+									local facts={"Alliance", "Horde", "Both"}
+									local now_fact=GeekRate_Faction_Get()
+									for i=1,#facts do
+										local name = facts[i] 
+										local info = UIDropDownMenu_CreateInfo();
+										info.checked = false;
+										if now_fact == name then 
+											info.checked = true 
+										end;
+										info.text = name;
+										info.func = function()
+											my_frame.text:SetText(name)
+											GeekRate_Faction_Set(name)
+										end;
+										UIDropDownMenu_AddButton(info, level);
+									end
+								end
+							end
+							UIDropDownMenu_Initialize(this, cb_init_fn);
+					</OnLoad>
+						  <OnHide>CloseDropDownMenus();</OnHide>
+						</Scripts>
+			</Button>
+			
+			<Button name="$parentCloseButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-5" y="-5"/></Offset></Anchor></Anchors>		
+       					 <NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+        					<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+       					 <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        					<DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="26" y="26"/></Size>
+				<Scripts>
+					<OnClick>GeekRate_HideList()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentResizeGrip" inherits="UIPanelButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<NormalTexture file="Interface\AddOns\FindGroup\textures\ResizeGrip"/>
+				<PushedTexture file="Interface\AddOns\FindGroup\textures\ResizeGrip"/>
+				<Scripts>
+					<OnMouseDown>
+						this:GetParent():StartSizing()
+					</OnMouseDown>
+					<OnMouseUp>
+						this:GetParent():StopMovingOrSizing();
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+			<Button name="$parentScrollText" virtual="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-40" y="-38"/></Offset></Anchor>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="15" y="-28"/></Offset></Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="$parentR" inherits="GameFontNormal" text="10lvl"  font="Fonts\FRIZQT__.TTF" justifyH="RIGHT" justifyV="TOP">
+							<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+							<Offset><AbsDimension x="-6" y="-2"/></Offset></Anchor></Anchors>
+							<FontHeight><AbsValue val="10" /></FontHeight>
+							<Color r="0.6" g="0.6" b="0.6"/>
+						</FontString>
+						<FontString name="$parentC" inherits="GameFontNormal" text="lifetimeHK" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+							<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+							<Offset><AbsDimension x="-215" y="-2"/></Offset></Anchor></Anchors>
+							<FontHeight><AbsValue val="10" /></FontHeight>
+							<Color r="0.6" g="0.6" b="0.6"/>
+						</FontString>
+						<FontString name="$parentC2" inherits="GameFontNormal" text="AchievePoints" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+							<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+							<Offset><AbsDimension x="-155" y="-2"/></Offset></Anchor></Anchors>
+							<FontHeight><AbsValue val="10" /></FontHeight>
+							<Color r="0.6" g="0.6" b="0.6"/>
+						</FontString>
+						<FontString name="$parentL" inherits="GameFontNormal"  text="Nickname" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+								<Offset><AbsDimension x="25" y="-2"/></Offset></Anchor>
+							</Anchors>
+							<FontHeight><AbsValue val="11" /></FontHeight>
+							<Color r="0.6" g="0.6" b="0.6"/>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Button>
+							
+			<Button name="$parentSort_R" inherits="UIPanelButtonTemplate" frameStrata="HIGH">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentScrollTextR"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentScrollTextR"><Offset><AbsDimension x="0" y="-0"/></Offset></Anchor>
+				</Anchors>
+				<NormalTexture file=""/>
+				<PushedTexture file=""/>
+				<HighlightTexture file="Interface\Buttons\UI-Panel-Button-Highlight2" alphaMode="ADD" parentKey="highlight"/>
+				<Scripts>
+				<OnClick>
+					GeekRate_SortCriteria(4)
+				</OnClick>
+				<OnLoad>
+					this.highlight:SetPoint("TOPLEFT", this, "TOPLEFT", -1*this:GetWidth()*0.08, 0);
+					this.highlight:SetPoint("BOTTOMRIGHT", this, "BOTTOMRIGHT", this:GetWidth()*0.8, -5);
+					--this.highlight:SetVertexColor(0.5,0.5,1,0.8)
+				</OnLoad>
+				<OnShow>
+				this:SetFrameLevel(30)
+				</OnShow>
+				</Scripts>
+			</Button>
+			<Button name="$parentSort_C" inherits="UIPanelButtonTemplate" frameStrata="HIGH">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentScrollTextC"><Offset><AbsDimension x="0" y="-0"/></Offset></Anchor>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentScrollTextC"><Offset><AbsDimension x="0" y="-0"/></Offset></Anchor>
+				</Anchors>
+				<NormalTexture file=""/>
+				<PushedTexture file=""/>
+				<HighlightTexture file="Interface\Buttons\UI-Panel-Button-Highlight2" alphaMode="ADD" parentKey="highlight"/>
+				<Scripts>
+				<OnClick>
+					GeekRate_SortCriteria(2)
+				</OnClick>
+				<OnLoad>
+						this.highlight:SetPoint("TOPLEFT", this, "TOPLEFT", -1*this:GetWidth()*0.08, 0);
+					this.highlight:SetPoint("BOTTOMRIGHT", this, "BOTTOMRIGHT", this:GetWidth()*0.8, -5);
+					--this.highlight:SetVertexColor(0.5,0.5,1,0.8)
+				</OnLoad>
+				<OnShow>
+					this:SetFrameLevel(30)
+				</OnShow>
+				</Scripts>
+			</Button>
+			<Button name="$parentSort_C2" inherits="UIPanelButtonTemplate" frameStrata="HIGH">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentScrollTextC2"><Offset><AbsDimension x="0" y="-0"/></Offset></Anchor>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentScrollTextC2"><Offset><AbsDimension x="0" y="-0"/></Offset></Anchor>
+				</Anchors>
+				<NormalTexture file=""/>
+				<PushedTexture file=""/>
+				<HighlightTexture file="Interface\Buttons\UI-Panel-Button-Highlight2" alphaMode="ADD" parentKey="highlight"/>
+				<Scripts>
+				<OnClick>
+					GeekRate_SortCriteria(3)
+				</OnClick>
+				<OnLoad>
+					this.highlight:SetPoint("TOPLEFT", this, "TOPLEFT", -1*this:GetWidth()*0.08, 0);
+					this.highlight:SetPoint("BOTTOMRIGHT", this, "BOTTOMRIGHT", this:GetWidth()*0.8, -5);
+					--this.highlight:SetVertexColor(0.5,0.5,1,0.8)
+				</OnLoad>
+				<OnShow>
+				this:SetFrameLevel(30)
+				</OnShow>
+				</Scripts>
+			</Button>
+			<Button name="$parentSort_L" inherits="UIPanelButtonTemplate" frameStrata="HIGH">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentScrollTextL"><Offset><AbsDimension x="0" y="-0"/></Offset></Anchor>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parentScrollTextL"><Offset><AbsDimension x="0" y="-0"/></Offset></Anchor>
+				</Anchors>
+				<NormalTexture file=""/>
+				<PushedTexture file=""/>
+				<HighlightTexture file="Interface\Buttons\UI-Panel-Button-Highlight2" alphaMode="ADD" parentKey="highlight"/>
+				<Scripts>
+				<OnClick>
+					GeekRate_SortCriteria(1)
+				</OnClick>
+				<OnLoad>
+					this.highlight:SetPoint("TOPLEFT", this, "TOPLEFT", -1*this:GetWidth()*0.08, 0);
+					this.highlight:SetPoint("BOTTOMRIGHT", this, "BOTTOMRIGHT", this:GetWidth()*0.8, -5);
+					--this.highlight:SetVertexColor(0.5,0.5,1,0.8)
+				</OnLoad>
+				<OnShow>
+				this:SetFrameLevel(30)
+				</OnShow>
+				</Scripts>
+			</Button>	
+
+			<Frame name="$parentPanelFrame" >
+				<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+					<BackgroundInsets>
+						<AbsInset left="2" right="2" top="2" bottom="2" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="12" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="12" />
+					</EdgeSize>
+				</Backdrop>
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+								<Offset><AbsDimension x="-37" y="-40"/></Offset></Anchor>
+								<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+								<Offset><AbsDimension x="10" y="10"/></Offset></Anchor>
+							</Anchors>
+					<Scripts>
+						<OnLoad>
+							this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1)
+							this:SetBackdropColor(0.2, 0.2, 0.2, 1)
+						</OnLoad>
+					</Scripts>
+			</Frame>
+			<Frame name="$parentPanel2Frame" >
+				<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+					<BackgroundInsets>
+						<AbsInset left="2" right="2" top="2" bottom="2" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="12" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="12" />
+					</EdgeSize>
+				</Backdrop>
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+								<Offset><AbsDimension x="-10" y="-40"/></Offset></Anchor>
+								<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+								<Offset><AbsDimension x="-37" y="10"/></Offset></Anchor>
+							</Anchors>
+					<Scripts>
+						<OnLoad>
+							this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1)
+							this:SetBackdropColor(0.2, 0.2, 0.2, 1)
+						</OnLoad>
+					</Scripts>
+			</Frame>
+			<ScrollFrame name="$parentScrollFrame" inherits="UIPanelScrollFrameTemplate" >
+
+				<Size><AbsDimension x="12" y="50"/></Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-38" y="-45"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="15" y="15"/></Offset></Anchor>
+				</Anchors>
+				<ScrollChild>
+					<Frame name="$parentScrollChild">
+						<Size><AbsDimension x="30" y="60"/></Size>				
+						<Frames>
+
+						</Frames>
+					</Frame>
+				</ScrollChild>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForDrag("LeftButton")
+					</OnLoad>
+					<OnDragStart>
+						this:GetParent():StartMoving()
+					</OnDragStart>
+					<OnDragStop>
+						this:GetParent():StopMovingOrSizing()
+					</OnDragStop>
+					<OnShow>
+						local scrollbar = _G[self:GetName().."ScrollBar"];
+						scrollbar:SetValue(0);
+						local min;
+						local max;
+						min, max = scrollbar:GetMinMaxValues();
+						_G[scrollbar:GetName().."ScrollUpButton"]:Disable();
+						if ((scrollbar:GetValue() - max) == 0) then
+							_G[scrollbar:GetName().."ScrollDownButton"]:Disable();
+						else
+							_G[scrollbar:GetName().."ScrollDownButton"]:Enable();
+						end
+					</OnShow>
+
+				</Scripts>
+			</ScrollFrame>
+		</Frames>
+		<Scripts>
+
+			<OnLoad>
+				this:RegisterForDrag("LeftButton")
+				this:SetMinResize(400,120)
+				this:SetMaxResize(400,480)
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving()
+			</OnDragStart>
+			<OnShow>
+				this:SetFrameLevel(8)
+			</OnShow>
+			<OnDragStop>
+				this:StopMovingOrSizing()
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+
+	<Button name="GeekRateListFrameScrollFrameScrollChildTextButtonTemplate" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentR" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="RIGHT" justifyV="TOP">
+					<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-2" y="-2"/></Offset></Anchor></Anchors>
+					<FontHeight><AbsValue val="10" /></FontHeight>
+				</FontString>
+
+				<FontString name="$parentC2" inherits="GameFontNormal" text="Осталось" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+					<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-155" y="-2"/></Offset></Anchor></Anchors>
+					<FontHeight><AbsValue val="10" /></FontHeight>
+				</FontString>
+				<FontString name="$parentC" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+							<Offset><AbsDimension x="-215" y="-2"/></Offset></Anchor>
+						<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentC2">
+							<Offset><AbsDimension x="-2" y="0"/></Offset></Anchor>
+					</Anchors>
+					<FontHeight><AbsValue val="10" /></FontHeight>
+				</FontString>
+				<FontString name="$parentL" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset><AbsDimension x="25" y="-2"/></Offset></Anchor>
+						<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentC">
+						<Offset><AbsDimension x="-2" y="0"/></Offset></Anchor>
+					</Anchors>
+					<FontHeight><AbsValue val="11" /></FontHeight>
+				</FontString>
+				<FontString name="$parentF" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset><AbsDimension x="2" y="-2"/></Offset></Anchor>
+					</Anchors>
+					<FontHeight><AbsValue val="11" /></FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<NormalTexture file="" alphaMode="ADD" />
+		<PushedTexture file="" alphaMode="ADD"/>
+		<HighlightTexture file="Interface\Buttons\UI-Listbox-Highlight" alphaMode="ADD" />
+		<Scripts><OnClick></OnClick></Scripts>
+	</Button>
+							
+</Ui>

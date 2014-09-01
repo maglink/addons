@@ -1,0 +1,9 @@
+﻿## Interface: 30300
+## Title: Team|cFFFF0000R|radar |cFF0099FF[Link]|r
+## Version: 1.0
+## Notes: Оповещение команды о расположении вражеских игроков.
+## Author: Maglink
+## DefaultState: enabled
+## SavedVariables: TeamRadarDB
+
+TeamRadar.lua

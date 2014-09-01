@@ -1,0 +1,19 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/"> 
+<!-- -->	
+	
+	<Script file="textures\backgrounds\FindGroup_Backgrounds.lua"></Script>
+		
+	<Script file="FindGroup_Init.lua"></Script>
+	<Script file="FindGroup_ToolTip.lua"></Script>
+	<Script file="FindGroup_Elapsed.lua"></Script>
+	<Script file="FindGroup_Find.lua"></Script>
+	<Script file="FindGroup_Main.lua"></Script>
+	<Script file="FindGroup_Minimap.lua"></Script>
+	<Script file="FindGroup_Options.lua"></Script>
+	<Script file="FindGroup_Create.lua"></Script>
+	<Script file="FindGroup_Saves.lua"></Script>
+	
+	<Include file="FindGroupMain.xml"/>
+	<Include file="FindGroupOptions.xml"/>
+	<Include file="FindGroupSaves.xml"/>
+</Ui>

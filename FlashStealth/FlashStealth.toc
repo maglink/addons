@@ -1,0 +1,10 @@
+﻿## Interface: 30300
+## Title: FlashStealth |cFF0099FF[Link]|r
+## Version: 1.0
+## Notes: Аддон делает режим НЕЗАМЕТНОСТЬ болеее наглядным
+## Author: Maglink
+## DefaultState: enabled
+## SavedVariables: FlashStealthDB
+
+FlashStealth.xml
+FlashStealth.lua

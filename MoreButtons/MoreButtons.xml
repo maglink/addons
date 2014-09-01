@@ -1,0 +1,104 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/"> 
+<!-- -->
+<!--
+			<CheckButton name="MY_Button13" inherits="MultiBar1ButtonTemplate" parent="UIParent" id="100">
+				<Anchors>
+					<Anchor point="CENTER"></Anchor>
+				</Anchors>
+			</CheckButton>
+			-->
+	<Script file="MoreButtons.lua"></Script>
+	
+	<Button name="MoreButtonsFrame" hidden="true" parent="UIParent" enableMouse="true" movable="true" ClampedToScreen="true">
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="12"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="12"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="3" right="3" top="3" bottom="3"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Frames>
+			<Button name="$parentAddButton" inherits="UIPanelButtonTemplate" text="+" motionScriptsWhileDisabled="true" parentKey="add">
+				    <Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-5" y="-23"/></Offset></Anchor></Anchors> 
+				    <Size><AbsDimension x="16" y="16"/></Size>
+					<Scripts>
+						<OnClick>MoreButtons_AddButton()</OnClick>
+					</Scripts>
+			</Button>
+			<Button name="$parentDeleteButton" inherits="UIPanelButtonTemplate" text="-" motionScriptsWhileDisabled="true" parentKey="delete">
+				    <Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-5" y="-43"/></Offset></Anchor></Anchors> 
+				    <Size><AbsDimension x="16" y="16"/></Size>
+					<Scripts>
+						<OnClick>MoreButtons_DeleteButton()</OnClick>
+					</Scripts>
+			</Button>
+<Slider name="$parentSliderScale" parentkey="scale" enableMouse="true" minValue="80" maxValue="150" defaultValue="100" valueStep="10" orientation="HORIZONTAL">
+  		<Layers>
+			<Layer level="BACKGROUND"> 
+					<FontString name="$parentTextScale" text="0.25" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" parentkey="text">
+						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="-25" y="2"/></Offset></Anchor></Anchors>
+						<FontHeight><AbsValue val="12" /></FontHeight>
+						<Color r="1" g="0.8196079" b="0" /><Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
+					</FontString>
+			</Layer>
+		</Layers>
+
+   <Size>
+          <AbsDimension x="100" y="8" />
+        </Size>
+						<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+							<Offset><AbsDimension x="-10" y="-8"/></Offset></Anchor>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+							<Offset><AbsDimension x="30" y="-8"/></Offset></Anchor></Anchors>
+        <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+          <BackgroundInsets>
+            <AbsInset left="0" right="0" top="0" bottom="0" />
+          </BackgroundInsets>
+          <TileSize>
+            <AbsValue val="3" />
+          </TileSize>
+          <EdgeSize>
+            <AbsValue val="3" />
+          </EdgeSize>
+        </Backdrop>
+        <HitRectInsets>
+          <AbsInset left="0" right="0" top="0" bottom="0" />
+        </HitRectInsets>
+        <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+          <Size>
+            <AbsDimension x="28" y="28" />
+          </Size>
+        </ThumbTexture>
+	<Scripts><OnValueChanged>
+this.text:SetText("" .. tostring(this:GetValue()/100) .. "")
+</OnValueChanged>
+	<OnMouseUp>
+this:GetParent():SetScale(this:GetValue()/100);
+</OnMouseUp>
+	</Scripts>
+      </Slider>
+		</Frames>
+			<Scripts>
+			<OnEvent>
+				if  (event == "ADDON_LOADED" and arg1 == "MoreButtons") then
+					this:UnregisterEvent("ADDON_LOADED")
+					MoreButtons_OnLoad()
+				end
+			</OnEvent>
+				<OnLoad>
+				this:RegisterEvent("ADDON_LOADED")
+				this:RegisterForDrag("LeftButton")
+				self:SetBackdropBorderColor(TOOLTIP_DEFAULT_COLOR.r, TOOLTIP_DEFAULT_COLOR.g, TOOLTIP_DEFAULT_COLOR.b);
+				self:SetBackdropColor(TOOLTIP_DEFAULT_BACKGROUND_COLOR.r, TOOLTIP_DEFAULT_BACKGROUND_COLOR.g, TOOLTIP_DEFAULT_BACKGROUND_COLOR.b);
+				</OnLoad>
+			<OnDragStart>if this:IsMovable() then this:StartMoving() end</OnDragStart>
+			<OnDragStop>this:StopMovingOrSizing()</OnDragStop>
+			</Scripts>
+	</Button>
+
+</Ui>

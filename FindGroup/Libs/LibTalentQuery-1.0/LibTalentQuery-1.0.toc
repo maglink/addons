@@ -1,0 +1,18 @@
+## Interface: 30200
+## LoadOnDemand: 1
+## Title: Lib: TalentQuery 1.0
+## Notes: Library to help with querying unit talents.
+## Author: Peragor
+## Version: $Rev: 60 $
+## X-Category: Library
+## X-ReleaseDate: $Date: 2009-08-07 23:04:00 +0000 (Fri, 07 Aug 2009) $
+## X-Website: http://wowace.com/wiki/LibTalentQuery-1.0
+## X-License: LGPL v2.1
+## X-Curse-Packaged-Version: r80
+## X-Curse-Project-Name: LibTalentQuery-1.0
+## X-Curse-Project-ID: libtalentquery-1-0
+## X-Curse-Repository-ID: wow/libtalentquery-1-0/mainline
+
+LibStub\LibStub.lua
+CallbackHandler-1.0\CallbackHandler-1.0.lua
+lib.xml

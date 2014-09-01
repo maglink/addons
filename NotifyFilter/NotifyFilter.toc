@@ -1,0 +1,10 @@
+﻿## Interface: 30300
+## Title: NotifyFilter |cFF0099FF[Link]|r
+## Version: 1.0
+## Notes: Вырезает из чата оповещения об очередях на арену и встраивает в отдельное окно.
+## Author: Maglink
+## DefaultState: enabled
+## SavedVariablesPerCharacter: NotifyFilterDB
+
+NotifyFilter.xml
+NotifyFilter.lua

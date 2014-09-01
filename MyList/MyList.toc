@@ -1,0 +1,8 @@
+## Interface: 30300
+## Title: MyList |cFF0099FF[Link]|r
+## Version: 0.1
+## Author: Maglink
+## DefaultState: enabled
+## SavedVariables: MyListDB
+
+MyList.lua
