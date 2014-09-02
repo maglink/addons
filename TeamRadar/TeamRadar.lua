@@ -71,7 +71,7 @@ TR.Main.OnLoad = function()
 	TR.CheckTable("TeamRadarDB#Version#OldVersion")
 
 	TR.Notice:Init()
-	TR.Version:Init(1000)
+	TR.Version:Init(1001)
 	TR.Nearest:Init()
 	TR.SendInfo:Init()
 	TR.Shield:Init()
