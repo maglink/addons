@@ -291,7 +291,7 @@ TR.Map.Init = function(self)
 	end
 	self.Timer:Start()
 	
-	local ShowMapToolTip = function(frame)
+	local TRShowMapToolTip = function(frame)
 	
 		local centerX, centerY = frame:GetParent():GetCenter()
 		local x, y = frame:GetCenter()
@@ -333,7 +333,7 @@ TR.Map.Init = function(self)
 
 		WorldMapTooltip:SetText(tooltipText);
 		WorldMapTooltip:Show()
-
+		
 	end
 		
 	self.CreateEnemyPointFrame = function(i)
@@ -341,11 +341,11 @@ TR.Map.Init = function(self)
 		local myframe = CreateFrame("Frame", "TeamRadar_EnemyPoint_"..i, WorldMapButton)
 		myframe:SetSize(16, 16)
 		myframe:SetFrameLevel(myframe:GetFrameLevel()+1);
-		myframe:EnableMouse(true) 
+		myframe:EnableMouse(true)
 
 		myframe.texture = myframe:CreateTexture()
 		myframe.texture:SetTexture("Interface\\RAIDFRAME\\UI-RaidFrame-Threat");
-		myframe.texture:SetBlendMode("DISABLE")
+		myframe.texture:SetBlendMode("BLEND")
 		myframe.texture:SetAllPoints()
 		
 		myframe.pingTexture = myframe:CreateTexture()
@@ -383,9 +383,6 @@ TR.Map.Init = function(self)
 			myframe.ping.timerWait:Start()
 		end
 
-		myframe:SetScript("OnMouseUp", function() print(1) end)
-		myframe:SetScript("OnEnter", function() print(1) end)
-		myframe:SetScript("OnLeave", WorldMapUnit_OnLeave)
 	end
 	
 	self.StylizeEnemyPointFrame = function(pointFrame, arrInfo, aboutName)
@@ -402,9 +399,13 @@ TR.Map.Init = function(self)
 		pointFrame.arrInfo=arrInfo
 		pointFrame.aboutName=aboutName
 		
-		pointFrame:SetScript("OnEnter", function(frame) ShowMapToolTip(frame) end)
+		pointFrame:SetScript("OnEnter", function(frame) 
+			WorldMapPOIFrame.allowBlobTooltip = false;
+			TRShowMapToolTip(frame) 
+		end)
 
 		pointFrame:SetScript("OnLeave", function() 
+			WorldMapPOIFrame.allowBlobTooltip = true;
 			WorldMapTooltip:Hide()
 		end)
 		
@@ -644,80 +645,22 @@ end;
 
 TR.Test = {}
 TR.Test.Init = function(self)
-	
-	
-	local testPos1X = math.random()
-	local testPos1Y = math.random()
-	
-	TR.Map.EnemyTable["BlackWarlock"] = {
-		senderInfo = "SenderNick",
-		lastUpdate = time()+10000,
-		class = "WARLOCK",
-		health = 20.2,
-		healthMax = 25.6,
-		posX = TR.Map.GetRandomDeviation(testPos1X),
-		posY = TR.Map.GetRandomDeviation(testPos1Y),
-	}	
-	
-	TR.Map.EnemyTable["PALADIN"] = {
-		senderInfo = "SenderNick",
-		lastUpdate = time()+10000,
-		class = "PALADIN",
-		health = 20.2,
-		healthMax = 25.6,
-		posX = TR.Map.GetRandomDeviation(testPos1X),
-		posY = TR.Map.GetRandomDeviation(testPos1Y),
-	}
-	
-	TR.Map.EnemyTable["BlackWar"] = {
-		senderInfo = "SenderNick",
-		lastUpdate = time()+10000,
-		class = "WARRIOR",
-		health = 30.6,
-		healthMax = 30.6,
-		posX = TR.Map.GetRandomDeviation(testPos1X),
-		posY = TR.Map.GetRandomDeviation(testPos1Y),
-	}	
-	
-	TR.Map.EnemyTable["PALADIN2"] = {
-		senderInfo = "SenderNick",
-		lastUpdate = time()+10000,
-		class = "PALADIN",
-		health = 1.6,
-		healthMax = 30.6,
-		posX = TR.Map.GetRandomDeviation(testPos1X),
-		posY = TR.Map.GetRandomDeviation(testPos1Y),
-	}
 
-		TR.Map.EnemyTable["PALADIN4"] = {
-		senderInfo = "SenderNick",
-		lastUpdate = time()+10000,
-		class = "PALADIN",
-		health = 20.2,
-		healthMax = 25.6,
-		posX = TR.Map.GetRandomDeviation(testPos1X),
-		posY = TR.Map.GetRandomDeviation(testPos1Y),
-	}
-	
-	TR.Map.EnemyTable["BlackWar2"] = {
-		senderInfo = "SenderNick",
-		lastUpdate = time()+10000,
-		class = "WARRIOR",
-		health = 30.6,
-		healthMax = 30.6,
-		posX = TR.Map.GetRandomDeviation(testPos1X),
-		posY = TR.Map.GetRandomDeviation(testPos1Y),
-	}	
-	
-	TR.Map.EnemyTable["PALADIN3"] = {
-		senderInfo = "SenderNick",
-		lastUpdate = time()+10000,
-		class = "PALADIN",
-		health = 1.6,
-		healthMax = 30.6,
-		posX = TR.Map.GetRandomDeviation(testPos1X),
-		posY = TR.Map.GetRandomDeviation(testPos1Y),
-	}
+	for i = 1, 3 do
+		local testPosX = math.random()
+		local testPosY = math.random()
+		for classname, color in pairs(RAID_CLASS_COLORS) do 
+			TR.Map.EnemyTable[classname..i] = {
+				senderInfo = "SenderNick",
+				lastUpdate = time()+10000,
+				class = classname,
+				health = math.random() * 20,
+				healthMax = 20 + math.random()*15,
+				posX = TR.Map.GetRandomDeviation(testPosX),
+				posY = TR.Map.GetRandomDeviation(testPosY),
+			}
+		end	
+	end	
 	
 	TR.Map.Update()
 	
