@@ -1,0 +1,276 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/"> 
+	
+	<Frame name="FirstStrikeListFrame" parent="UIParent" movable="true" hidden="true" enableMouse="true"  ClampedToScreen="true" frameStrata="HIGH" resizable="true">
+		<Size><AbsDimension x="400" y="280"/></Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" relativeTo="UIParent">
+			<Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+		</Anchors>
+		<Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground"
+		edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="64"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>	
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="FirstStrike ListFrame" justifyH="LEFT" justifyV="TOP">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="10" y="-10"/></Offset></Anchor>
+				</Anchors>
+				<Size><AbsDimension x="300"/></Size>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+					
+			<Button name="$parentCloseButton" inherits="UIPanelButtonTemplate">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"><Offset><AbsDimension x="-5" y="-5"/></Offset></Anchor></Anchors>		
+       					 <NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+        					<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+       					 <HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+        					<DisabledTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Disabled" />
+				<Size><AbsDimension x="26" y="26"/></Size>
+				<Scripts>
+					<OnClick>FirstStrike_HideList()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentResizeGrip" inherits="UIPanelButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+					</Anchor>
+				</Anchors>
+				<Size><AbsDimension x="16" y="16"/></Size>
+				<NormalTexture file="Interface\AddOns\FirstStrike\ResizeGrip"/>
+				<PushedTexture file="Interface\AddOns\FirstStrike\ResizeGrip"/>
+				<Scripts>
+					<OnMouseDown>
+						this:GetParent():StartSizing()
+					</OnMouseDown>
+					<OnMouseUp>
+						this:GetParent():StopMovingOrSizing();
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+			<Button name="$parentScrollText" virtual="true">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-40" y="-38"/></Offset></Anchor>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="15" y="-28"/></Offset></Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="$parentR" inherits="GameFontNormal" text="Time"  font="Fonts\FRIZQT__.TTF" justifyH="RIGHT" justifyV="TOP">
+							<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+							<Offset><AbsDimension x="-6" y="-2"/></Offset></Anchor></Anchors>
+							<FontHeight><AbsValue val="10" /></FontHeight>
+							<Color r="0.6" g="0.6" b="0.6"/>
+						</FontString>
+						<FontString name="$parentC" inherits="GameFontNormal" text="SourceName" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+							<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+							<Offset><AbsDimension x="-235" y="-2"/></Offset></Anchor></Anchors>
+							<FontHeight><AbsValue val="10" /></FontHeight>
+							<Color r="0.6" g="0.6" b="0.6"/>
+						</FontString>
+						<FontString name="$parentC2" inherits="GameFontNormal" text="ZoneName" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+							<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+							<Offset><AbsDimension x="-155" y="-2"/></Offset></Anchor></Anchors>
+							<FontHeight><AbsValue val="10" /></FontHeight>
+							<Color r="0.6" g="0.6" b="0.6"/>
+						</FontString>
+						<FontString name="$parentL" inherits="GameFontNormal"  text="DestName" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+								<Offset><AbsDimension x="25" y="-2"/></Offset></Anchor>
+							</Anchors>
+							<FontHeight><AbsValue val="11" /></FontHeight>
+							<Color r="0.6" g="0.6" b="0.6"/>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Button>
+			
+			<Frame name="$parentPanelFrame" >
+				<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+					<BackgroundInsets>
+						<AbsInset left="2" right="2" top="2" bottom="2" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="12" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="12" />
+					</EdgeSize>
+				</Backdrop>
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+								<Offset><AbsDimension x="-37" y="-40"/></Offset></Anchor>
+								<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+								<Offset><AbsDimension x="10" y="10"/></Offset></Anchor>
+							</Anchors>
+					<Scripts>
+						<OnLoad>
+							this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1)
+							this:SetBackdropColor(0.2, 0.2, 0.2, 1)
+						</OnLoad>
+					</Scripts>
+			</Frame>
+			<Frame name="$parentPanel2Frame" >
+				<Backdrop  bgFile="Interface/Tooltips/UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="false">
+					<BackgroundInsets>
+						<AbsInset left="2" right="2" top="2" bottom="2" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="12" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="12" />
+					</EdgeSize>
+				</Backdrop>
+							<Anchors>
+								<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+								<Offset><AbsDimension x="-10" y="-40"/></Offset></Anchor>
+								<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+								<Offset><AbsDimension x="-37" y="10"/></Offset></Anchor>
+							</Anchors>
+					<Scripts>
+						<OnLoad>
+							this:SetBackdropBorderColor(0.6, 0.6, 0.6, 1)
+							this:SetBackdropColor(0.2, 0.2, 0.2, 1)
+						</OnLoad>
+					</Scripts>
+			</Frame>
+			<ScrollFrame name="$parentScrollFrame" inherits="UIPanelScrollFrameTemplate" >
+
+				<Size><AbsDimension x="12" y="50"/></Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-38" y="-45"/></Offset></Anchor>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+					<Offset><AbsDimension x="15" y="15"/></Offset></Anchor>
+				</Anchors>
+				<ScrollChild>
+					<Frame name="$parentScrollChild">
+						<Size><AbsDimension x="30" y="60"/></Size>				
+						<Frames>
+
+						</Frames>
+					</Frame>
+				</ScrollChild>
+				<Scripts>
+					<OnLoad>
+						this:RegisterForDrag("LeftButton")
+					</OnLoad>
+					<OnDragStart>
+						this:GetParent():StartMoving()
+					</OnDragStart>
+					<OnDragStop>
+						this:GetParent():StopMovingOrSizing()
+					</OnDragStop>
+					<OnShow>
+						local scrollbar = _G[self:GetName().."ScrollBar"];
+						scrollbar:SetValue(0);
+						local min;
+						local max;
+						min, max = scrollbar:GetMinMaxValues();
+						_G[scrollbar:GetName().."ScrollUpButton"]:Disable();
+						if ((scrollbar:GetValue() - max) == 0) then
+							_G[scrollbar:GetName().."ScrollDownButton"]:Disable();
+						else
+							_G[scrollbar:GetName().."ScrollDownButton"]:Enable();
+						end
+					</OnShow>
+
+				</Scripts>
+			</ScrollFrame>
+		</Frames>
+		<Scripts>
+
+			<OnLoad>
+				this:RegisterForDrag("LeftButton")
+				this:SetMinResize(400,120)
+				this:SetMaxResize(400,480)
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving()
+			</OnDragStart>
+			<OnShow>
+				this:SetFrameLevel(8)
+			</OnShow>
+			<OnDragStop>
+				this:StopMovingOrSizing()
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+
+	<Button name="FirstStrikeListFrameScrollFrameScrollChildTextButtonTemplate" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentR" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="RIGHT" justifyV="TOP">
+					<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-2" y="-2"/></Offset></Anchor></Anchors>
+					<FontHeight><AbsValue val="10" /></FontHeight>
+				</FontString>
+
+				<FontString name="$parentC2" inherits="GameFontNormal" text="Осталось" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+					<Anchors><Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+					<Offset><AbsDimension x="-155" y="-2"/></Offset></Anchor></Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentR">
+						<Offset><AbsDimension x="-2" y="0"/></Offset></Anchor>
+					<FontHeight><AbsValue val="10" /></FontHeight>
+				</FontString>
+				<FontString name="$parentC" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+							<Offset><AbsDimension x="-235" y="-2"/></Offset></Anchor>
+						<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentC2">
+							<Offset><AbsDimension x="-2" y="0"/></Offset></Anchor>
+					</Anchors>
+					<FontHeight><AbsValue val="10" /></FontHeight>
+				</FontString>
+				<FontString name="$parentL" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset><AbsDimension x="25" y="-2"/></Offset></Anchor>
+						<Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentC">
+						<Offset><AbsDimension x="-2" y="0"/></Offset></Anchor>
+					</Anchors>
+					<FontHeight><AbsValue val="11" /></FontHeight>
+				</FontString>
+				<FontString name="$parentF" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+						<Offset><AbsDimension x="2" y="-2"/></Offset></Anchor>
+					</Anchors>
+					<FontHeight><AbsValue val="11" /></FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentSend" inherits="UIPanelButtonTemplate">
+			<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"><Offset>
+			<AbsDimension x="0" y="2" /></Offset></Anchor></Anchors>
+				<Size><AbsDimension x="20" y="20"/></Size>
+				<NormalTexture file="Interface\AddOns\FirstStrike\UI-ChatIcon-Chat-Up"/>
+				<PushedTexture file="Interface\AddOns\FirstStrike\UI-ChatIcon-Chat-Down"/>
+				<DisabledTexture file="Interface\AddOns\FirstStrike\UI-ChatIcon-Chat-Disabled" />
+						<HighlightTexture file=""/>
+				<Scripts>
+				</Scripts>			
+			</Button>
+		</Frames>
+		<NormalTexture file="" alphaMode="ADD" />
+		<PushedTexture file="" alphaMode="ADD"/>
+		<HighlightTexture file="Interface\Buttons\UI-Listbox-Highlight" alphaMode="ADD" />
+		<Scripts><OnClick></OnClick></Scripts>
+	</Button>
+							
+</Ui>

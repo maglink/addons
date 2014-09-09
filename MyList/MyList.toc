@@ -1,6 +1,7 @@
-## Interface: 30300
+﻿## Interface: 30300
 ## Title: MyList |cFF0099FF[Link]|r
-## Version: 0.1
+## Version: 1.0
+## Notes: Аддон позволяет содавать список игроков. При обнаружении в пати/рейде игрока из списка происходит оповещение. Предполагалось таким образом бороться с кидалами.
 ## Author: Maglink
 ## DefaultState: enabled
 ## SavedVariables: MyListDB

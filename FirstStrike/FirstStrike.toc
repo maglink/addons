@@ -1,0 +1,10 @@
+﻿## Interface: 30300
+## Title: FirstStrike |cFF0099FF[Link]|r
+## Version: 1.0
+## Notes: Ведение списка игроков в рейде/пати, которые нанесли первый удар. Предполагалось использовать, для наказания сагривших боса игроков.
+## Author: Maglink
+## DefaultState: enabled
+## SavedVariablesPerCharacter: FirstStrikeDB
+
+FirstStrike.xml
+FirstStrike.lua

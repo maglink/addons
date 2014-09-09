@@ -70,7 +70,10 @@ PN.CheckPlayer = function()
 		local history_table = realm_table[n].history
 		if #history_table > 0 then
 			local i = #history_table
-			if not(history_table[i].name == name) or not(history_table[i].race == race) or not(history_table[i].guildName == guildName) then
+			if not(history_table[i].name == name) 
+			or not(history_table[i].race == race) 
+			or not(history_table[i].guildName == guildName) 
+			then
 				PN.Alarm(history_table[i].name, name, history_table[i].race, race, history_table[i].guildName, guildName)
 				tinsert(history_table, {name=name, race=race, point=my_date, guildName=guildName})
 			end

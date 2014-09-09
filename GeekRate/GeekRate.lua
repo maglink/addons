@@ -727,6 +727,7 @@ GR.OnLoad = function()
 			print(color.."/gr achieve_list")
 			print(color.."/gr honorkills_toggle")
 			print(color.."/gr achievepoints_toggle")
+			print(color.."/gr professions_toggle")
 			print(color.."/gr database_clear")
 		end		
 	end
