@@ -7,3 +7,10 @@
 ## SavedVariables: TeamRadarDB
 
 TeamRadar.lua
+TeamRadar_Version.lua
+TeamRadar_Nearest.lua
+TeamRadar_Map.lua
+TeamRadar_SendInfo.lua
+TeamRadar_Shield.lua
+TeamRadar_Test.lua
+
