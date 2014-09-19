@@ -43,6 +43,7 @@ TR.SendInfo.Init = function(self)
 	self.Timer.tick = 2
 	self.Timer.func = function()
 		if not UnitInBattleground("player") then
+			Stack = {}
 			return
 		end
 
@@ -66,9 +67,9 @@ TR.SendInfo.Init = function(self)
 		end
 		
 		if sendFlag then
-			SendAddonMessage(AddonName, msg, "BATTLEGROUND")
 			self.msgack = false
 			timeoutleft = timeout
+			SendAddonMessage(AddonName, msg, "BATTLEGROUND")
 			Stack = {}
 		else
 			self.Unit("focus")

@@ -12,6 +12,14 @@ TR.Map.Init = function(self)
 	
 	self.Timer.tick = 1
 	self.Timer.func = function()
+		if not UnitInBattleground("player") then
+			self.EnemyTable = {}
+			for k = 1, self.PointCount do
+				local pointFrame = _G["TeamRadar_EnemyPoint_"..k]
+				pointFrame:Hide()
+			end	
+			return
+		end
 		for key, enemyInfo in pairs(self.EnemyTable) do
 			local lastUpdate = enemyInfo.lastUpdate
 			if time() - lastUpdate > DeleteTime then

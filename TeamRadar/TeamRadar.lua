@@ -73,7 +73,7 @@ TR.Main.OnLoad = function()
 	TR.CheckTable("TeamRadarDB#Version#OldVersion")
 
 	TR.Notice:Init()
-	TR.Version:Init(1002)
+	TR.Version:Init(1009)
 	TR.Nearest:Init()
 	TR.SendInfo:Init()
 	TR.Shield:Init()
@@ -207,7 +207,7 @@ end
 TR.Notice = {}
 TR.Notice.Init = function(self)
 	
-	local AddonNoticePrefix = string.format("|cffffaa00[|cff22ff22%s|cffffaa00]|r", AddonName)
+	local AddonNoticePrefix = string.format("|cffffaa00[|cff22ff22%s|cffffaa00]|r ", AddonName)
 	
 	local TypeColors = {
 		normal = "|cff22ff22",
