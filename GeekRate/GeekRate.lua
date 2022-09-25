@@ -1,4 +1,4 @@
-﻿local GeekRate, GR = ...;
+local GeekRate, GR = ...;
 
 GR.d=60*60*24
 GR.m=GR.d*30.4368499
@@ -13,38 +13,17 @@ GR.realm = nil
 GR.faction_filter = UnitFactionGroup("player")
 GR.filter = ""
 
-
-function GetStatisticId(CategoryTitle, StatisticTitle)
-	local str = ""
-	for _, CategoryId in pairs(GetStatisticsCategoryList()) do
-		local Title, ParentCategoryId, Something
-		Title, ParentCategoryId, Something = GetCategoryInfo(CategoryId)
-		if Title == CategoryTitle then
-			local i
-			local statisticCount = GetCategoryNumAchievements(CategoryId)
-			for i = 1, statisticCount do
-				local IDNumber, Name, Points, Completed, Month, Day, Year, Description, Flags, Image, RewardText
-				IDNumber, Name, Points, Completed, Month, Day, Year, Description, Flags, Image, RewardText = GetAchievementInfo(CategoryId, i)
-				if Name == StatisticTitle then
-					return IDNumber
-				end
-			end
-		end
-	end
-	return -1
-end
-
 GR.profs = {
-	{name = "Алхимия", 			abb="A", 	find="Изучено алхимических рецептов"},
-	{name = "Кузнечное дело", 	abb="Ку", 	find="Изучено чертежей кузнечного дела"},
-	{name = "Кожевничество", 	abb="Ко",	find="Изучено кожевенных выкроек"},
-	{name = "Наложение чар", 	abb="Нал", 	find="Изучено формул наложения чар"},
-	{name = "Начертание", 		abb="Нач", 	find="Изучено начертаний"},
-	{name = "Портняжное дело", 	abb="П", 	find="Изучено портняжных выкроек"},
-	{name = "Ювелирное дело", 	abb="Ю", 	find="Изучено эскизов ювелирных изделий"},
-	{name = "Горное дело", 		abb="Г", 	find="Изучено рецептов выплавки металлов"},
-	{name = "Снятие шкур", 		abb="(С)", 	find="Наивысший уровень навыка в снятии шкур"},
-	{name = "Травничество", 	abb="(Т)", 	find="Наивысший уровень навыка в травничестве"},
+	{name = "Алхимия", 			abb="A", 	find="Изучено алхимических рецептов", id=1729},
+	{name = "Кузнечное дело", 	abb="Ку", 	find="Изучено чертежей кузнечного дела", id=1730},
+	{name = "Кожевничество", 	abb="Ко",	find="Изучено кожевенных выкроек", id=1740},
+	{name = "Наложение чар", 	abb="Нал", 	find="Изучено формул наложения чар", id=178},
+	{name = "Начертание", 		abb="Нач", 	find="Изучено начертаний", id=1735},
+	{name = "Портняжное дело", 	abb="П", 	find="Изучено портняжных выкроек", id=1741},
+	{name = "Ювелирное дело", 	abb="Ю", 	find="Изучено эскизов ювелирных изделий", id=1738},
+	{name = "Горное дело", 		abb="Г", 	find="Изучено рецептов выплавки металлов", id=3216},
+	{name = "Снятие шкур", 		abb="(С)", 	find="Наивысший уровень навыка в снятии шкур", id=1541},
+	{name = "Травничество", 	abb="(Т)", 	find="Наивысший уровень навыка в травничестве", id=1538},
 }
 
 GR.Event = CreateFrame("Frame")
@@ -58,6 +37,12 @@ GR.Event:SetScript("OnEvent", function(self, event)
 		GR.OnLoad()
 	end
 	if event == "UPDATE_MOUSEOVER_UNIT" then
+		if GeekRateDB.BattleGrounds == -1 then
+			if UnitInBattleground("player") or IsActiveBattlefieldArena() then
+				return;
+			end
+		end
+
 		ClearAchievementComparisonUnit()
 		local unit = "mouseover"
 		if not UnitIsPlayer(unit) then return end
@@ -106,7 +91,7 @@ GR.Event:SetScript("OnEvent", function(self, event)
 		
 		char_table.profs = {}
 		for i=1, #GR.profs do
-			local value = GetComparisonStatistic(GetStatisticId("Профессии", GR.profs[i].find))
+			local value = GetComparisonStatistic(GR.profs[i].id)
 			value = tonumber(value:sub(1,3))
 			if type(value) == 'number' then
 				if value > 0 then
@@ -141,31 +126,29 @@ GR.Event:SetScript("OnEvent", function(self, event)
 			end
 		end
 
-
-		
-		
-		--[[]
-		if type(char_table.achieveshrono) ~= 'table' then
-			char_table.achieveshrono = {}
-		end
-		local list = GetCategoryList()
-		for i=1, #list do
-			for j=1, GetCategoryNumAchievements(list[i]) do
-				local achievementID, _ = GetAchievementInfo(list[i], j)
-				local completed, month, day, year = GetAchievementComparisonInfo(achievementID)
-				if completed then
-					local sum = GR.d*day
-					sum = sum + GR.m*(month-1)
-					sum = sum + GR.y*(2000+year-1970)
-					local lastdays = floor(sum/GR.d)
-					if not char_table.achieveshrono[lastdays] then
-						char_table.achieveshrono[lastdays] = 0
+		if GeekRateDB.AllAchievementsHistory == 1 then
+			if type(char_table.achieveshrono) ~= 'table' then
+				char_table.achieveshrono = {}
+			end
+			local list = GetCategoryList()
+			for i=1, #list do
+				for j=1, GetCategoryNumAchievements(list[i]) do
+					local achievementID, _ = GetAchievementInfo(list[i], j)
+					local completed, month, day, year = GetAchievementComparisonInfo(achievementID)
+					if completed then
+						local sum = GR.d*day
+						sum = sum + GR.m*(month-1)
+						sum = sum + GR.y*(2000+year-1970)
+						local lastdays = floor(sum/GR.d)
+						if not char_table.achieveshrono[lastdays] then
+							char_table.achieveshrono[lastdays] = 0
+						end
+						char_table.achieveshrono[lastdays] = char_table.achieveshrono[lastdays] + 1
 					end
-					char_table.achieveshrono[lastdays] = char_table.achieveshrono[lastdays] + 1
 				end
 			end
 		end
-]]
+
 		ClearAchievementComparisonUnit()
 	end
 	if event == "INSPECT_HONOR_UPDATE" then
@@ -644,13 +627,19 @@ GR.OnLoad = function()
 	
 	if not(GeekRateDB.HonorKills) then
 		GeekRateDB.HonorKills = 1
-	end	
+	end
 	if not(GeekRateDB.AchievePoints) then
 		GeekRateDB.AchievePoints = 1
-	end	
+	end
 	if not(GeekRateDB.Profs) then
 		GeekRateDB.Profs = 1
-	end		
+	end
+	if not(GeekRateDB.BattleGrounds) then
+		GeekRateDB.BattleGrounds = 1
+	end
+	if not(GeekRateDB.AllAchievementsHistory) then
+		GeekRateDB.AllAchievementsHistory = -1
+	end
 	if not(GeekRateDB.sortvar) then
 		GeekRateDB.sortvar = {1,1}
 	end
@@ -701,9 +690,9 @@ GR.OnLoad = function()
 		elseif msg:find("achievepoints_toggle") then
 			GeekRateDB.AchievePoints = GeekRateDB.AchievePoints * -1
 			if GeekRateDB.AchievePoints == 1 then
-				print(color.."GeekRate HonorKills: enabled")
+				print(color.."GeekRate AchievePoints: enabled")
 			else
-				print(color.."GeekRate HonorKills: disabled")
+				print(color.."GeekRate AchievePoints: disabled")
 			end
 		elseif msg:find("professions_toggle") then
 			GeekRateDB.Profs = GeekRateDB.Profs * -1
@@ -712,10 +701,20 @@ GR.OnLoad = function()
 			else
 				print(color.."GeekRate Profs Num: disabled")
 			end
-		elseif msg:find("calc_class") then
-			GR.Calc_class()
-		elseif msg:find("calc_3s") then
-			GR.Calc_3s()
+		elseif msg:find("battlegrounds_toggle") then
+			GeekRateDB.BattleGrounds = GeekRateDB.BattleGrounds * -1
+			if GeekRateDB.BattleGrounds == 1 then
+				print(color.."GeekRate BattleGrounds: enabled")
+			else
+				print(color.."GeekRate BattleGrounds: disabled")
+			end
+		elseif msg:find("achievements_history_toggle") then
+			GeekRateDB.AllAchievementsHistory = GeekRateDB.AllAchievementsHistory * -1
+			if GeekRateDB.AllAchievementsHistory == 1 then
+				print(color.."GeekRate All Achievements History: enabled")
+			else
+				print(color.."GeekRate All Achievements History: disabled")
+			end
 		elseif msg:find("database_clear") then
 			GeekRateDB.db = {}
 			ReloadUI()
@@ -728,8 +727,10 @@ GR.OnLoad = function()
 			print(color.."/gr honorkills_toggle")
 			print(color.."/gr achievepoints_toggle")
 			print(color.."/gr professions_toggle")
+			print(color.."/gr battlegrounds_toggle")
+			print(color.."/gr achievements_history_toggle")
 			print(color.."/gr database_clear")
-		end		
+		end
 	end
 	GeekRateListFrameScrollFrameScrollChild:SetWidth(GeekRateListFrame:GetWidth()-55)
 end
